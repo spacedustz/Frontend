@@ -53,11 +53,11 @@ const HeaderTabs: React.FC = () => {
             activeKey={activeKey} // 현재 활성화 탭의 eventKey를 설정
             onSelect={handleSelect} // 탭을 선택할때마다 활성화된 탭의 eventKey 업데이트
         >
-            <Tab eventKey="Assignment" title={<span style={activeKey === "Assignment" ? {color: "lightblue"} : {}}>과제</span>}>
+            <Tab eventKey="Assignment" title={<span style={activeKey === "Assignment" ? {color: "lightblue"} : {}}>☃️ 과제 ☃️</span>}>
                 <Outlet/>
             </Tab>
 
-            <Tab eventKey="Note" title={<span style={activeKey === "Note" ? {color: "lightblue"} : {}}>공부 노트</span>}>
+            <Tab eventKey="Note" title={<span style={activeKey === "Note" ? {color: "lightblue"} : {}}>📚 공부 노트 📚</span>}>
                 <Outlet/>
             </Tab>
         </TabsStyle>
