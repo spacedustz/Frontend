@@ -1,27 +1,95 @@
 import React from "react";
-import ListGroup from 'react-bootstrap/ListGroup';
 import styled from "styled-components";
-import {ListContainer} from "../styles/container/ListContainer.tsx";
-import {ListItem} from "../styles/tabs/ListItem.tsx";
+import {MemoContainer} from "../styles/container/MemoContainer.tsx";
+import {BaseLink} from "../styles/base/BaseLink.tsx";
 
-const FirstH2 = styled.h2`
-    padding-left: 70%;
-    padding-right: 70%;
-    margin-bottom: 10px;
+export const TitleDiv = styled.div`
+    text-align: center;
+    font-size: 1.5em;
+    margin-bottom: 20px;
+    font-family: spotify-circular, Helvetica, Arial, sans-serif;
+    text-decoration: none;
+`;
+
+export const SubDiv = styled.div`
+    background-color: rgba(143, 188, 143, 0.5);
+    padding: 15px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+`;
+
+export const AssignmentTitle = styled.h2`
+    margin: 0 0 10px 0;
+    font-size: 15px;
+`;
+
+export const PFont = styled.p`
+    font-size: 15px;
+`;
+
+const MemoRootContainer = styled.div`
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
 `;
 
 const Note: React.FC = () => {
     return (
-        <ListContainer>
-            <FirstH2>공부 노트</FirstH2>
-            <ListGroup>
-                <ListItem variant="secondary">
-                    <strong>JavaScript 기본 문법</strong>
-                    <li>ddddddddddddddddddddddddddddddddddddddd</li>
-                </ListItem>
+        <MemoRootContainer>
+            <MemoContainer>
+                <TitleDiv>
+                    <h4><strong>HTML & CSS</strong></h4>
+                </TitleDiv>
 
-            </ListGroup>
-        </ListContainer>
+                <SubDiv>
+                    <AssignmentTitle><BaseLink
+                        href="https://github.com/spacedustz/Markup-CSS/blob/main/Description/1.md"
+                        target="_blank">📄 1. HTML & CSS 기초</BaseLink></AssignmentTitle>
+                </SubDiv>
+
+                <SubDiv>
+                    <AssignmentTitle><BaseLink
+                        href="https://github.com/spacedustz/Markup-CSS/blob/main/Description/2.md"
+                        target="_blank">📄 2. Wire Frame 구조 잡기</BaseLink></AssignmentTitle>
+                </SubDiv>
+
+                <SubDiv>
+                    <AssignmentTitle><BaseLink
+                        href="https://github.com/spacedustz/Markup-CSS/blob/main/Description/3.md"
+                        target="_blank">📄 3. Flex Box란?</BaseLink></AssignmentTitle>
+                </SubDiv>
+
+                <SubDiv>
+                    <AssignmentTitle><BaseLink
+                        href="https://github.com/spacedustz/Markup-CSS/blob/main/Description/4.md"
+                        target="_blank">📄 4. Flex Box & 단위 & 다양한 팁</BaseLink></AssignmentTitle>
+                </SubDiv>
+
+                <SubDiv>
+                    <AssignmentTitle><BaseLink
+                        href="https://github.com/spacedustz/Markup-CSS/blob/main/Description/5.md"
+                        target="_blank">📄 5. ARGB란? </BaseLink></AssignmentTitle>
+                </SubDiv>
+
+                <SubDiv>
+                    <AssignmentTitle><BaseLink
+                        href="https://github.com/spacedustz/Markup-CSS/blob/main/Description/6.md"
+                        target="_blank">📄 6. BootStrap 사용법 </BaseLink></AssignmentTitle>
+                </SubDiv>
+            </MemoContainer>
+
+            <MemoContainer>
+                <TitleDiv>
+                    <h4><strong>JavaScript 기초 문법</strong></h4>
+                </TitleDiv>
+
+                <SubDiv>
+                    <AssignmentTitle><BaseLink
+                        href="https://github.com/spacedustz/JavaScript/blob/main/Description/1/1-Variable.md"
+                        target="_blank">📄 1. 변수 </BaseLink></AssignmentTitle>
+                </SubDiv>
+            </MemoContainer>
+        </MemoRootContainer>
     );
 };
 
