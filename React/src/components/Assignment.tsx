@@ -32,6 +32,10 @@ const StyledTable = styled(Table)`
     }
 
     td:nth-child(3) {
+        width: 30%;
+    }
+
+    td:nth-child(4) {
         width: 20%;
     }
 
@@ -76,14 +80,15 @@ const SubTd = styled.td`
 const Assignment: React.FC = () => {
     return (
         <ListContainer>
-            <FirstTitle>과제 제출 현황</FirstTitle>
+            <FirstTitle>📚 과제 제출 현황 📚</FirstTitle>
             <ListStyle>
                 <ListItem variant="secondary">
                     <StyledTable striped bordered hover>
                         <thead>
                         <tr>
                             <th>날짜</th>
-                            <th>과제</th>
+                            <th>과제명</th>
+                            <th>답안</th>
                             <th>진행도</th>
                         </tr>
                         </thead>
@@ -91,11 +96,11 @@ const Assignment: React.FC = () => {
                         <tbody>
                         <tr>
                             <SubTd>2024-01-01</SubTd>
+                            <SubTd><p>변수와 자료형 문제</p></SubTd>
                             <SubTd>
-                                <ul>코드스테이츠</ul>
-                                <li>링크dddddddddddddddddddddddddddddddddddddddddddddddddd</li>
+                                <li>이미지 @@@</li>
                             </SubTd>
-                            <SubTd><BaseBar num={20} /></SubTd>
+                            <SubTd><BaseBar num={100} /></SubTd>
                         </tr>
 
                         </tbody>
