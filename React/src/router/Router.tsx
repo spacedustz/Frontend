@@ -3,6 +3,7 @@ import {BrowserRouter, Route, Routes} from "react-router-dom";
 import HeaderTabs from "../styles/tabs/HeaderTabs.tsx";
 import Note from "../components/Note.tsx";
 import Assignment from "../components/Assignment.tsx";
+import CommentApp from "../components/Comment/CommentApp.tsx";
 
 const Router: React.FC = () => {
     return (
@@ -13,6 +14,7 @@ const Router: React.FC = () => {
                         <Route path="/*" element={<HeaderTabs/>}>
                             <Route path="Assignment" element={<Assignment/>}/>
                             <Route path="Note" element={<Note/>}/>
+                            <Route path="Comment" element={<CommentApp />} />
                         </Route>
                     </Routes>
                 </Suspense>
