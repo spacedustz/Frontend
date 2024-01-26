@@ -3,6 +3,8 @@ import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import React from "react";
 import styled, {keyframes} from "styled-components";
+import SignUp from "../../components/auth/SignUp.tsx";
+import SignIn from "../../components/auth/SignIn.tsx";
 
 const colorChange = keyframes`
     0% {
@@ -23,7 +25,7 @@ const NavStyle = styled(Navbar)`
     a {
         margin: 2px;
         animation: ${colorChange} 3s infinite;
-        
+
         &:hover {
             background-color: rgba(250, 250, 210, 0.5);
             color: rgba(250, 250, 210, 0.5);
@@ -52,12 +54,15 @@ const Navigation: React.FC = () => {
                 <Container>
                     <Nav className="me-auto">
                         <Nav.Link href="https://github.com/spacedustz" target="_blank">
-                            <ImageStyle src="../public/assets/profile/github.svg" alt="github" />
+                            <ImageStyle src="../public/assets/profile/github.svg" alt="github"/>
                             Github</Nav.Link>
                         <Nav.Link href="https://iizz.tistory.com" target="_blank">
-                            <ImageStyle src="../public/assets/profile/blog.svg" alt="blog" />
+                            <ImageStyle src="../public/assets/profile/blog.svg" alt="blog"/>
                             Blog</Nav.Link>
                     </Nav>
+
+                    <SignUp/>
+                    <SignIn/>
                 </Container>
             </NavStyle>
         </>
