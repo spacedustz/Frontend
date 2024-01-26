@@ -6,14 +6,14 @@ import {Outlet, useNavigate} from "react-router-dom";
 
 const TabsStyle = styled(Tabs)`
     overflow: hidden;
+    background-color: lightblue;
     
     button {
-        color: white;
+        color: black;
 
         &:hover {
             background-color: dimgray;
-            color: white;
-            transform: scale(1.12);
+            color: black;
             transition: color 0.5s;
         }
     }
@@ -41,6 +41,9 @@ const HeaderTabs: React.FC = () => {
             case '/Note':
                 setActiveKey('Note');
                 break;
+            case '/Comment':
+                setActiveKey('Comment');
+                break;
             default:
                 setActiveKey('Assignment');
         }
@@ -60,6 +63,10 @@ const HeaderTabs: React.FC = () => {
             </Tab>
 
             <Tab eventKey="Note" title={<span style={activeKey === "Note" ? {color: "lightblue"} : {}}>📚 공부 노트 📚</span>}>
+                <Outlet/>
+            </Tab>
+
+            <Tab eventKey="Comment" title={<span style={activeKey === "Comment" ? {color: "lightblue"} : {}}>🐣 피드백 남기기 🐣</span>}>
                 <Outlet/>
             </Tab>
         </TabsStyle>
