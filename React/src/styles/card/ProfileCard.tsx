@@ -14,7 +14,7 @@ const colorChange = keyframes`
     }
     100% {
         background-color: rgba(250, 250, 210, 0);
-        color: rgba(250, 250, 210, 0.9);
+        color: rgba(250, 250, 210, 0.5);
     }
 `;
 
@@ -34,7 +34,6 @@ const CardContainer = styled(Container)`
         font-weight: 700;
 
         &:hover {
-            transform: scale(1.12);
             transition: color 0.5s;
         }
     }
