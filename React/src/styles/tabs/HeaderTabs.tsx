@@ -5,6 +5,8 @@ import styled from "styled-components";
 import {Outlet, useNavigate} from "react-router-dom";
 
 const TabsStyle = styled(Tabs)`
+    overflow: hidden;
+    
     button {
         color: white;
 
