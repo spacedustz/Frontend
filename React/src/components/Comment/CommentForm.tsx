@@ -35,7 +35,6 @@ const ButtonStyle = styled.button`
 
 const CommentForm: React.FC = () => {
     const [newComment, setNewComment] = useState<string>('');
-    const [userName, setUserName] = useState<string>('');
 
     const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         if (event.target && event.target.value !== null && event.target.value !== undefined) {
@@ -48,7 +47,6 @@ const CommentForm: React.FC = () => {
             try {
                 await postComment(newComment); // postComment 함수를 직접 호출
                 setNewComment('');
-                setUserName('');
             } catch (error) {
                 alert('댓글은 로그인 후 작성 가능합니다.');
                 console.error('댓글 추가 - Authorization Failed:', error);
@@ -72,4 +70,4 @@ const CommentForm: React.FC = () => {
     );
 };
 
-export default React.memo(CommentForm);
+export default CommentForm;
