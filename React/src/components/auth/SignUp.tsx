@@ -10,7 +10,7 @@ const SignUpContainer = styled.div`
 
 const SignUp: React.FC = () => {
     const [show, setShow] = useState<boolean>(false);
-    const [user, setUser] = useState<User>({name: '', password: ''});
+    const [user, setUser] = useState<User>({id: 0, name: '', password: '', type: ''});
 
     const handleClose = (): void => setShow(false);
     const handleShow = (): void => setShow(true);
@@ -30,7 +30,7 @@ const SignUp: React.FC = () => {
                 localStorage.setItem('jwt', response.data.token);
                 handleClose();
             } else {
-                alert('회원가입에 실패하였습니다.');
+                alert('이미 사용중인 아이디입니다.');
             }
         } catch (error) {
             console.error(error);
