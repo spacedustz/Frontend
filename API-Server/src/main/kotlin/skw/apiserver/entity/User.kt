@@ -6,6 +6,7 @@ import skw.apiserver.dto.SignUpRequest
 import skw.apiserver.dto.UpdateRequest
 import skw.apiserver.enum.UserType
 import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
 
 @Entity
 class User(
@@ -19,20 +20,25 @@ class User(
     var password: String,
 
     @Enumerated(EnumType.STRING)
-    val type: UserType = UserType.USER,
+    var type: UserType = UserType.USER,
 
-    val createdAt: LocalDateTime = LocalDateTime.now(),
-    var modifiedAt: LocalDateTime? = null
+    val createdAt: String? = "",
+    var modifiedAt: String? = ""
 ) {
     companion object {
+        private val formatter: DateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH시 mm분 ss초")
+
         fun createOf(request: SignUpRequest, encoder: PasswordEncoder) = User(
             name = request.name,
-            password = encoder.encode(request.password)
+            password = encoder.encode(request.password),
+            createdAt =  LocalDateTime.now().format(formatter).toString()
         )
     }
 
     fun changePassword(newUser: UpdateRequest, encoder: PasswordEncoder) {
+        val formatter: DateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH시 mm분 ss초")
+
         this.password = newUser.newPassword?.takeIf { it.isNotBlank() }?.let { encoder.encode(it) }?: this.password
-        this.modifiedAt = LocalDateTime.now();
+        this.modifiedAt = LocalDateTime.now().format(formatter).toString();
     }
 }
