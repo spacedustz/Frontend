@@ -10,12 +10,13 @@ const Router: React.FC = () => {
         <>
             <BrowserRouter>
                 <Suspense fallback={<div>Loading...</div>}>
+                    <HeaderTabs />
                     <Routes>
-                        <Route path="/*" element={<HeaderTabs/>}>
+                        {/*<Route path="/*" element={<HeaderTabs/>}>*/}
                             <Route path="Assignment" element={<Assignment/>}/>
                             <Route path="Note" element={<Note/>}/>
                             <Route path="Comment" element={<CommentApp />} />
-                        </Route>
+                        {/*</Route>*/}
                     </Routes>
                 </Suspense>
             </BrowserRouter>
