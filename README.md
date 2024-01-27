@@ -11,7 +11,7 @@ React & TypeScript / Kotlin 사용해 자바스크립트 학습 페이지 만들
 
 - React (nodejs: 20.11.0 / yarn: 1.22.21 / vite )
 - TypeScript
-- Libraries : react-router-dom, styled-components, react-bootstrap, axios, Web Kit
+- Libraries : react-router-dom, styled-components, react-bootstrap, axios, WebKit, @stomp/stompjs
 
 ---
 
