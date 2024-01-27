@@ -2,6 +2,7 @@ import React, {useState, ChangeEvent, FormEvent} from 'react';
 import {Modal, Button, Form} from 'react-bootstrap';
 import styled from "styled-components";
 import {requestSignUp, User} from "../../model/Api.ts";
+import {AxiosError} from "axios";
 
 const SignUpContainer = styled.div`
     margin: 10;
@@ -11,7 +12,8 @@ const SignUp: React.FC = () => {
     const [show, setShow] = useState<boolean>(false);
     const [showSuccess, setShowSuccess] = useState<boolean>(false);
     const [showError, setShowError] = useState<boolean>(false);
-    const [user, setUser] = useState<User>({ name: '', password: '' });
+    const [user, setUser] = useState<User>({name: '', password: ''});
+    const [signedUserName, setSignedUserName] = useState<string>('');
 
     const handleClose = (): void => {
         setShow(false);
@@ -29,16 +31,22 @@ const SignUp: React.FC = () => {
 
     const handleSubmit = async (e: FormEvent<HTMLFormElement>): Promise<void> => {
         e.preventDefault();
+
         try {
             await requestSignUp(user);
-            setUser({ name: '', password: '' }); // 초기화
-            setShow(false)
+            console.log(user.name + ' 님 회원가입을 축하합니다!');
+            setSignedUserName(user.name);
+
+            setUser({name: '', password: ''});
+            setShow(false);
             setShowSuccess(true);
         } catch (error) {
-            console.error(error);
-            if (error.response.status === 400) {
-                setUser({name: '', password: ''})
-                setShow(false)
+            const axiosError = error as AxiosError
+
+            console.error(axiosError);
+            if (axiosError && axiosError.response && axiosError.response.status === 400) {
+                setUser({name: '', password: ''});
+                setShow(false);
                 setShowError(true);
             }
         }
@@ -46,7 +54,7 @@ const SignUp: React.FC = () => {
 
     return (
         <SignUpContainer>
-            <Button variant="primary" onClick={handleShow}>
+            <Button variant="outline-secondary" onClick={handleShow}>
                 회원가입
             </Button>
 
@@ -79,7 +87,7 @@ const SignUp: React.FC = () => {
                     <Modal.Title>회원가입 성공</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    {user.name}님, 회원가입을 축하합니다!
+                    {signedUserName}님, 귀찮음을 무릅쓰고 회원가입 해주셔서 감사합니다!
                 </Modal.Body>
             </Modal>
 
