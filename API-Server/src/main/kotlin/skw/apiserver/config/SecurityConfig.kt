@@ -24,6 +24,7 @@ class SecurityConfig(
 ) {
     private val signupPages = arrayOf(
         "/",
+        "/ws",
         "/api/user/sign-up",
         "/api/user/sign-in",
         "/api/comment",
