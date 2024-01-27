@@ -1,14 +1,28 @@
 import React, { useState, ChangeEvent, FormEvent } from 'react';
 import { Modal, Button, Form } from 'react-bootstrap';
-import {requestSignIn} from "../../model/Api.ts";
+import {requestSignIn, User} from "../../model/Api.ts";
+import SignUp from "./SignUp.tsx";
+import SignOut from "./SignOut.tsx";
+import styled from "styled-components";
 
-interface User {
-    name: string;
-    password: string;
-}
+const StyledUserName = styled.span`
+    color: white;
+    margin-right: 18px;
+`;
+
+const SignUpSignInMargin = styled.div`
+    display: flex;
+    justify-content: space-around;
+
+    & > *:first-child {
+        margin-right: 15px;
+    }
+`;
 
 const SignIn: React.FC = () => {
+    const [loggedInUserName, setLoggedInUserName] = useState<string>('');
     const [show, setShow] = useState<boolean>(false);
+    const [loggedIn, setLoggedIn] = useState<boolean>(false);
     const [user, setUser] = useState<User>({ name: '', password: '' });
 
     const handleClose = (): void => setShow(false);
@@ -23,24 +37,41 @@ const SignIn: React.FC = () => {
 
     const handleSubmit = async (e: FormEvent<HTMLFormElement>): Promise<void> => {
         e.preventDefault();
+
         try {
             const response = await requestSignIn(user);
             if (response.status === 200) {
                 localStorage.setItem('jwt', response.data.token);
+                setLoggedIn(true);
+                setLoggedInUserName(user.name);
                 handleClose();
+
+                console.log(user.name + ' 님 로그인에 성공 하셨습니다.')
             } else {
                 alert('유저 이름이나 비밀번호가 일치하지 않습니다.');
             }
         } catch (error) {
-            console.error(error);
+            console.error('로그인 실패 : ' + error);
         }
     };
 
     return (
         <>
-            <Button variant="primary" onClick={handleShow}>
-                로그인
-            </Button>
+            {!loggedIn && (
+                <SignUpSignInMargin>
+                    <SignUp />
+                    <Button variant="outline-secondary" onClick={handleShow}>
+                        로그인
+                    </Button>
+                </SignUpSignInMargin>
+            )}
+
+            {loggedIn && (
+                <>
+                    <StyledUserName>{loggedInUserName + ' 님'}</StyledUserName>
+                    <SignOut />
+                </>
+            )}
 
             <Modal show={show} onHide={handleClose}>
                 <Modal.Header closeButton>
