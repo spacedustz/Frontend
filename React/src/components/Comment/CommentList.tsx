@@ -3,9 +3,10 @@ import {Client, Frame} from '@stomp/stompjs';
 import styled from "styled-components";
 import Pagination from "./Pagination.tsx";
 import {Comment} from "../../model/Comment.ts";
+import {getAllComments} from "../../model/Api.ts";
 
 const CommentStyle = styled.div`
-    
+
     table {
         border-collapse: collapse;
         margin-top: 20px;
@@ -49,28 +50,67 @@ const CommentList: React.FC = () => {
         }
 
         const stompClient = new Client({
-            brokerURL: 'ws://localhost:8080/api/comment/list',
-            debug: function (str) {
-                console.log(str);
-            },
+            brokerURL: 'ws://localhost:8080/ws',
+            // debug: function (str) {
+            //     console.log('WebSocket 연결 중 ... : ' + str);
+            // },
             reconnectDelay: 5000,
             heartbeatIncoming: 4000,
             heartbeatOutgoing: 4000,
         });
 
-        stompClient.onConnect = function (frame: Frame) {
+        stompClient.onConnect = function () {
             stompClientRef.current = stompClient;
+
+            stompClient.subscribe("/api/comment/list", (frame: Frame) => {
                 if (frame.body) {
-                    const newComment = JSON.parse(frame.body);
-                    setComments((prevComments: Comment[]) => [...prevComments, newComment]);
+                    const receivedComments: Comment[] = JSON.parse(frame.body);
+
+                    const newComments: Comment[] = receivedComments.map((comment: Comment) => ({
+                        commentId: comment.commentId,
+                        description: comment.description,
+                        createdAt: comment.createdAt,
+                        userId: comment.userId,
+                        userName: comment.userName,
+                        password: comment.password,
+                        userType: comment.userType,
+                        userCreatedAt: comment.userCreatedAt,
+                    }));
+
+                    setComments(newComments);
                 }
+            });
+
+            console.log("[댓글 기능] WebSocket 세션이 생성 되었습니다.");
         };
 
-        console.log("[댓글 기능] WebSocket 세션이 생성 되었습니다.");
+        stompClient.activate();
+    };
+
+    const fetchComments = async () => {
+        const result = await getAllComments();
+        if (result.data) {
+            const comments: Comment[] = result.data.map((comment: any) => ({
+                commentId: comment.id,
+                description: comment.description,
+                createdAt: comment.createdAt,
+                userId: comment.user.id,
+                userName: comment.user.name,
+                password: comment.user.password,
+                userType: comment.user.type,
+                userCreatedAt: comment.user.createdAt,
+            }));
+            setComments(comments);
+        }
+    };
+
+    const init = async (): Promise<void> => {
+        await connectWebSocket();
+        fetchComments();
     };
 
     useEffect(() => {
-        connectWebSocket();
+        init()
 
         return () => {
             if (stompClientRef.current) {
@@ -99,7 +139,7 @@ const CommentList: React.FC = () => {
                 <tbody>
                 {currentComments.map((comment, index) => (
                     <tr key={index}>
-                        <td>{comment.user.name}</td>
+                        <td>{comment.userName}</td>
                         <td>{comment.description}</td>
                         <td>{comment.createdAt}</td>
                     </tr>
