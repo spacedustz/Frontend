@@ -2,7 +2,7 @@ import Tab from 'react-bootstrap/Tab';
 import Tabs from 'react-bootstrap/Tabs';
 import React, {useEffect, useState} from "react";
 import styled from "styled-components";
-import {Outlet, useNavigate} from "react-router-dom";
+import {Outlet, useLocation, useNavigate} from "react-router-dom";
 
 const TabsStyle = styled(Tabs)`
     overflow: hidden;
@@ -20,8 +20,9 @@ const TabsStyle = styled(Tabs)`
 `;
 
 const HeaderTabs: React.FC = () => {
-    const [activeKey, setActiveKey] = useState<string>("Assignment");
+    const location = useLocation();
     const navigate = useNavigate();
+    const [activeKey, setActiveKey] = useState<string>("Assignment");
 
     const handleSelect = (k: string|null) => {
         if (k) {
@@ -32,21 +33,22 @@ const HeaderTabs: React.FC = () => {
     }
 
     useEffect(() => {
-        const currentPath = location.pathname;
+        const currentPath = location.pathname.slice(1);
+        setActiveKey(currentPath)
 
-        switch (currentPath) {
-            case '/Assignment':
-                setActiveKey('Assignment');
-                break;
-            case '/Note':
-                setActiveKey('Note');
-                break;
-            case '/Comment':
-                setActiveKey('Comment');
-                break;
-            default:
-                setActiveKey('Assignment');
-        }
+        // switch (currentPath) {
+        //     case '/Assignment':
+        //         setActiveKey('Assignment');
+        //         break;
+        //     case '/Note':
+        //         setActiveKey('Note');
+        //         break;
+        //     case '/Comment':
+        //         setActiveKey('Comment');
+        //         break;
+        //     default:
+        //         setActiveKey('Assignment');
+        // }
     }, [location.pathname]);
 
     return (
