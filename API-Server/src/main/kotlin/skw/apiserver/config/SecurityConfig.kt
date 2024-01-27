@@ -26,7 +26,8 @@ class SecurityConfig(
         "/",
         "/api/user/sign-up",
         "/api/user/sign-in",
-        "/api/comment"
+        "/api/comment",
+        "/api/comment/list"
     )
 
     @Bean
@@ -36,6 +37,7 @@ class SecurityConfig(
         .authorizeHttpRequests { authorize ->
             authorize
                 .requestMatchers(*signupPages).permitAll()
+                .requestMatchers("/api/admin/*").hasRole("DEVELOPER")
                 .anyRequest().authenticated()
         }
         .sessionManagement { session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS) }
