@@ -1,17 +1,15 @@
 package skw.apiserver.service
 
-import com.fasterxml.jackson.databind.ObjectMapper
 import jakarta.annotation.PostConstruct
 import lombok.RequiredArgsConstructor
 import org.apache.logging.log4j.LogManager
 import org.apache.logging.log4j.Logger
 import org.springframework.http.HttpStatus
+import org.springframework.messaging.simp.SimpMessagingTemplate
 import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
-import org.springframework.web.socket.TextMessage
-import org.springframework.web.socket.WebSocketSession
-import skw.apiserver.config.CommentWebSocketHandler
+import skw.apiserver.dto.CommentListDto
 import skw.apiserver.entity.Comment
 import skw.apiserver.entity.User
 import skw.apiserver.error.CommonException
@@ -27,6 +25,7 @@ class CommentService(
     private val commentRepository: CommentRepository,
     private val userRepository: UserRepository,
     private val passwordEncoder: PasswordEncoder,
+    private val socketChannel: SimpMessagingTemplate
 ) {
     companion object {
         private val log: Logger = LogManager.getLogger(this::class.java.name)
@@ -40,19 +39,23 @@ class CommentService(
 
     fun writeComment(userName: String, description: String): Comment {
         val user = try {
-            userRepository.findByName(userName).orElseThrow { CommonException("Invalid UserName", HttpStatus.BAD_REQUEST) }
+            userRepository.findByName(userName)
+                .orElseThrow { CommonException("Invalid UserName", HttpStatus.BAD_REQUEST) }
         } catch (e: Exception) {
             log.error("댓글 작성 에러 : $e")
             throw CommonException("비밀번호가 틀립니다.", HttpStatus.BAD_REQUEST)
         }
 
+        val newComment = commentRepository.save(Comment.createOf(description, user!!))
+
         getAllComments()
-        return commentRepository.save(Comment.createOf(description, user!!))
+        return newComment
     }
 
     fun updateComment(commentId: Long, newDescription: String, password: String): Comment {
         val comment = try {
-            commentRepository.findById(commentId).orElseThrow { CommonException("Invalid Comment ID", HttpStatus.BAD_REQUEST) }
+            commentRepository.findById(commentId)
+                .orElseThrow { CommonException("Invalid Comment ID", HttpStatus.BAD_REQUEST) }
         } catch (e: Exception) {
             log.error("댓글 수정 에러 : $e")
             throw CommonException("댓글 수정 에러", HttpStatus.BAD_REQUEST)
@@ -63,13 +66,16 @@ class CommentService(
 
         comment.description = newDescription
         comment.createdAt = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH시 mm분 ss초")).toString()
+        val updatedComment = commentRepository.save(comment)
+
         getAllComments()
-        return commentRepository.save(comment)
+        return updatedComment
     }
 
     fun deleteComment(commentId: Long, password: String) {
         val comment = try {
-            commentRepository.findById(commentId).orElseThrow { CommonException("Invalid Comment ID", HttpStatus.BAD_REQUEST) }
+            commentRepository.findById(commentId)
+                .orElseThrow { CommonException("Invalid Comment ID", HttpStatus.BAD_REQUEST) }
         } catch (e: Exception) {
             log.error("댓글 삭제 에러 : $e")
             throw CommonException("댓글 삭제 에러", HttpStatus.BAD_REQUEST)
@@ -84,16 +90,26 @@ class CommentService(
 
     @Transactional(readOnly = true)
     fun getAllComments() {
-        val sessionMap: Map<String, WebSocketSession> = CommentWebSocketHandler.sessionMap
-        val comments = commentRepository.findAll()
-        val mapper = ObjectMapper().findAndRegisterModules()
-        val jsonString = mapper.writeValueAsString(comments)
-
-        for ((_, session) in sessionMap) {
-            if (session.isOpen) {
-                log.info("Comment Socket Channel 데이터 전송 - $jsonString")
-                session.sendMessage(TextMessage(jsonString))
-            }
+        val comments = try {
+            commentRepository.findAll()
+        } catch (e: Exception) {
+            log.error("댓글 리스트 조회 실패 - $e")
+            throw CommonException("댓글 리스트 조회 실패", HttpStatus.BAD_REQUEST)
         }
+
+        val commentListDtos = comments.map { comment ->
+            CommentListDto(
+                commentId = comment.id ?: 0,
+                description = comment.description ?: "",
+                createdAt = comment.createdAt ?: "",
+                userId = comment.user?.id ?: 0,
+                userName = comment.user?.name ?: "",
+                password = comment.user?.password ?: "",
+                userType = comment.user?.type?.name ?: "",
+                userCreatedAt = comment.user?.createdAt ?: ""
+            )
+        }
+
+        socketChannel.convertAndSend("/api/comment/list", commentListDtos)
     }
 }
