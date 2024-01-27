@@ -20,13 +20,14 @@ data class SignUpResponse(
 data class SignInResponse(
     val name: String,
     val type: UserType,
-    val token: String // 로그인하면 토큰을 받을 수 있게 Response에 추가
+    val token: String, // 로그인하면 토큰을 받을 수 있게 Response에 추가
+    val password: String
 )
 
 data class UpdatePasswordResponse(
     val result: Boolean,
     val name: String,
-    val modifiedAt: LocalDateTime
+    val modifiedAt: String
 ) {
     companion object {
         fun createOf(result: Boolean, user: User) = UpdatePasswordResponse(
@@ -41,14 +42,14 @@ data class UserInfoResponse(
     val id: Long,
     val name: String,
     val type: UserType,
-    val createdAt: LocalDateTime
+    val createdAt: String
 ) {
     companion object {
         fun from(user: User) = UserInfoResponse(
             id = user.id!!,
             name = user.name,
             type = user.type,
-            createdAt = user.createdAt
+            createdAt = user.createdAt!!
         )
     }
 }
