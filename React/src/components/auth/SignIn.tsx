@@ -24,12 +24,12 @@ const SignIn: React.FC = () => {
     const [show, setShow] = useState<boolean>(false);
     const [loggedIn, setLoggedIn] = useState<boolean>(false);
     const [user, setUser] = useState<User>({ name: '', password: '' });
-    const [password, setPassword] = useState<string>('');
+    // const [password, setPassword] = useState<string>('');
 
     useEffect(() => {
         const token = localStorage.getItem('jwt')
         const userName = localStorage.getItem('username')
-        const password = localStorage.getItem('password')
+        // const password = localStorage.getItem('password')
 
         if(token) {
             setLoggedIn(true);
@@ -39,9 +39,9 @@ const SignIn: React.FC = () => {
             setLoggedInUserName(userName)
         }
 
-        if (password) {
-            setPassword(password)
-        }
+        // if (password) {
+        //     setPassword(password)
+        // }
     }, []);
 
     const handleClose = (): void => setShow(false);
@@ -65,7 +65,7 @@ const SignIn: React.FC = () => {
                 localStorage.setItem('password', response.data.password)
                 setLoggedIn(true);
                 setLoggedInUserName(user.name);
-                setPassword(response.data.password)
+                // setPassword(response.data.password)
                 handleClose();
 
                 console.log(user.name + ' 님 로그인에 성공 하셨습니다.')
