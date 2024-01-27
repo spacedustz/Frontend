@@ -39,7 +39,9 @@ class JwtAuthenticationFilter(
         if (requestURI.endsWith("/") ||
             requestURI.endsWith( "/api/user/sign-in") ||
             requestURI.endsWith("/api/user/sign-up") ||
-            requestURI.endsWith("/api/comment")) {
+            requestURI.endsWith("/api/comment") ||
+            requestURI.endsWith("/api/comment/list")
+            ) {
             filterChain.doFilter(request, response)
             return
         }
@@ -56,8 +58,8 @@ class JwtAuthenticationFilter(
             )
             SecurityContextHolder.getContext().authentication = authenticationToken
         } else {
-            response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Unauthorized")
             log.error("토큰이 없거나 유효하지 않은 토큰입니다. - Authorization Header : ${request.getHeader(HttpHeaders.AUTHORIZATION)}")
+//            response.sendError(403)
             return
         }
 
