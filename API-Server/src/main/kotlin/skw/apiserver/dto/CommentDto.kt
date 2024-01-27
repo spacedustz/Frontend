@@ -13,3 +13,14 @@ data class UpdateCommentDto(
 data class DeleteCommentDto(
     var password: String
 )
+
+data class CommentListDto(
+    var commentId: Long,
+    var description: String,
+    var createdAt: String,
+    var userId: Long,
+    var userName: String,
+    var password: String,
+    var userType: String,
+    var userCreatedAt: String,
+)
