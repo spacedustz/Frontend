@@ -6,9 +6,11 @@ import CommentList from './CommentList';
 const CommentApp: React.FC = () => {
     const [comments, setComments] = useState<Comment[]>([]);
     const webSocketRef = useRef<WebSocket | null>(null); // 추가
+    const server = 'ws://43.202.203.180:8080'
+    const local = 'ws://localhost:8080'
 
     useEffect(() => {
-        webSocketRef.current = new WebSocket('ws://13.125.251.209:8080/comment');
+        webSocketRef.current = new WebSocket(local + '/api/comment');
 
         webSocketRef.current.onopen = () => {
             console.log('WebSocket 연결 완료');
@@ -32,7 +34,7 @@ const CommentApp: React.FC = () => {
 
     const handleAddComment = async (comment: string) => {
         try {
-            const response = await axios.post('http://13.125.251.209:8080/api/comments', { comment });
+            const response = await axios.post(local + '/api/comments', { comment });
             const newComment = response.data;
             setComments((prevComments) => [...prevComments, newComment]);
         } catch (error) {
