@@ -1,8 +1,8 @@
-// CommentList.tsx
-import React, {useState} from 'react';
-import {CommentListProps} from "../../model/Comment.ts";
+import React, {useState, useEffect, useRef} from 'react';
+import {Client, Frame} from '@stomp/stompjs';
 import styled from "styled-components";
 import Pagination from "./Pagination.tsx";
+import {Comment} from "../../model/Comment.ts";
 
 const CommentStyle = styled.div`
     
@@ -37,14 +37,52 @@ const CommentStyle = styled.div`
     }
 `;
 
-const CommentList: React.FC<CommentListProps> = ({comments}) => {
-    // 댓글 Pagination.tsx 구현
-    const itemsPerPage = 10;
+const CommentList: React.FC = () => {
+    const [comments, setComments] = useState<Comment[]>([]);
     const [currentPage, setCurrentPage] = useState(1);
+    const stompClientRef = useRef<Client | null>(null);
+    const itemsPerPage = 7;
+
+    const connectWebSocket = () => {
+        if (stompClientRef.current && stompClientRef.current.connected) {
+            return; // 이미 연결된 경우 종료
+        }
+
+        const stompClient = new Client({
+            brokerURL: 'ws://localhost:8080/api/comment/list',
+            debug: function (str) {
+                console.log(str);
+            },
+            reconnectDelay: 5000,
+            heartbeatIncoming: 4000,
+            heartbeatOutgoing: 4000,
+        });
+
+        stompClient.onConnect = function (frame: Frame) {
+            stompClientRef.current = stompClient;
+                if (frame.body) {
+                    const newComment = JSON.parse(frame.body);
+                    setComments((prevComments: Comment[]) => [...prevComments, newComment]);
+                }
+        };
+
+        console.log("[댓글 기능] WebSocket 세션이 생성 되었습니다.");
+    };
+
+    useEffect(() => {
+        connectWebSocket();
+
+        return () => {
+            if (stompClientRef.current) {
+                stompClientRef.current?.deactivate();
+                console.log("[댓글 기능] WebSocket 세션이 종료 되었습니다.");
+            }
+        };
+    }, []);
 
     const lastItemIdx = currentPage * itemsPerPage; // 현재 페이지 * 페이지당 댓글 개수 1 x 10
     const firstItemIdx = lastItemIdx - itemsPerPage; // 10 - 10
-    const currentComments = comments.slice(firstItemIdx, lastItemIdx);
+    const currentComments: Comment[] = comments.slice(firstItemIdx, lastItemIdx);
 
     const paginate = (pageNum: number) => setCurrentPage(pageNum);
 
@@ -53,16 +91,16 @@ const CommentList: React.FC<CommentListProps> = ({comments}) => {
             <table>
                 <thead>
                 <tr>
-                    <th>댓글번호</th>
-                    <th>댓글</th>
-                    <th>작성일자</th>
+                    <th>작성자</th>
+                    <th>내용</th>
+                    <th>작성일</th>
                 </tr>
                 </thead>
                 <tbody>
                 {currentComments.map((comment, index) => (
                     <tr key={index}>
-                        <td>{comment.id}</td>
-                        <td>{comment.comment}</td>
+                        <td>{comment.user.name}</td>
+                        <td>{comment.description}</td>
                         <td>{comment.createdAt}</td>
                     </tr>
                 ))}
