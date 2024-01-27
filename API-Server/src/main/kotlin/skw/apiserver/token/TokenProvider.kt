@@ -2,13 +2,14 @@ package skw.apiserver.token
 
 import io.jsonwebtoken.Jwts
 import io.jsonwebtoken.SignatureAlgorithm
-import jakarta.annotation.PostConstruct
 import lombok.RequiredArgsConstructor
 import org.apache.logging.log4j.LogManager
 import org.apache.logging.log4j.Logger
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.context.annotation.PropertySource
+import org.springframework.http.HttpStatus
 import org.springframework.stereotype.Service
+import skw.apiserver.error.CommonException
 import java.sql.Timestamp
 import java.time.Instant
 import java.time.LocalDateTime
@@ -70,7 +71,7 @@ class TokenProvider(
             token
         } catch (e: Exception) {
             log.error("Token 검증이 실패 하였습니다. - $e")
-            throw RuntimeException("Token 검증 실패", e)
+            throw CommonException("Token 검증 실패", HttpStatus.FORBIDDEN)
         }
     }
 }
