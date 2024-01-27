@@ -37,6 +37,7 @@ class JwtAuthenticationFilter(
         log.info("Request URL : $requestURI")
 
         if (requestURI.endsWith("/") ||
+            requestURI.endsWith("/ws") ||
             requestURI.endsWith( "/api/user/sign-in") ||
             requestURI.endsWith("/api/user/sign-up") ||
             requestURI.endsWith("/api/comment") ||
