@@ -19,7 +19,7 @@ import skw.apiserver.token.TokenProvider
 /**
  * @Order : 의존성 주입 우선순위 최상위로 설정
  */
-@Order(0)
+@Order(5)
 @Component
 class JwtAuthenticationFilter(
     private val tokenProvider: TokenProvider
@@ -34,8 +34,12 @@ class JwtAuthenticationFilter(
         filterChain: FilterChain
     ) {
         val requestURI = request.requestURI
+        log.info("Request URL : $requestURI")
 
-        if (requestURI.endsWith("/sign-in") || requestURI.endsWith("/sign-up")) {
+        if (requestURI.endsWith("/") ||
+            requestURI.endsWith( "/api/user/sign-in") ||
+            requestURI.endsWith("/api/user/sign-up") ||
+            requestURI.endsWith("/api/comment")) {
             filterChain.doFilter(request, response)
             return
         }
