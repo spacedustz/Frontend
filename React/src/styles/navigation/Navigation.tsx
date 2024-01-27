@@ -1,9 +1,7 @@
-import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import React from "react";
 import styled, {keyframes} from "styled-components";
-import SignUp from "../../components/auth/SignUp.tsx";
 import SignIn from "../../components/auth/SignIn.tsx";
 
 const colorChange = keyframes`
@@ -22,6 +20,11 @@ const colorChange = keyframes`
 `;
 
 const NavStyle = styled(Navbar)`
+    display: flex;
+    justify-content: space-between;
+    padding-left: 30px;
+    padding-right: 30px;
+
     a {
         margin: 2px;
         animation: ${colorChange} 3s infinite;
@@ -47,25 +50,28 @@ const ImageStyle = styled.img`
     }
 `;
 
+const SignInStyle = styled.div`
+    @media (max-width: 768px) {
+        transform: scale(0.8);
+    }
+`;
+
 const Navigation: React.FC = () => {
     return (
-        <>
-            <NavStyle bg="dark" data-bs-theme="dark">
-                <Container>
-                    <Nav className="me-auto">
-                        <Nav.Link href="https://github.com/spacedustz" target="_blank">
-                            <ImageStyle src="../public/assets/profile/github.svg" alt="github"/>
-                            Github</Nav.Link>
-                        <Nav.Link href="https://iizz.tistory.com" target="_blank">
-                            <ImageStyle src="../public/assets/profile/blog.svg" alt="blog"/>
-                            Blog</Nav.Link>
-                    </Nav>
+        <NavStyle bg="dark" data-bs-theme="dark">
+            <Nav className="me-auto">
+                <Nav.Link href="https://github.com/spacedustz" target="_blank">
+                    <ImageStyle src="../public/assets/profile/github.svg" alt="github"/>
+                    Github</Nav.Link>
+                <Nav.Link href="https://iizz.tistory.com" target="_blank">
+                    <ImageStyle src="../public/assets/profile/blog.svg" alt="blog"/>
+                    Blog</Nav.Link>
+            </Nav>
 
-                    <SignUp/>
-                    <SignIn/>
-                </Container>
-            </NavStyle>
-        </>
+            <SignInStyle>
+                <SignIn/>
+            </SignInStyle>
+        </NavStyle>
     );
 }
 
