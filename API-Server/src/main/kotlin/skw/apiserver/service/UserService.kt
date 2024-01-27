@@ -34,7 +34,10 @@ class UserService(
 
     @PostConstruct
     fun init() {
-        userRepository.save(User(null, "Developer", encoder.encode("1260"), type = UserType.DEVELOPER))
+        val signup: SignUpRequest = SignUpRequest.createOf("Developer", "1260")
+        val developer = User.createOf(signup, encoder)
+        developer.type = UserType.DEVELOPER
+        userRepository.save(developer)
     }
 
     /* User 기능 */
@@ -54,7 +57,7 @@ class UserService(
 
         val token = tokenProvider.createToken("${user!!.id}:${user.type}")
 
-        return SignInResponse(user.name, user.type, token)
+        return SignInResponse(user.name, user.type, token, user.password)
     }
 
     @Transactional(readOnly = true)
