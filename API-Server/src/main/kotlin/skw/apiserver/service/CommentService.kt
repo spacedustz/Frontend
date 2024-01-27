@@ -31,11 +31,11 @@ class CommentService(
         private val log: Logger = LogManager.getLogger(this::class.java.name)
     }
 
-    @PostConstruct
-    fun init() {
-        val developer: User = userRepository.findById(1L).orElseThrow()
-        commentRepository.save(Comment.createOf("첫 댓글", developer))
-    }
+//    @PostConstruct
+//    fun init() {
+//        val developer: User = userRepository.findById(1L).orElseThrow()
+//        commentRepository.save(Comment.createOf("첫 댓글", developer))
+//    }
 
     fun writeComment(userName: String, description: String): Comment {
         val user = try {
