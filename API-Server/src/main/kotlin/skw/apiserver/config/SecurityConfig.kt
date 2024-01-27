@@ -22,19 +22,11 @@ import skw.apiserver.filter.JwtAuthenticationFilter
 class SecurityConfig(
     private val jwtAuthenticationFilter: JwtAuthenticationFilter
 ) {
-//    private val defaultPages = arrayOf(
-//        "/",
-//        "/intro",
-//        "/skills",
-//        "/careers",
-//        "/licenses",
-//        "/educations"
-//    )
-//
     private val signupPages = arrayOf(
         "/",
-        "/sign-up",
-        "/sign-in",
+        "/api/user/sign-up",
+        "/api/user/sign-in",
+        "/api/comment"
     )
 
     @Bean
