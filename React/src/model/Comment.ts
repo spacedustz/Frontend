@@ -1,19 +1,14 @@
 import React, {createContext} from "react";
 
-export type User = {
-    id: number,
-    name: string,
-    password: string,
-    type: string,
-    createdAt: string,
-    modifiedAt: string
-}
-
 export type Comment = {
-    id: number,
+    commentId: number,
     description: string,
     createdAt: string,
-    user: User
+    userId: number,
+    userName: string,
+    password: string,
+    userType: string,
+    userCreatedAt: string,
 }
 
 type CommentContextType = {
