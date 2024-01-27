@@ -34,10 +34,12 @@ class UserService(
 
     @PostConstruct
     fun init() {
-        val signup: SignUpRequest = SignUpRequest.createOf("Developer", "1260")
-        val developer = User.createOf(signup, encoder)
-        developer.type = UserType.DEVELOPER
-        userRepository.save(developer)
+        if (userRepository.findByName("Developer").isEmpty) {
+            val signup: SignUpRequest = SignUpRequest.createOf("Developer", "1260")
+            val developer = User.createOf(signup, encoder)
+            developer.type = UserType.DEVELOPER
+            userRepository.save(developer)
+        }
     }
 
     /* User 기능 */
