@@ -5,9 +5,11 @@ React & TypeScript / Kotlin 사용해 자바스크립트 학습 페이지 만들
 - Server : AWS EC2 (Ubuntu 22.04 LTS)
 - EC2 Elastic IP 설정
 
+<br>
+
 > **메인 화면**
 
-![img](https://github.com/spacedustz/JavaScript/tree/main/Description/img/main.png)
+![img](./Description/img/main.png)
 
 ---
 
@@ -31,11 +33,11 @@ React & TypeScript / Kotlin 사용해 자바스크립트 학습 페이지 만들
 
 <br>
 
-![img](https://github.com/spacedustz/JavaScript/tree/main/Description/img/signup-1.png)
+![img](./Description/img/signup-1.png)
 
 <br>
 
-![img](https://github.com/spacedustz/JavaScript/tree/main/Description/img/signup-2.png)
+![img](./Description/img/signup-2.png)
 
 </details>
 
@@ -49,11 +51,11 @@ React & TypeScript / Kotlin 사용해 자바스크립트 학습 페이지 만들
 
 <br>
 
-![img](https://github.com/spacedustz/JavaScript/tree/main/Description/img/login-2.png)
+![img](./Description/img/login-2.png)
 
 <br>
 
-![img](https://github.com/spacedustz/JavaScript/tree/main/Description/img/login-2.png)
+![img](./Description/img/login-2.png)
 
 </details>
 
@@ -64,11 +66,11 @@ React & TypeScript / Kotlin 사용해 자바스크립트 학습 페이지 만들
 
 - 유저가 로그아웃 시 LocalStorage의 JWT Token 제거
 
-![img](https://github.com/spacedustz/JavaScript/tree/main/Description/img/logout-1.png)
+![img](./Description/img/logout-1.png)
 
 <br>
 
-![img](https://github.com/spacedustz/JavaScript/tree/main/Description/img/logout-2.png)
+![img](./Description/img/logout-2.png)
 
 </details>
 
@@ -83,19 +85,19 @@ React & TypeScript / Kotlin 사용해 자바스크립트 학습 페이지 만들
 - 로그인을 안하면 댓글 남기기 불가능
 - 댓글 달린걸 그냥 보는건 모든 유저(anonymous 포함) 허용
 
-![img](https://github.com/spacedustz/JavaScript/tree/main/Description/img/403.png)
+![img](./Description/img/403.png)
 
 <br>
 
-![img](https://github.com/spacedustz/JavaScript/tree/main/Description/img/comment-1.png)
+![img](./Description/img/comment-1.png)
 
 <br>
 
-![img](https://github.com/spacedustz/JavaScript/tree/main/Description/img/comment-2.png)
+![img](./Description/img/comment-2.png)
 
 <br>
 
-![img](https://github.com/spacedustz/JavaScript/tree/main/Description/img/comment-3.png)
+![img](./Description/img/comment-3.png)
 
 </details>
 
