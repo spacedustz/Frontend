@@ -51,11 +51,11 @@ React & TypeScript / Kotlin 사용해 자바스크립트 학습 페이지 만들
 
 <br>
 
-![img](./Description/img/login-2.png)
+![img](./Description/img/login-1.png)
 
 <br>
 
-![img](./Description/img/login-2.png)
+![img](./Description/img/logn-2.png)
 
 </details>
 
@@ -84,6 +84,7 @@ React & TypeScript / Kotlin 사용해 자바스크립트 학습 페이지 만들
 - WebSocket Channel Name : '/api/comment/list'
 - 로그인을 안하면 댓글 남기기 불가능
 - 댓글 달린걸 그냥 보는건 모든 유저(anonymous 포함) 허용
+- 페이지네이션 추가
 
 ![img](./Description/img/403.png)
 
