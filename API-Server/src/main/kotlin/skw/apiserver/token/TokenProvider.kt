@@ -49,7 +49,7 @@ class TokenProvider(
             token
         } catch (e: Exception) {
             log.error("Token 생성이 실패 하였습니다. - $e")
-            throw RuntimeException("Token 생성 실패", e)
+            throw CommonException("Token 생성 실패", HttpStatus.FORBIDDEN)
         }
 
     }
