@@ -111,5 +111,6 @@ class CommentService(
         }
 
         socketChannel.convertAndSend("/api/comment/list", commentListDtos)
+        log.info("WebSocket - Comment List 전송 완료")
     }
 }
