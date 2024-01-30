@@ -5,8 +5,6 @@ import Pagination from "./Pagination.tsx";
 import {Comment} from "../../model/Comment.ts";
 import {getAllComments} from "../../model/Api.ts";
 
-const url: string = import.meta.env.WEB_SOCKET_URL
-
 const CommentStyle = styled.div`
     table {
         border-collapse: collapse;
@@ -51,7 +49,7 @@ const CommentList: React.FC = () => {
         }
 
         const stompClient = new Client({
-            brokerURL: url,
+            brokerURL: import.meta.env.VITE_SOCKET_URL,
             // debug: function (str) {
             //     console.log('WebSocket 연결 중 ... : ' + str);
             // },
@@ -91,8 +89,8 @@ const CommentList: React.FC = () => {
     const fetchComments = async () => {
         const result = await getAllComments();
         if (result.data) {
-            const comments: Comment[] = result.data.map((comment: any) => ({
-                commentId: comment.id,
+            const comments: Comment[] = result.data.map((comment: Comment) => ({
+                commentId: commentId,
                 description: comment.description,
                 createdAt: comment.createdAt,
                 userId: comment.user.id,
