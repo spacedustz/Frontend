@@ -8,7 +8,6 @@ import {getAllComments} from "../../model/Api.ts";
 const CommentStyle = styled.div`
     table {
         border-collapse: collapse;
-        margin-top: 20px;
         font-size: 14px;
         margin: auto;
     }
@@ -25,7 +24,7 @@ const CommentStyle = styled.div`
     }
 
     td:nth-child(1) {
-        width: 5%;
+        width: 10%;
     }
 
     td:nth-child(2) { /* Comment column */
@@ -80,7 +79,7 @@ const CommentList: React.FC = () => {
                 }
             });
 
-            console.log("[댓글 기능] WebSocket 세션이 생성 되었습니다.");
+            console.log("WebSocket 세션이 [생성] 되었습니다.");
         };
 
         stompClient.activate();
@@ -89,32 +88,22 @@ const CommentList: React.FC = () => {
     const fetchComments = async () => {
         const result = await getAllComments();
         if (result.data) {
-            const comments: Comment[] = result.data.map((comment: Comment) => ({
-                commentId: commentId,
-                description: comment.description,
-                createdAt: comment.createdAt,
-                userId: comment.user.id,
-                userName: comment.user.name,
-                password: comment.user.password,
-                userType: comment.user.type,
-                userCreatedAt: comment.user.createdAt,
-            }));
-            setComments(comments);
+            setComments(result.data);
         }
     };
 
     const init = async (): Promise<void> => {
-        await connectWebSocket();
-        fetchComments();
+        connectWebSocket();
+        await fetchComments();
     };
 
     useEffect(() => {
-        init()
+        init().catch(error => console.error("WebSocket 연결 실패 : ", error))
 
         return () => {
             if (stompClientRef.current) {
                 stompClientRef.current?.deactivate();
-                console.log("[댓글 기능] WebSocket 세션이 종료 되었습니다.");
+                console.log("WebSocket 세션이 [종료] 되었습니다.");
             }
         };
     }, []);
