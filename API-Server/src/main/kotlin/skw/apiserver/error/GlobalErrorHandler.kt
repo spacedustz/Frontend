@@ -10,9 +10,9 @@ import org.springframework.web.bind.annotation.RestControllerAdvice
 open class CommonException(
     message: String,
     val status: HttpStatus
-) : RuntimeException(message)
+) : RuntimeException("[Code] - ${status.value()} ${status.name}, [Message] - $message")
 
-class CommonExceptionResponse(
+open class CommonExceptionResponse(
     val code: Int,
     val message: String
 )
@@ -22,7 +22,8 @@ class GlobalErrorHandler {
     @ExceptionHandler(CommonException::class)
     fun commonExceptionHandler(e: CommonException): ResponseEntity<CommonExceptionResponse> {
         val error = CommonExceptionResponse(code = e.status.value(), message = e.message ?: "")
-        return ResponseEntity(error, e.status)
+//        return ResponseEntity(error, e.status)
+        return ResponseEntity.status(e.status).body(error)
     }
 
     companion object {
