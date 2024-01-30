@@ -5,8 +5,9 @@ import Pagination from "./Pagination.tsx";
 import {Comment} from "../../model/Comment.ts";
 import {getAllComments} from "../../model/Api.ts";
 
-const CommentStyle = styled.div`
+const url: string = import.meta.env.WEB_SOCKET_URL
 
+const CommentStyle = styled.div`
     table {
         border-collapse: collapse;
         margin-top: 20px;
@@ -50,7 +51,7 @@ const CommentList: React.FC = () => {
         }
 
         const stompClient = new Client({
-            brokerURL: 'ws://localhost:8080/ws',
+            brokerURL: url,
             // debug: function (str) {
             //     console.log('WebSocket 연결 중 ... : ' + str);
             // },
