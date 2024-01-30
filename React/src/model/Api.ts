@@ -5,15 +5,14 @@ export interface User {
     password: string
 }
 
-// const local = 'http://localhost:8080'
-const server = 'http://43.202.203.180:8080'
+const url = import.meta.env.BASE_URL
 
 export const requestSignUp = async (user: User) => {
-    return await axios.post(server + '/api/user/sign-up', user);
+    return await axios.post(url + '/api/user/sign-up', user);
 }
 
 export const requestSignIn = async (user: User) => {
-    return await axios.post(server + '/api/user/sign-in', user);
+    return await axios.post(url + '/api/user/sign-in', user);
 }
 
 export const postComment = async (description: string) => {
@@ -21,12 +20,12 @@ export const postComment = async (description: string) => {
     const userName = localStorage.getItem('username')
 
     return await axios.post(
-        server + '/api/comment/post',
+        url + '/api/comment/post',
         { userName,  description },
         { headers : { Authorization: `Bearer ${token}`}}
     );
 }
 
 export const getAllComments = async () => {
-    return await axios.get(server + '/api/comment')
+    return await axios.get(url + '/api/comment')
 }
