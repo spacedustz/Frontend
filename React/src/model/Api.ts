@@ -5,7 +5,7 @@ export interface User {
     password: string
 }
 
-const url = import.meta.env.BASE_URL
+const url = import.meta.env.VITE_SERVER_URL;
 
 export const requestSignUp = async (user: User) => {
     return await axios.post(url + '/api/user/sign-up', user);
