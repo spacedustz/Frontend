@@ -9,6 +9,8 @@
 *.user
 *.userosscache
 *.sln.docstates
+React/.env
+API-Server/src/main/resources/jwt.yml
 
 # User-specific files (MonoDevelop/Xamarin Studio)
 *.userprefs
