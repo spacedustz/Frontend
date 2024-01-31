@@ -6,6 +6,7 @@ import org.apache.logging.log4j.LogManager
 import org.apache.logging.log4j.Logger
 import org.springframework.http.HttpStatus
 import org.springframework.messaging.simp.SimpMessagingTemplate
+import org.springframework.scheduling.annotation.Scheduled
 import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
@@ -35,6 +36,11 @@ class CommentService(
     fun init() {
         val developer: User = userRepository.findById(1L).orElseThrow()
         commentRepository.save(Comment.createOf("첫 댓글", developer))
+    }
+
+    @Scheduled(initialDelay = 2000, fixedDelay = 2000)
+    fun refresh() {
+        getAllComments()
     }
 
     fun writeComment(userName: String, description: String): Comment {
@@ -89,7 +95,7 @@ class CommentService(
     }
 
     @Transactional(readOnly = true)
-    fun getAllComments() {
+    fun getAllComments(): List<CommentListDto> {
         val comments = try {
             commentRepository.findAll()
         } catch (e: Exception) {
@@ -112,5 +118,7 @@ class CommentService(
 
         socketChannel.convertAndSend("/api/comment/list", commentListDtos)
         log.info("WebSocket - Comment List 전송 완료")
+
+        return commentListDtos;
     }
 }
