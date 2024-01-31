@@ -87,7 +87,7 @@ const SignUp: React.FC = () => {
                     <Modal.Title>회원가입 성공</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    {signedUserName}님, 귀찮음을 무릅쓰고 회원가입 해주셔서 감사합니다!
+                    {signedUserName}님, 회원가입 완료!
                 </Modal.Body>
             </Modal>
 
