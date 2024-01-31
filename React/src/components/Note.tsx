@@ -43,37 +43,37 @@ const Note: React.FC = () => {
 
                 <SubDiv>
                     <AssignmentTitle><BaseLink
-                        href="https://github.com/spacedustz/Markup-CSS/blob/main/Description/1.md"
+                        href="https://github.com/spacedustz/JavaScript/blob/main/Description/HTML-CSS/1.md"
                         target="_blank">📄 1. HTML & CSS 기초</BaseLink></AssignmentTitle>
                 </SubDiv>
 
                 <SubDiv>
                     <AssignmentTitle><BaseLink
-                        href="https://github.com/spacedustz/Markup-CSS/blob/main/Description/2.md"
+                        href="https://github.com/spacedustz/JavaScript/blob/main/Description/HTML-CSS/2.md"
                         target="_blank">📄 2. Wire Frame 구조 잡기</BaseLink></AssignmentTitle>
                 </SubDiv>
 
                 <SubDiv>
                     <AssignmentTitle><BaseLink
-                        href="https://github.com/spacedustz/Markup-CSS/blob/main/Description/3.md"
+                        href="https://github.com/spacedustz/JavaScript/blob/main/Description/HTML-CSS/3.md"
                         target="_blank">📄 3. Flex Box란?</BaseLink></AssignmentTitle>
                 </SubDiv>
 
                 <SubDiv>
                     <AssignmentTitle><BaseLink
-                        href="https://github.com/spacedustz/Markup-CSS/blob/main/Description/4.md"
+                        href="https://github.com/spacedustz/JavaScript/blob/main/Description/HTML-CSS/4.md"
                         target="_blank">📄 4. Flex Box & 단위 & 다양한 팁</BaseLink></AssignmentTitle>
                 </SubDiv>
 
                 <SubDiv>
                     <AssignmentTitle><BaseLink
-                        href="https://github.com/spacedustz/Markup-CSS/blob/main/Description/5.md"
+                        href="https://github.com/spacedustz/JavaScript/blob/main/Description/HTML-CSS/5.md"
                         target="_blank">📄 5. ARGB란? </BaseLink></AssignmentTitle>
                 </SubDiv>
 
                 <SubDiv>
                     <AssignmentTitle><BaseLink
-                        href="https://github.com/spacedustz/Markup-CSS/blob/main/Description/6.md"
+                        href="https://github.com/spacedustz/JavaScript/blob/main/Description/HTML-CSS/6.md"
                         target="_blank">📄 6. BootStrap 사용법 </BaseLink></AssignmentTitle>
                 </SubDiv>
             </MemoContainer>
@@ -85,7 +85,7 @@ const Note: React.FC = () => {
 
                 <SubDiv>
                     <AssignmentTitle><BaseLink
-                        href="https://github.com/spacedustz/JavaScript/blob/main/Description/1/1-Variable.md"
+                        href="https://github.com/spacedustz/JavaScript/blob/main/Description/JavaScript/1-Variable.md"
                         target="_blank">📄 1. 변수 </BaseLink></AssignmentTitle>
                 </SubDiv>
             </MemoContainer>
