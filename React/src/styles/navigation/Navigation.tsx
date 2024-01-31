@@ -45,8 +45,8 @@ const ImageStyle = styled.img`
     margin-right: 10px;
 
     @media (max-width: 768px) {
-        width: 20px;
-        height: 20px;
+        width: 17px;
+        height: 17px;
     }
 `;
 
