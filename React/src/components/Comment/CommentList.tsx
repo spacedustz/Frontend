@@ -63,19 +63,7 @@ const CommentList: React.FC = () => {
             stompClient.subscribe("/api/comment/list", (frame: Frame) => {
                 if (frame.body) {
                     const receivedComments: Comment[] = JSON.parse(frame.body);
-
-                    const newComments: Comment[] = receivedComments.map((comment: Comment) => ({
-                        commentId: comment.commentId,
-                        description: comment.description,
-                        createdAt: comment.createdAt,
-                        userId: comment.userId,
-                        userName: comment.userName,
-                        password: comment.password,
-                        userType: comment.userType,
-                        userCreatedAt: comment.userCreatedAt,
-                    }));
-
-                    setComments(newComments);
+                    setComments(receivedComments);
                 }
             });
 
