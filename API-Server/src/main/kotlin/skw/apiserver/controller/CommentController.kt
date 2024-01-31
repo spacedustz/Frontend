@@ -5,6 +5,7 @@ import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 
 import org.springframework.web.bind.annotation.*
+import skw.apiserver.dto.CommentListDto
 import skw.apiserver.dto.DeleteCommentDto
 import skw.apiserver.dto.PostCommentDto
 import skw.apiserver.dto.UpdateCommentDto
@@ -34,7 +35,7 @@ class CommentController(
     }
 
     @GetMapping
-    fun getAllComments() {
-        commentService.getAllComments()
+    fun getAllComments(): ResponseEntity<List<CommentListDto>> {
+        return ResponseEntity(commentService.getAllComments(), HttpStatus.OK)
     }
 }
