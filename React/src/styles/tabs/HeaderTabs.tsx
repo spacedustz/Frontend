@@ -17,6 +17,16 @@ const TabsStyle = styled(Tabs)`
             transition: color 0.5s;
         }
     }
+    
+    @media (max-width: 768px) {
+        .tab-pane {
+            min-height: 100vh;
+        }
+        
+        span {
+            font-size: 12px;
+        }
+    }
 `;
 
 const HeaderTabs: React.FC = () => {
@@ -35,20 +45,6 @@ const HeaderTabs: React.FC = () => {
     useEffect(() => {
         const currentPath = location.pathname.slice(1);
         setActiveKey(currentPath)
-
-        // switch (currentPath) {
-        //     case '/Assignment':
-        //         setActiveKey('Assignment');
-        //         break;
-        //     case '/Note':
-        //         setActiveKey('Note');
-        //         break;
-        //     case '/Comment':
-        //         setActiveKey('Comment');
-        //         break;
-        //     default:
-        //         setActiveKey('Assignment');
-        // }
     }, [location.pathname]);
 
     return (
