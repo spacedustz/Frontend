@@ -75,7 +75,7 @@ const CommentList: React.FC = () => {
 
     const fetchComments = async () => {
         const result = await getAllComments();
-        if (result.data) {
+        if (result.data && Array.isArray(result.data)) {
             setComments(result.data);
         }
     };
