@@ -1,15 +1,9 @@
-## 📚 Learn JavaScript 📚
+## 📚 Learn Frontend 📚
 
-React & TypeScript / Kotlin 사용해 자바스크립트 학습 페이지 만들기
+React & TypeScript / Kotlin 사용해 프론트엔드 학습 기록 사이트 만들기
 
 - Server : AWS EC2 (Ubuntu 22.04 LTS)
 - EC2 Elastic IP 설정
-
-<br>
-
-> **메인 화면**
-
-![img](./Description/img/main.png)
 
 ---
 
