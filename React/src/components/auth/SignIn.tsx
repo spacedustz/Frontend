@@ -19,6 +19,28 @@ const SignUpSignInMargin = styled.div`
     }
 `;
 
+const UserAndLogoutContainer = styled.div`
+    display: flex;
+    flex-direction: row;
+    
+    span {
+        padding-top: 10px;
+    }
+
+    @media (max-width: 768px) {
+        flex-direction: row;
+        
+        span {
+            padding-top: 10px;
+            font-size: 14px;
+        }
+        
+        button {
+            font-size: 14px;
+        }
+    }
+`;
+
 const SignIn: React.FC = () => {
     const [loggedInUserName, setLoggedInUserName] = useState<string>('');
     const [show, setShow] = useState<boolean>(false);
@@ -89,10 +111,10 @@ const SignIn: React.FC = () => {
             )}
 
             {loggedIn && (
-                <>
+                <UserAndLogoutContainer>
                     <StyledUserName>{loggedInUserName + ' 님'}</StyledUserName>
                     <SignOut />
-                </>
+                </UserAndLogoutContainer>
             )}
 
             <Modal show={show} onHide={handleClose}>
