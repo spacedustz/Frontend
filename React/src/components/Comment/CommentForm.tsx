@@ -33,6 +33,7 @@ const CommentForm: React.FC = () => {
                 value={newComment}
                 onChange={handleInputChange}
                 placeholder="여러분의 소중한 댓글을 입력해주세요."
+                maxLength={120}
             />
             <ButtonStyle onClick={handleAddComment}>Send</ButtonStyle>
         </CommentFormContainer>
