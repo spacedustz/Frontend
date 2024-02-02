@@ -1,21 +1,14 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {postComment} from "../../model/Api.ts";
 import {ButtonStyle, CommentFormContainer, FormHeader, InputStyle} from "../../styles/comment/Form.ts";
+import {CommentFormProps} from "../../model/Comment.ts";
 
-const CommentForm: React.FC = () => {
-    const [newComment, setNewComment] = useState<string>('');
-
-    const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        if (event.target && event.target.value !== null && event.target.value !== undefined) {
-            setNewComment(event.target.value);
-        }
-    };
-
+const CommentForm: React.FC<CommentFormProps> = ({ newComment, onInputChange, onSubmitComment, isEditing }) => {
     const handleAddComment = async () => {
         if (newComment.trim() !== '') {
             try {
                 await postComment(newComment); // postComment 함수를 직접 호출
-                setNewComment('');
+                onInputChange({ target: { value: '' } } as React.ChangeEvent<HTMLInputElement>); // 댓글을 추가한 후 입력 필드를 비웁니다.
             } catch (error) {
                 alert('댓글은 로그인 후 작성 가능합니다.');
                 console.error('댓글 추가 - Authorization Failed:', error);
@@ -31,11 +24,11 @@ const CommentForm: React.FC = () => {
             <InputStyle
                 type="text"
                 value={newComment}
-                onChange={handleInputChange}
+                onChange={onInputChange}
                 placeholder="여러분의 소중한 댓글을 입력해주세요."
                 maxLength={120}
             />
-            <ButtonStyle onClick={handleAddComment}>Send</ButtonStyle>
+            <ButtonStyle onClick={isEditing ? onSubmitComment : handleAddComment}>{isEditing ? '수정 완료' : 'Send'}</ButtonStyle>
         </CommentFormContainer>
     );
 };
