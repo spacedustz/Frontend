@@ -1,5 +1,5 @@
 package skw.apiserver.enum
 
 enum class UserType {
-    USER, DEVELOPER
+    유저, 개발자
 }
