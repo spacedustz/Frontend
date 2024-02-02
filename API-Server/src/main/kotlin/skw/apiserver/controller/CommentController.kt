@@ -6,7 +6,6 @@ import org.springframework.http.ResponseEntity
 
 import org.springframework.web.bind.annotation.*
 import skw.apiserver.dto.CommentListDto
-import skw.apiserver.dto.DeleteCommentDto
 import skw.apiserver.dto.PostCommentDto
 import skw.apiserver.dto.UpdateCommentDto
 import skw.apiserver.entity.Comment
@@ -25,13 +24,12 @@ class CommentController(
 
     @PatchMapping("/update/{commentId}")
     fun updateComment(@PathVariable commentId: Long, @RequestBody request: UpdateCommentDto): ResponseEntity<Comment> {
-        return ResponseEntity(commentService.updateComment(commentId, request.newDescription, request.password), HttpStatus.OK)
-
+        return ResponseEntity(commentService.updateComment(commentId, request.newDescription), HttpStatus.OK)
     }
 
     @DeleteMapping("/delete/{commentId}")
-    fun deleteComment(@PathVariable commentId: Long, @RequestBody request: DeleteCommentDto): ResponseEntity<Unit> {
-        return ResponseEntity(commentService.deleteComment(commentId, request.password), HttpStatus.OK)
+    fun deleteComment(@PathVariable commentId: Long): ResponseEntity<Unit> {
+        return ResponseEntity(commentService.deleteComment(commentId), HttpStatus.OK)
     }
 
     @GetMapping
