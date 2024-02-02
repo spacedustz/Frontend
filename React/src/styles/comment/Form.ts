@@ -18,6 +18,10 @@ export const InputStyle = styled.input`
     }
 `;
 
+export const FormHeader = styled.h3`
+    color: white;
+`;
+
 export const ButtonStyle = styled.button`
     border: 0 none;
     border-radius: 18px;

@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import {postComment} from "../../model/Api.ts";
-import {ButtonStyle, CommentFormContainer, InputStyle} from "../../styles/comment/Form.ts";
+import {ButtonStyle, CommentFormContainer, FormHeader, InputStyle} from "../../styles/comment/Form.ts";
 
 const CommentForm: React.FC = () => {
     const [newComment, setNewComment] = useState<string>('');
@@ -27,7 +27,7 @@ const CommentForm: React.FC = () => {
 
     return (
         <CommentFormContainer>
-            <h3>🐣 Guest Book 🐣 </h3>
+            <FormHeader>🐣 Guest Book 🐣 </FormHeader>
             <InputStyle
                 type="text"
                 value={newComment}
