@@ -1,4 +1,5 @@
 import axios from "axios";
+import {DeleteComment, ModifyComment} from "./Comment.ts";
 
 export interface User {
     name: string
@@ -28,4 +29,21 @@ export const postComment = async (description: string) => {
 
 export const getAllComments = async () => {
     return await axios.get(url + '/api/comment')
+}
+
+export const modifyComment = async (data: ModifyComment) => {
+    return await axios.patch(url + '/api/comment/' + data.commentId, {
+        body: {
+            newDescription: data.newDescription,
+            password: data.password
+        }
+    })
+}
+
+export const deleteComment = async (data: DeleteComment) => {
+    return await axios.delete(url + '/api/comment/'+ data.commentId, {
+        data: {
+            password: data.password
+        }
+    })
 }
