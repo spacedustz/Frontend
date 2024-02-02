@@ -17,8 +17,8 @@ export const requestSignIn = async (user: User) => {
 }
 
 export const postComment = async (description: string) => {
-    const token = localStorage.getItem('jwt')
-    const userName = localStorage.getItem('username')
+    const token = sessionStorage.getItem('jwt')
+    const userName = sessionStorage.getItem('username')
 
     return await axios.post(
         url + '/api/comment/post',
@@ -31,21 +31,17 @@ export const getAllComments = async () => {
     return await axios.get(url + '/api/comment')
 }
 
-export const modifyComment = async (data: ModifyComment) => {
-    return await axios.patch(url + '/api/comment/' + data.commentId, {
-        body: {
-            newDescription: data.newDescription,
-        },
-        headers: {
-            Authorization: `Bearer ${data.jwt}`
-        }
-    })
+export async function modifyComment(requestData: ModifyComment) {
+    const request = `${url}/api/comment/update/${requestData.commentId}`;
+    const headers = { 'Authorization': 'Bearer ' + requestData.jwt };
+    const data = { newDescription: requestData.newDescription };
+
+    return await axios.patch(request, data, { headers });
 }
 
-export const deleteComment = async (data: DeleteComment) => {
-    return await axios.delete(url + '/api/comment/'+ data.commentId, {
-        headers: {
-            Authorization: `Bearer ${data.jwt}`
-        }
-    })
+export async function deleteComment(requestData: DeleteComment) {
+    const request = `${url}/api/comment/delete/${requestData.commentId}`;
+    const headers = { 'Authorization': 'Bearer ' + requestData.jwt };
+
+    return await axios.delete(request, { headers });
 }
