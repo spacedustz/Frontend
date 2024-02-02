@@ -38,10 +38,10 @@ class UserService(
 
     @PostConstruct
     fun init() {
-        if (userRepository.findByName("Developer").isEmpty) {
+        if (userRepository.findByName("신건우").isEmpty) {
             val signup: SignUpRequest = SignUpRequest.createOf("신건우", password)
             val developer = User.createOf(signup, encoder)
-            developer.type = UserType.DEVELOPER
+            developer.type = UserType.개발자
             userRepository.save(developer)
         }
     }
@@ -61,7 +61,7 @@ class UserService(
             .filter { encoder.matches(request.password, it?.password) }
             .orElseThrow { CommonException("아이디 또는 비밀번호가 일치하지 않습니다.", HttpStatus.BAD_REQUEST) }
 
-        val token = tokenProvider.createToken("${user!!.id}:${user.type}")
+        val token = tokenProvider.createToken("${user!!.id}:${user.type.name}")
 
         return SignInResponse(user.name, user.type, token, user.password)
     }
@@ -89,8 +89,8 @@ class UserService(
 
     /* Admin 기능 */
     @Transactional(readOnly = true)
-    fun getUsers(): List<UserInfoResponse> = userRepository.findAllByType(UserType.USER).map(UserInfoResponse::from)
+    fun getUsers(): List<UserInfoResponse> = userRepository.findAllByType(UserType.유저).map(UserInfoResponse::from)
 
     @Transactional(readOnly = true)
-    fun getAdmins(): List<UserInfoResponse> = userRepository.findAllByType(UserType.DEVELOPER).map(UserInfoResponse::from)
+    fun getAdmins(): List<UserInfoResponse> = userRepository.findAllByType(UserType.개발자).map(UserInfoResponse::from)
 }
