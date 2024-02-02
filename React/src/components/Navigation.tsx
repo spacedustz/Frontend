@@ -1,7 +1,7 @@
 import Nav from 'react-bootstrap/Nav';
 import React from "react";
 import SignIn from "./auth/SignIn.tsx";
-import {NavImageStyle, NavSignInStyle, NavStyle} from "../styles/container/NavigatinContainer.tsx";
+import {NavImageStyle, NavSignInStyle, NavStyle} from "../styles/container/NavigatinContainer.ts";
 
 const Navigation: React.FC = () => {
     return (

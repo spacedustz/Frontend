@@ -1,6 +1,6 @@
 import Card from 'react-bootstrap/Card';
 import React from "react";
-import CardContainer, {CardTitle, MainCard} from "../styles/container/CardContainer.tsx";
+import CardContainer, {CardTitle, MainCard} from "../styles/container/CardContainer.ts";
 
 const ProfileCard: React.FC = () => {
     return (
