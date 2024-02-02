@@ -104,6 +104,12 @@ class CommentService(
         }
 
         val commentListDtos = comments.map { comment ->
+            val userType = when(comment.user?.type?.name) {
+                "USER" -> "일반회원"
+                "DEVELOPER" -> "개발자"
+                else -> comment.user?.type?.name ?: ""
+            }
+
             CommentListDto(
                 commentId = comment.id ?: 0,
                 description = comment.description ?: "",
@@ -111,7 +117,7 @@ class CommentService(
                 userId = comment.user?.id ?: 0,
                 userName = comment.user?.name ?: "",
                 password = comment.user?.password ?: "",
-                userType = comment.user?.type?.name ?: "",
+                userType = userType,
                 userCreatedAt = comment.user?.createdAt ?: ""
             )
         }
