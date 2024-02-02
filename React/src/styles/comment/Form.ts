@@ -12,10 +12,14 @@ export const InputStyle = styled.input`
     border: 1px solid #dfe1e5;
     text-align: center;
     font-size: 12px;
+    
+    @media (max-width: 768px) {
+        width: 70%;
+    }
 `;
 
 export const ButtonStyle = styled.button`
-    border: 1px solid;
+    border: 0 none;
     border-radius: 18px;
     background-color: rgba(107, 172, 206, 1);
     color: #fff;
