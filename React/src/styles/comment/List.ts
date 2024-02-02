@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, {css, keyframes} from "styled-components";
 
 export const CommentStyle = styled.div`
     font-size: 14px;
@@ -14,7 +14,6 @@ export const CommentStyle = styled.div`
 export const CommentItem = styled.div`
     border-bottom: 1px solid #ddd;
     padding: 12px;
-    margin-bottom: 10px;
     background-color: rgba(255, 255, 255, 0.1);
     color: white;
     font-family: 'Spoqa Han Sans', sans-serif;
@@ -40,12 +39,22 @@ export const CommentAuthor = styled.div`
     margin: 10px;
 
     @media (max-width: 768px) {  // 화면 크기가 768px 이하인 경우
-        font-size: 14px;
+        font-size: 12px;
         margin: 5px;
     }
 `;
 
-export const CommentUserType = styled.span`
+const colorAnimation = keyframes`
+    0% { background-color: rgba(255, 105, 97, 0.7); }  // 연한 빨강
+    50% { background-color: rgba(70, 130, 180, 0.7); }  // 파랑
+    100% { background-color: rgba(147, 112, 219, 0.7); }  // 보라색
+`;
+
+type CommentUserTypeProps = {
+    $userType: string;
+}
+
+export const CommentUserType = styled.span<CommentUserTypeProps>`
     font-weight: bold;
     font-size: 13px;
     border: 1px solid gray;
@@ -53,6 +62,7 @@ export const CommentUserType = styled.span`
     width: 60px;
     height: 25px;
     margin-top: 10px;
+    animation: ${props => props.$userType === '개발자' ? css`${colorAnimation} 3s linear infinite` : 'none'};
 
     @media (max-width: 768px) {  // 화면 크기가 768px 이하인 경우
         font-size: 10px;
@@ -116,4 +126,9 @@ export const CommentDescription = styled.div`
     white-space: normal;
     margin-left: 20px;
     margin-right: 15%;
+
+    @media (max-width: 768px) {  // 화면 크기가 768px 이하인 경우
+        font-size: 0.7em;
+        margin: 5px;
+    }
 `;
