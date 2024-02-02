@@ -5,6 +5,8 @@ import lombok.RequiredArgsConstructor
 import lombok.extern.slf4j.Slf4j
 import org.apache.logging.log4j.LogManager
 import org.apache.logging.log4j.Logger
+import org.springframework.beans.factory.annotation.Value
+import org.springframework.context.annotation.PropertySource
 import org.springframework.data.repository.findByIdOrNull
 import org.springframework.http.HttpStatus
 import org.springframework.security.crypto.password.PasswordEncoder
@@ -20,11 +22,14 @@ import skw.apiserver.token.TokenProvider
 @Slf4j
 @Service
 @Transactional
+@PropertySource("classpath:jwt.yml")
 @RequiredArgsConstructor
 class UserService(
     private val userRepository: UserRepository,
     private val encoder: PasswordEncoder,
-    private val tokenProvider: TokenProvider
+    private val tokenProvider: TokenProvider,
+    @Value("\${password}")
+    private val password: String
 
 ) {
     companion object {
@@ -34,7 +39,7 @@ class UserService(
     @PostConstruct
     fun init() {
         if (userRepository.findByName("Developer").isEmpty) {
-            val signup: SignUpRequest = SignUpRequest.createOf("Developer", "1260")
+            val signup: SignUpRequest = SignUpRequest.createOf("신건우", password)
             val developer = User.createOf(signup, encoder)
             developer.type = UserType.DEVELOPER
             userRepository.save(developer)
