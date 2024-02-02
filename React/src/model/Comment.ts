@@ -6,9 +6,19 @@ export type Comment = {
     createdAt: string,
     userId: number,
     userName: string,
-    password: string,
     userType: string,
     userCreatedAt: string,
+}
+
+export type ModifyComment = {
+    commentId: number,
+    newDescription: string,
+    jwt: string
+}
+
+export type DeleteComment = {
+    commentId: number,
+    jwt: string
 }
 
 type CommentContextType = {
@@ -27,4 +37,17 @@ export interface PaginationProps {
     totalItems: number;
     currentPage: number;
     paginate: (pageNum: number) => void;
+}
+
+export interface CommentFormProps {
+    newComment: string;
+    onInputChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
+    onSubmitComment: () => Promise<void>;
+    isEditing: boolean;
+}
+
+export interface CommentListProps {
+    comments: Comment[];
+    onEditComment: (commentId: number, comment: string) => void;
+    onDeleteComment: (commentId: number) => Promise<void>;
 }
