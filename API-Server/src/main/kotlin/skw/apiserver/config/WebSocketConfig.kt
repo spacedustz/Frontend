@@ -8,7 +8,7 @@ import org.springframework.web.socket.config.annotation.*
 @EnableWebSocketMessageBroker
 class WebSocketConfig : WebSocketMessageBrokerConfigurer {
     override fun configureMessageBroker(config: MessageBrokerRegistry) {
-        config.enableSimpleBroker("/api/comment")
+        config.enableSimpleBroker("/comment")
         config.setApplicationDestinationPrefixes("/")
     }
 
