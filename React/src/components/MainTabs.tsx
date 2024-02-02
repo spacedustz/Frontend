@@ -1,35 +1,9 @@
 import Tab from 'react-bootstrap/Tab';
-import Tabs from 'react-bootstrap/Tabs';
 import React, {useEffect, useState} from "react";
-import styled from "styled-components";
 import {Outlet, useLocation, useNavigate} from "react-router-dom";
+import {TabsStyle} from "../styles/tabs/TabStyle.ts";
 
-const TabsStyle = styled(Tabs)`
-    overflow: hidden;
-    background-color: lightblue;
-    
-    button {
-        color: black;
-
-        &:hover {
-            background-color: dimgray;
-            color: black;
-            transition: color 0.5s;
-        }
-    }
-    
-    @media (max-width: 768px) {
-        .tab-pane {
-            min-height: 100vh;
-        }
-        
-        span {
-            font-size: 12px;
-        }
-    }
-`;
-
-const HeaderTabs: React.FC = () => {
+const MainTabs: React.FC = () => {
     const location = useLocation();
     const navigate = useNavigate();
     const [activeKey, setActiveKey] = useState<string>("Assignment");
@@ -64,11 +38,11 @@ const HeaderTabs: React.FC = () => {
                 <Outlet/>
             </Tab>
 
-            <Tab eventKey="Comment" title={<span style={activeKey === "Comment" ? {color: "lightblue"} : {}}>🐣 피드백 남기기 🐣</span>}>
+            <Tab eventKey="Comment" title={<span style={activeKey === "Comment" ? {color: "lightblue"} : {}}>🐣 방명록 🐣</span>}>
                 <Outlet/>
             </Tab>
         </TabsStyle>
     );
 }
 
-export default HeaderTabs;
+export default MainTabs;
