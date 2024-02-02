@@ -10,6 +10,7 @@ import org.springframework.security.config.annotation.web.configurers.HeadersCon
 import org.springframework.security.config.http.SessionCreationPolicy
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
 import org.springframework.security.web.authentication.www.BasicAuthenticationFilter
+import skw.apiserver.enum.UserType
 import skw.apiserver.filter.JwtAuthenticationFilter
 
 /**
@@ -37,8 +38,8 @@ class SecurityConfig(
         .headers { header -> header.frameOptions(HeadersConfigurer<HttpSecurity>.FrameOptionsConfig::sameOrigin) }
         .authorizeHttpRequests { authorize ->
             authorize
+                .requestMatchers("/api/admin/*").hasRole(UserType.개발자.name)
                 .requestMatchers(*signupPages).permitAll()
-                .requestMatchers("/api/admin/*").hasRole("DEVELOPER")
                 .anyRequest().authenticated()
         }
         .sessionManagement { session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS) }
