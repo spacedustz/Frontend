@@ -34,7 +34,7 @@ const CommentForm: React.FC = () => {
                 onChange={handleInputChange}
                 placeholder="여러분의 소중한 댓글을 입력해주세요."
             />
-            <ButtonStyle onClick={handleAddComment}>추가</ButtonStyle>
+            <ButtonStyle onClick={handleAddComment}>Send</ButtonStyle>
         </CommentFormContainer>
     );
 };
