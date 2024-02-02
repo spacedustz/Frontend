@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
-import {MemoContainer} from "../styles/container/MemoContainer.tsx";
-import {BaseLink} from "../styles/base/BaseLink.tsx";
+import {MemoContainer} from "../styles/container/MemoContainer.ts";
+import {BaseLink} from "../styles/base/BaseLink.ts";
 
 export const TitleDiv = styled.div`
     text-align: center;
