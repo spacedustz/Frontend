@@ -7,8 +7,8 @@ const CommentForm: React.FC<CommentFormProps> = ({ newComment, onInputChange, on
     const handleAddComment = async () => {
         if (newComment.trim() !== '') {
             try {
-                await postComment(newComment); // postComment 함수를 직접 호출
-                onInputChange({ target: { value: '' } } as React.ChangeEvent<HTMLInputElement>); // 댓글을 추가한 후 입력 필드를 비웁니다.
+                await postComment(newComment);
+                onInputChange({ target: { value: '' } } as React.ChangeEvent<HTMLInputElement>);
             } catch (error) {
                 alert('댓글은 로그인 후 작성 가능합니다.');
                 console.error('댓글 추가 - Authorization Failed:', error);
