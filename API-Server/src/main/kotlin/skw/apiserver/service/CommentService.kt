@@ -25,7 +25,6 @@ import java.time.format.DateTimeFormatter
 class CommentService(
     private val commentRepository: CommentRepository,
     private val userRepository: UserRepository,
-    private val passwordEncoder: PasswordEncoder,
     private val socketChannel: SimpMessagingTemplate,
 ) {
     companion object {
@@ -55,6 +54,8 @@ class CommentService(
         val newComment = commentRepository.save(Comment.createOf(description, user!!))
 
         getAllComments()
+
+        log.info("${user.name} 님 댓글 작성 완료 - 작성한 내용 : $description")
         return newComment
     }
 
@@ -72,6 +73,8 @@ class CommentService(
         val updatedComment = commentRepository.save(comment)
 
         getAllComments()
+
+        log.info("${comment.user?.name} 님 댓글 수정 완료 - 수정한 내용 : ${comment.description}")
         return updatedComment
     }
 
@@ -84,7 +87,9 @@ class CommentService(
             throw CommonException("댓글 삭제 에러", HttpStatus.BAD_REQUEST)
         }
 
+
         commentRepository.delete(comment)
+        log.info("${comment.user?.name} 님 댓글 삭제 완료 - 삭제한 댓글 번호 : ${comment.id}")
         getAllComments()
     }
 
@@ -98,24 +103,18 @@ class CommentService(
         }
 
         val commentListDtos = comments.map { comment ->
-            val userType = when(comment.user?.type?.name) {
-                "USER" -> "유저"
-                "DEVELOPER" -> "개발자"
-                else -> comment.user?.type?.name ?: ""
-            }
-
             CommentListDto(
                 commentId = comment.id ?: 0,
                 description = comment.description ?: "",
                 createdAt = comment.createdAt ?: "",
                 userId = comment.user?.id ?: 0,
                 userName = comment.user?.name ?: "",
-                userType = userType,
+                userType = comment.user?.type!!.name,
                 userCreatedAt = comment.user?.createdAt ?: ""
             )
         }
 
-        socketChannel.convertAndSend("/api/comment/list", commentListDtos)
+        socketChannel.convertAndSend("/comment/list", commentListDtos)
 
         return commentListDtos;
     }
