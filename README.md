@@ -2,8 +2,9 @@
 
 React & TypeScript / Kotlin 사용해 프론트엔드 학습 기록 사이트 만들기
 
-- Server : AWS EC2 (Ubuntu 22.04 LTS)
-- EC2 Elastic IP 설정
+> **초기 화면**
+
+![img](./Description/img/main.png)
 
 ---
 
