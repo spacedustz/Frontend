@@ -35,15 +35,17 @@ export const modifyComment = async (data: ModifyComment) => {
     return await axios.patch(url + '/api/comment/' + data.commentId, {
         body: {
             newDescription: data.newDescription,
-            password: data.password
+        },
+        headers: {
+            Authorization: `Bearer ${data.jwt}`
         }
     })
 }
 
 export const deleteComment = async (data: DeleteComment) => {
     return await axios.delete(url + '/api/comment/'+ data.commentId, {
-        data: {
-            password: data.password
+        headers: {
+            Authorization: `Bearer ${data.jwt}`
         }
     })
 }
