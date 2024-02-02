@@ -105,7 +105,7 @@ class CommentService(
 
         val commentListDtos = comments.map { comment ->
             val userType = when(comment.user?.type?.name) {
-                "USER" -> "일반회원"
+                "USER" -> "유저"
                 "DEVELOPER" -> "개발자"
                 else -> comment.user?.type?.name ?: ""
             }
