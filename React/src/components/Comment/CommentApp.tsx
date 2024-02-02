@@ -28,7 +28,7 @@ const CommentApp: React.FC = () => {
         stompClient.onConnect = function () {
             stompClientRef.current = stompClient;
 
-            stompClient.subscribe("/api/comment/list", (frame: Frame) => {
+            stompClient.subscribe("/comment/list", (frame: Frame) => {
                 if (frame.body) {
                     const receivedComments: Comment[] = JSON.parse(frame.body);
                     setComments(receivedComments);
@@ -71,7 +71,7 @@ const CommentApp: React.FC = () => {
 
     const handleEditComment = async () => {
         if (isEditing && editingCommentId !== null) {
-            const jwt = localStorage.getItem('jwt');
+            const jwt = sessionStorage.getItem('jwt');
             if (!jwt) {
                 alert('비밀번호가 저장되지 않았습니다.');
                 return;
@@ -85,6 +85,7 @@ const CommentApp: React.FC = () => {
 
             try {
                 const response = await modifyComment(requestData);
+
                 if (response.status === 200) {
                     alert('댓글이 수정되었습니다.');
                     console.log('댓글 수정 완료')
@@ -108,7 +109,7 @@ const CommentApp: React.FC = () => {
     };
 
     const handleDeleteComment = async (commentId: number) => {
-        const jwt = localStorage.getItem('jwt');
+        const jwt = sessionStorage.getItem('jwt');
         if (!jwt) {
             alert('비밀번호가 저장되지 않았습니다.');
             return;
@@ -121,6 +122,7 @@ const CommentApp: React.FC = () => {
 
         try {
             const response = await deleteComment(requestData);
+
             if (response.status === 200) {
                 console.log('댓글 삭제 완료')
                 alert('댓글이 삭제되었습니다.');
