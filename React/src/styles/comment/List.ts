@@ -5,7 +5,10 @@ export const CommentStyle = styled.div`
     margin: auto;
     display: flex;
     flex-direction: column;
-    width: 50%;
+
+    @media (min-width: 768px) {  // 화면 크기가 768px 이상인 경우
+        width: 50%;
+    }
 `;
 
 export const CommentItem = styled.div`
@@ -35,6 +38,11 @@ export const CommentAuthor = styled.div`
     font-weight: bold;
     font-size: 17px;
     margin: 10px;
+
+    @media (max-width: 768px) {  // 화면 크기가 768px 이하인 경우
+        font-size: 14px;
+        margin: 5px;
+    }
 `;
 
 export const CommentUserType = styled.span`
@@ -45,13 +53,25 @@ export const CommentUserType = styled.span`
     width: 60px;
     height: 25px;
     margin-top: 10px;
+
+    @media (max-width: 768px) {  // 화면 크기가 768px 이하인 경우
+        font-size: 10px;
+        width: 50px;
+        height: 20px;
+        margin-top: 5px;
+    }
 `;
 
 export const CommentTime = styled.div`
     margin: 10px;
-    font-weight: 300;  // 글씨 두께를 보통보다 약간 얇게 설정
-    font-size: 0.8em;  // 글씨 크기를 작게 설정
-    color: rgba(200, 200, 200, 0.8);  // 연한 회색으로 설정
+    font-weight: 300;
+    font-size: 0.8em;
+    color: rgba(200, 200, 200, 0.8);
+
+    @media (max-width: 768px) {  // 화면 크기가 768px 이하인 경우
+        font-size: 0.6em;
+        margin: 5px;
+    }
 `;
 
 export const CommentActions = styled.div`
@@ -64,7 +84,6 @@ export const EditButton = styled.button`
     background-color: rgba(76, 175, 80, 0.5);
     color: white;
     cursor: pointer;
-    margin-right: 5px;
     width: auto;
     height: auto;
     font-size: 10px;
@@ -96,5 +115,5 @@ export const CommentDescription = styled.div`
     height: auto;
     white-space: normal;
     margin-left: 20px;
-    margin-right: 30%;
+    margin-right: 15%;
 `;
