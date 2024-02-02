@@ -86,7 +86,7 @@ const CommentList: React.FC = () => {
                     <CommentTop>
                         <CommentAuthorAndTime>
                             <CommentAuthor>{comment.userName}</CommentAuthor>
-                            <CommentUserType>{comment.userType}</CommentUserType>
+                            <CommentUserType $userType={comment.userType}>{comment.userType}</CommentUserType>
                             <CommentTime>{comment.createdAt}</CommentTime>
                         </CommentAuthorAndTime>
                         <CommentActions>
