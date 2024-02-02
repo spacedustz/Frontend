@@ -3,6 +3,9 @@ spring:
     active: prod
 
 ---
+server:
+  port: 9992
+
 spring:
   config:
     activate:
