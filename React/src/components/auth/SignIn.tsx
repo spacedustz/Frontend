@@ -4,16 +4,16 @@ import {requestSignIn, User} from "../../model/Api.ts";
 import SignUp from "./SignUp.tsx";
 import SignOut from "./SignOut.tsx";
 import {SignUpSignInMargin, StyledUserName, UserAndLogoutContainer} from "../../styles/auth/SignIn.ts";
+import {useAuth} from "./AutnContext.tsx";
 
 const SignIn: React.FC = () => {
-    const [loggedInUserName, setLoggedInUserName] = useState<string>('');
+    const { loggedIn, loggedInUserName, setLoggedIn, setLoggedInUserName } = useAuth();
     const [show, setShow] = useState<boolean>(false);
-    const [loggedIn, setLoggedIn] = useState<boolean>(false);
     const [user, setUser] = useState<User>({ name: '', password: '' });
 
     useEffect(() => {
-        const token = localStorage.getItem('jwt')
-        const userName = localStorage.getItem('username')
+        const token = sessionStorage.getItem('jwt')
+        const userName = sessionStorage.getItem('username')
 
         if(token) {
             setLoggedIn(true);
@@ -40,8 +40,8 @@ const SignIn: React.FC = () => {
         try {
             const response = await requestSignIn(user);
             if (response.status === 200) {
-                localStorage.setItem('jwt', response.data.token);
-                localStorage.setItem('username', response.data.name)
+                sessionStorage.setItem('jwt', response.data.token);
+                sessionStorage.setItem('username', response.data.name)
                 setLoggedIn(true);
                 setLoggedInUserName(user.name);
                 handleClose();
