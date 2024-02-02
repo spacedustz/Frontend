@@ -20,7 +20,7 @@ class User(
     var password: String,
 
     @Enumerated(EnumType.STRING)
-    var type: UserType = UserType.USER,
+    var type: UserType = UserType.유저,
 
     val createdAt: String? = "",
     var modifiedAt: String? = ""
