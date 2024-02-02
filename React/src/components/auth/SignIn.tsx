@@ -3,43 +3,7 @@ import { Modal, Button, Form } from 'react-bootstrap';
 import {requestSignIn, User} from "../../model/Api.ts";
 import SignUp from "./SignUp.tsx";
 import SignOut from "./SignOut.tsx";
-import styled from "styled-components";
-
-const StyledUserName = styled.span`
-    color: white;
-    margin-right: 18px;
-`;
-
-const SignUpSignInMargin = styled.div`
-    display: flex;
-    justify-content: space-around;
-
-    & > *:first-child {
-        margin-right: 15px;
-    }
-`;
-
-const UserAndLogoutContainer = styled.div`
-    display: flex;
-    flex-direction: row;
-    
-    span {
-        padding-top: 10px;
-    }
-
-    @media (max-width: 768px) {
-        flex-direction: row;
-        
-        span {
-            padding-top: 10px;
-            font-size: 14px;
-        }
-        
-        button {
-            font-size: 14px;
-        }
-    }
-`;
+import {SignUpSignInMargin, StyledUserName, UserAndLogoutContainer} from "../../styles/auth/SignIn.ts";
 
 const SignIn: React.FC = () => {
     const [loggedInUserName, setLoggedInUserName] = useState<string>('');
