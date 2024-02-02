@@ -26,7 +26,7 @@ class CommentService(
     private val commentRepository: CommentRepository,
     private val userRepository: UserRepository,
     private val passwordEncoder: PasswordEncoder,
-    private val socketChannel: SimpMessagingTemplate
+    private val socketChannel: SimpMessagingTemplate,
 ) {
     companion object {
         private val log: Logger = LogManager.getLogger(this::class.java.name)
@@ -58,7 +58,7 @@ class CommentService(
         return newComment
     }
 
-    fun updateComment(commentId: Long, newDescription: String, password: String): Comment {
+    fun updateComment(commentId: Long, newDescription: String): Comment {
         val comment = try {
             commentRepository.findById(commentId)
                 .orElseThrow { CommonException("Invalid Comment ID", HttpStatus.BAD_REQUEST) }
@@ -66,9 +66,6 @@ class CommentService(
             log.error("댓글 수정 에러 : $e")
             throw CommonException("댓글 수정 에러", HttpStatus.BAD_REQUEST)
         }
-
-        if (!passwordEncoder.matches(password, comment.user?.password))
-            throw CommonException("Invalid Password", HttpStatus.BAD_REQUEST)
 
         comment.description = newDescription
         comment.createdAt = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH시 mm분 ss초")).toString()
@@ -78,7 +75,7 @@ class CommentService(
         return updatedComment
     }
 
-    fun deleteComment(commentId: Long, password: String) {
+    fun deleteComment(commentId: Long) {
         val comment = try {
             commentRepository.findById(commentId)
                 .orElseThrow { CommonException("Invalid Comment ID", HttpStatus.BAD_REQUEST) }
@@ -86,9 +83,6 @@ class CommentService(
             log.error("댓글 삭제 에러 : $e")
             throw CommonException("댓글 삭제 에러", HttpStatus.BAD_REQUEST)
         }
-
-        if (!passwordEncoder.matches(password, comment.user?.password))
-            throw CommonException("비밀번호가 틀립니다.", HttpStatus.BAD_REQUEST)
 
         commentRepository.delete(comment)
         getAllComments()
@@ -116,7 +110,6 @@ class CommentService(
                 createdAt = comment.createdAt ?: "",
                 userId = comment.user?.id ?: 0,
                 userName = comment.user?.name ?: "",
-                password = comment.user?.password ?: "",
                 userType = userType,
                 userCreatedAt = comment.user?.createdAt ?: ""
             )
