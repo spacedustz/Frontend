@@ -1,40 +1,17 @@
 import React, {useState, useEffect, useRef} from 'react';
 import {Client, Frame} from '@stomp/stompjs';
-import styled from "styled-components";
 import Pagination from "./Pagination.tsx";
 import {Comment} from "../../model/Comment.ts";
 import {getAllComments} from "../../model/Api.ts";
-
-const CommentStyle = styled.div`
-    table {
-        border-collapse: collapse;
-        font-size: 14px;
-        margin: auto;
-    }
-
-    th, td {
-        border: 1px solid #ddd;
-        padding: 12px;
-        text-align: center;
-        background-color: rgba(250, 250, 210, 0.5);
-    }
-
-    th {
-        background-color: rgba(211, 211, 211, 0.5);
-    }
-
-    td:nth-child(1) {
-        width: 10%;
-    }
-
-    td:nth-child(2) { /* Comment column */
-        width: 25%;
-    }
-
-    td:nth-child(3) { /* CreatedAt column */
-        width: 10%;
-    }
-`;
+import {
+    CommentActions,
+    CommentAuthor,
+    CommentAuthorAndTime, CommentDescription,
+    CommentItem,
+    CommentStyle, CommentTime,
+    CommentTop,
+    CommentUserType, DeleteButton, EditButton
+} from "../../styles/comment/List.ts";
 
 const CommentList: React.FC = () => {
     const [comments, setComments] = useState<Comment[]>([]);
@@ -104,25 +81,22 @@ const CommentList: React.FC = () => {
 
     return (
         <CommentStyle>
-            <table>
-                <thead>
-                <tr>
-                    <th>작성자</th>
-                    <th>내용</th>
-                    <th>작성일</th>
-                </tr>
-                </thead>
-                <tbody>
-                {currentComments.map((comment, index) => (
-                    <tr key={index}>
-                        <td>{comment.userName}</td>
-                        <td>{comment.description}</td>
-                        <td>{comment.createdAt}</td>
-                    </tr>
-                ))}
-                </tbody>
-            </table>
-
+            {currentComments.map((comment, index) => (
+                <CommentItem key={index}>
+                    <CommentTop>
+                        <CommentAuthorAndTime>
+                            <CommentAuthor>{comment.userName}</CommentAuthor>
+                            <CommentUserType>{comment.userType}</CommentUserType>
+                            <CommentTime>{comment.createdAt}</CommentTime>
+                        </CommentAuthorAndTime>
+                        <CommentActions>
+                            <EditButton>수정</EditButton>
+                            <DeleteButton>삭제</DeleteButton>
+                        </CommentActions>
+                    </CommentTop>
+                    <CommentDescription>{comment.description}</CommentDescription>
+                </CommentItem>
+            ))}
             <Pagination
                 itemsPerPage={itemsPerPage}
                 totalItems={comments.length}
