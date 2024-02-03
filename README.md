@@ -12,9 +12,12 @@ React & TypeScript / Kotlin 사용해 프론트엔드 학습 기록 사이트 �
 
 ### 추가한 목록
 
-- 회원가입 (JWT), 로그인 (JWT), 로그아웃 (JWT)
-- 댓글 추가, 수정, 삭제 (WebSocket)
-- DB는 AWS EC2의 MariaDB Docker Container와 연동 
+- 회원가입 / 로그인 / 로그아웃 (Spring Security + JWT)
+- **댓글** 추가 / 수정 / 삭제 (Web Socket)
+- **마크다운** 작성 / 마크다운 Viewer 기능 -> **Markdown 브랜치에 적용되어 있음 (main 브랜치는 아직)**
+  - Code Highlighter 적용
+  - `<br>` 태그 줄바꿈으로 치환
+  - 마크다운 문법 중 `>` blockquate 적용
 
 <br>
 
@@ -102,13 +105,45 @@ React & TypeScript / Kotlin 사용해 프론트엔드 학습 기록 사이트 �
 
 </details>
 
+<br>
+
+### 마크다운 작성 & 보기 기능
+
+- Code Highlighter 적용
+- `<br>` 줄바꿈으로 치환
+- 마크다운 문법 중 `>` blockquate 적용
+
+<details>
+<summary>펼치기</summary>
+
+> **🚩 글작성 (마크다운) 기능**
+
+- Code Highlighter 적용
+- `<br>` 줄바꿈으로 치환
+- 마크다운 문법 중 `>` blockquate 적용
+
+![img](./Description/img/markdown.png)
+
+</details>
+
 ---
 
 ## 📘 Frontend
 
 - React (nodejs: 20.11.0 / yarn: 1.22.21 / vite )
 - TypeScript
-- Libraries : react-router-dom, styled-components, react-bootstrap, axios, WebKit, @stomp/stompjs
+- Libraries
+  - react-router-dom
+  - styled-components
+  - react-bootstrap
+  - axios
+  - webkit
+  - @stomp/stompjs
+  - react-markdown
+  - react-syntax-highlighter
+  - rehype-sanitize
+  - rehype-raw
+  - remark-gfm
 
 ---
 
