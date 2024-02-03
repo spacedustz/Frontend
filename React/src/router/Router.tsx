@@ -21,7 +21,7 @@ const Router: React.FC = () => {
                         <Route path="assignment" element={<Assignment/>}/>
                         <Route path="note/*" element={<NoteApp />}>
                             <Route path="write" element={<Write />} />
-                            <Route path=":title" element={<View />} />
+                            <Route path=":id" element={<View />} />
                         </Route>
                         <Route path="comment" element={<CommentApp/>}/>
                     </Routes>
