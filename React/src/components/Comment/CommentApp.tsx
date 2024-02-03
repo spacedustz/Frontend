@@ -86,6 +86,7 @@ const CommentApp: React.FC = () => {
         const comment = comments.find(comment => comment.commentId === commentId);
         if (!comment || comment.userName !== username) {
             alert('자신이 작성한 댓글만 수정할 수 있습니다.');
+            console.log('AuthGuard - 자신이 작성한 댓글이 아닙니다.')
             return;
         }
 
@@ -123,6 +124,7 @@ const CommentApp: React.FC = () => {
         const username = sessionStorage.getItem('username')
         if (!jwt) {
             alert('로그인 후 삭제 가능합니다.');
+            console.log('AuthGuard - 로그인이 필요합니다.')
             return;
         }
 
@@ -140,6 +142,7 @@ const CommentApp: React.FC = () => {
         // 댓글 작성자와 현재 사용자를 비교
         if (commentToDelete.userName !== username) {
             alert('자신이 작성한 댓글만 삭제할 수 있습니다.');
+            console.log('AuthGuard - 자신이 작성한 댓글이 아닙니다.')
             return;
         }
 
