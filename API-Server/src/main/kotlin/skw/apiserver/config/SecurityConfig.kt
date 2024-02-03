@@ -29,8 +29,7 @@ class SecurityConfig(
         "/api/user/sign-up",
         "/api/user/sign-in",
         "/api/comment",
-        "/api/comment/list",
-        "/api/note"
+        "/api/comment/list"
     )
 
     @Bean
@@ -40,6 +39,7 @@ class SecurityConfig(
         .authorizeHttpRequests { authorize ->
             authorize
                 .requestMatchers("/api/admin/*").hasRole(UserType.개발자.name)
+                .requestMatchers("/api/note/*").hasRole(UserType.개발자.name)
 //                .requestMatchers(*signupPages).permitAll()
                 .anyRequest().permitAll()
         }
