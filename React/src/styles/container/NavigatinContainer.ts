@@ -27,7 +27,7 @@ export const NavStyle = styled(Navbar)`
         animation: ${navColorChange} 3s infinite;
 
         &:hover {
-            background-color: rgba(250, 250, 210, 0.5);
+            background-color: rgba(250, 250, 210, 0);
             color: rgba(250, 250, 210, 0.5);
             transform: scale(1.12);
             transition: color 0.5s;
@@ -42,8 +42,8 @@ export const NavImageStyle = styled.img`
     margin-right: 10px;
 
     @media (max-width: 768px) {
-        width: 17px;
-        height: 17px;
+        width: 15px;
+        height: 15px;
     }
 `;
 
