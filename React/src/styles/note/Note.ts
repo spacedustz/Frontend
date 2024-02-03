@@ -41,7 +41,7 @@ export const List = styled.div`
     
     li {
         text-align: left;
-        margin-top: 10px;
+        margin-top: 20px;
         list-style-type: none;
     }
     
@@ -63,6 +63,41 @@ export const List = styled.div`
             transition: color 0.5s;
             animation: none;
             text-decoration: none;
+        }
+    }
+    
+    @media (max-width: 768px) {
+        padding: 15px;
+        margin-bottom: 20px;
+        border-radius: 5px;
+        font-size: 10px;
+
+        li {
+            text-align: left;
+            margin-top: 20px;
+            list-style-type: none;
+        }
+
+        h4 {
+            font-size: 15px;
+            color: rgba(66, 126,214, 0.7);
+            padding-left: 3px;
+            font-weight: bold;
+        }
+
+        a {
+            margin: 1px;
+            animation: ${navColorChange} 3s infinite;
+            text-decoration: none;
+
+            &:hover {
+                background-color: rgba(250, 250, 210, 0);
+                color: rgba(250, 250, 210, 0.5);
+                transform: scale(1.12);
+                transition: color 0.5s;
+                animation: none;
+                text-decoration: none;
+            }
         }
     }
 `;

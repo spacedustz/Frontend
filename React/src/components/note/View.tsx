@@ -57,12 +57,32 @@ const ViewContainer = styled.div`
     overflow: auto;
 
     h2 {
-        padding-bottom: 5px;
+        padding-bottom: 3px;
         font-weight: bold;
+    }
+
+    h3 {
+        font-weight: bold;
+        font-size: 11px;
     }
 
     @media (max-width: 768px) {
         padding-top: 5%;
+        flex-wrap: wrap;
+        word-wrap: break-word;
+        font-size: 9px;
+        
+        h2 {
+            padding-bottom: 3px;
+            font-weight: bold;
+            font-size: 13px;
+        }
+        
+        h3 {
+            padding-bottom: 5px;
+            font-weight: bold;
+            font-size: 11px;
+        }
     }
 `;
 
