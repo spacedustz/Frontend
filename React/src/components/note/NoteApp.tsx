@@ -9,7 +9,6 @@ const PostButton = styled.button`
     background-color: rgba(76, 175, 80, 0.3);
     border: none;
     border-radius: 15px;
-    width: 10%;
     height: 5%;
     color: white;
     text-align: center;
@@ -18,10 +17,6 @@ const PostButton = styled.button`
     margin: 4px 2px;
     cursor: pointer;
     transition-duration: 0.4s;
-    
-    &:hover {
-        width: 10%;
-    }
 `;
 
 const DeleteButton = styled.button`
@@ -71,23 +66,23 @@ const NoteApp: React.FC = () => {
         <div>
             {location.pathname === "/note" && (
                 <RootContainer>
-                    <PostButton>
-                        <Link
-                            onClick={(e) => {
-                                e.persist()
-                                if (sessionStorage.getItem('username') !== '신건우') {
-                                    e.preventDefault();
-                                    alert('개발자 전용 메뉴입니다.');
-                                }
-                            }}
-                            style={{textDecoration: 'none', color: 'white'}}
-                            to="write">메모 작성</Link>
-                    </PostButton>
-
                     <SubContainer>
                         <Title>
                             <h4>공부 노트</h4>
                         </Title>
+
+                        <PostButton>
+                            <Link
+                                onClick={(e) => {
+                                    e.persist()
+                                    if (sessionStorage.getItem('username') !== '신건우') {
+                                        e.preventDefault();
+                                        alert('개발자 전용 메뉴입니다.');
+                                    }
+                                }}
+                                style={{textDecoration: 'none', color: 'white'}}
+                                to="write">메모 작성</Link>
+                        </PostButton>
 
                         <ListContainer>
                             {categories.map((category) => (
@@ -105,7 +100,10 @@ const NoteApp: React.FC = () => {
                                                     >
                                                         {note.title}</Link>
                                                     <span>
-                                                        <DeleteButton onClick={() => handleDelete(note.id)}>삭제</DeleteButton>
+                                                        {sessionStorage.getItem('username') === '신건우' && (
+                                                            <DeleteButton
+                                                                onClick={() => handleDelete(note.id)}>삭제</DeleteButton>
+                                                        )}
                                                     </span>
                                                 </li>
                                             ))}
