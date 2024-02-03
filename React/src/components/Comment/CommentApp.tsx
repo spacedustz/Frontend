@@ -94,7 +94,9 @@ const CommentApp: React.FC = () => {
 
                 if (response.status === 200) {
                     alert('댓글이 수정되었습니다.');
-                    console.log('댓글 수정 완료')
+
+                    const name = sessionStorage.getItem('username')
+                    console.log(`${name}님 댓글 수정  - 수정 내용 : ${newDescription}`)
                     setNewComment('');
                     // setIsEditing(false);
                     // setEditingCommentId(null);
@@ -129,7 +131,8 @@ const CommentApp: React.FC = () => {
             const response = await deleteComment(requestData);
 
             if (response.status === 200) {
-                console.log('댓글 삭제 완료')
+                const name = sessionStorage.getItem('username')
+                console.log(`${name}님 댓글 삭제 완료`)
                 alert('댓글이 삭제되었습니다.');
 
                 const updatedComments = await getAllComments();
