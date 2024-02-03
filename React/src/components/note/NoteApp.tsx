@@ -2,24 +2,29 @@ import React, {useEffect, useState} from 'react';
 import {Link, Outlet, useLocation} from 'react-router-dom';
 import {ButtonStyle, List, ListContainer, RootContainer, SubContainer, Title} from "../../styles/note/Note.ts";
 import {Note} from "../../model/Note.ts";
-import {getAllNote} from "../../model/Api.ts";
+import {deleteNote, getAllNote} from "../../model/Api.ts";
 
 const NoteApp: React.FC = () => {
     const [notes, setNotes] = useState<Note[]>([]);
     const location = useLocation();
 
     useEffect(() => {
-        const fetchNotes = async () => {
-            const response = await getAllNote();
-            console.log(response.data)
-            setNotes(response.data);
-        };
-
         fetchNotes();
-    }, []);
+    }, [location]);
 
-    const deleteNote = (id: number) => {
-        setNotes(notes.filter(note => note.id !== id));
+    const fetchNotes = async () => {
+        const response = await getAllNote();
+        console.log(response.data)
+        setNotes(response.data);
+    };
+    const handleDelete = async (id: number) => {
+        try {
+            await deleteNote(id);
+            setNotes(notes.filter(note => note.id !== id))
+            fetchNotes()
+        } catch (error) {
+            console.error("Note 삭제 실패")
+        }
     };
 
     const categories = Array.from(new Set(notes.map((note) => note.category)));
@@ -53,7 +58,7 @@ const NoteApp: React.FC = () => {
                                                     >
                                                         {note.title}</Link>
                                                     <span>
-                                                        <button onClick={() => deleteNote(note.id)}>삭제</button>
+                                                        <button onClick={() => handleDelete(note.id)}>삭제</button>
                                                     </span>
                                                 </li>
                                             ))}
