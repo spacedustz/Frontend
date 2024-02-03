@@ -1,7 +1,5 @@
 package skw.apiserver.dto
 
-import skw.apiserver.enum.UserType
-
 data class PostCommentDto(
     var userName: String,
     var description: String
