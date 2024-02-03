@@ -2,32 +2,27 @@ import React, {useEffect, useState} from 'react';
 import {Link, Outlet, useLocation} from 'react-router-dom';
 import {ButtonStyle, List, ListContainer, RootContainer, SubContainer, Title} from "../../styles/note/Note.ts";
 import {Note} from "../../model/Note.ts";
+import {getAllNote} from "../../model/Api.ts";
 
 const NoteApp: React.FC = () => {
-    const [note, setNote] = useState<Note[]>([]);
+    const [notes, setNotes] = useState<Note[]>([]);
     const location = useLocation();
 
-    // const handleClick = () => {
-    //     sessionStorage.getItem('key')
-    //     navigate(`/note/${}`)
-    // }
-
     useEffect(() => {
-        const storedNotes = Object.keys(localStorage).map((key) => {
-            const content = localStorage.getItem(key) || '{}';
+        const fetchNotes = async () => {
+            const response = await getAllNote();
+            console.log(response.data)
+            setNotes(response.data);
+        };
 
-            return {
-                title: key,
-                content: content
-            }
-        });
-        setNote(storedNotes);
+        fetchNotes();
     }, []);
 
-    const deleteNote = (title: string) => {
-        localStorage.removeItem(title);
-        setNote(note.filter(note => note.title !== title));
+    const deleteNote = (id: number) => {
+        setNotes(notes.filter(note => note.id !== id));
     };
+
+    const categories = Array.from(new Set(notes.map((note) => note.category)));
 
     return (
         <div>
@@ -43,40 +38,32 @@ const NoteApp: React.FC = () => {
                         </Title>
 
                         <ListContainer>
-                            <List>
-                                <h4>HTML & CSS</h4>
+                            {categories.map((category) => (
+                                <List key={category}>
+                                    <h4>{category}</h4>
 
-                                <ul>
-                                    {note.map((note, index) => (
-                                        <li key={index}>
-                                            <Link to={`${note.title}`}>{note.title}</Link>
-                                            <span>
-                                    <button onClick={() => deleteNote(note.title)}>삭제</button>
-                                </span>
-                                        </li>
-                                    ))}
-                                </ul>
-                            </List>
-
-                            <List>
-                                <h4>JavaScript</h4>
-
-                                <ul>
-                                    {note.map((note, index) => (
-                                        <li key={index}>
-                                            <Link to={`${note.title}`}>{note.title}</Link>
-                                            <span>
-                                    <button onClick={() => deleteNote(note.title)}>삭제</button>
-                                </span>
-                                        </li>
-                                    ))}
-                                </ul>
-                            </List>
+                                    <ul>
+                                        {notes
+                                            .filter((note) => note.category === category)
+                                            .map((note, index) => (
+                                                <li key={index}>
+                                                    <Link
+                                                        to={`${note.id}`}
+                                                        onClick={() => localStorage.setItem(String(note.id), JSON.stringify(note))}
+                                                    >
+                                                        {note.title}</Link>
+                                                    <span>
+                                                        <button onClick={() => deleteNote(note.id)}>삭제</button>
+                                                    </span>
+                                                </li>
+                                            ))}
+                                    </ul>
+                                </List>
+                            ))}
                         </ListContainer>
                     </SubContainer>
                 </RootContainer>
             )}
-
             <Outlet/>
         </div>
     );
