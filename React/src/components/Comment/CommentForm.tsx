@@ -3,7 +3,7 @@ import {postComment} from "../../model/Api.ts";
 import {ButtonStyle, CommentFormContainer, FormHeader, InputStyle} from "../../styles/comment/Form.ts";
 import {CommentFormProps} from "../../model/Comment.ts";
 
-const CommentForm: React.FC<CommentFormProps> = ({ newComment, onInputChange, onSubmitComment, isEditing }) => {
+const CommentForm: React.FC<CommentFormProps> = ({ newComment, onInputChange }) => {
     const handleAddComment = async () => {
         if (newComment.trim() !== '') {
             try {
@@ -14,7 +14,7 @@ const CommentForm: React.FC<CommentFormProps> = ({ newComment, onInputChange, on
                 console.error('댓글 추가 - Authorization Failed:', error);
             }
         } else {
-            alert('빈 값은 전송이 안됩니다! 하하하');
+            alert('빈 값은 전송이 안됩니다!');
         }
     };
 
@@ -28,7 +28,7 @@ const CommentForm: React.FC<CommentFormProps> = ({ newComment, onInputChange, on
                 placeholder="여러분의 소중한 댓글을 입력해주세요."
                 maxLength={120}
             />
-            <ButtonStyle onClick={isEditing ? onSubmitComment : handleAddComment}>{isEditing ? '수정 완료' : 'Send'}</ButtonStyle>
+            <ButtonStyle onClick={handleAddComment}>Send</ButtonStyle>
         </CommentFormContainer>
     );
 };
