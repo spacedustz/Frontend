@@ -20,7 +20,7 @@ import skw.apiserver.service.NoteService
 class NoteController(
     private val noteService: NoteService
 ) {
-    @PostMapping("/port")
+    @PostMapping("/post")
     fun postNote(@RequestBody data: PostNoteDto): ResponseEntity<Unit> {
         return ResponseEntity(noteService.postNote(data), HttpStatus.CREATED)
     }
