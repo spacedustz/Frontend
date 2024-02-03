@@ -116,11 +116,7 @@ React & TypeScript / Kotlin 사용해 프론트엔드 학습 기록 사이트 �
 <details>
 <summary>펼치기</summary>
 
-> **🚩 글작성 (마크다운) 기능**
-
-- Code Highlighter 적용
-- `<br>` 줄바꿈으로 치환
-- 마크다운 문법 중 `>` blockquate 적용
+> **🚩 작성한 마크다운 글 Viewer**
 
 ![img](./Description/img/markdown.png)
 
