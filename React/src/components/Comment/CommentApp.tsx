@@ -6,11 +6,17 @@ import {Client, Frame} from "@stomp/stompjs";
 import {Comment} from "../../model/Comment.ts";
 
 const CommentApp: React.FC = () => {
+    // 댓글의 새로운 내용을 저장하는 상태
     const [newComment, setNewComment] = useState<string>('');
-    const [isEditing, setIsEditing] = useState<boolean>(false);
-    const [editingCommentId, setEditingCommentId] = useState<number | null>(null);
+    // 전체 댓글 목록을 저장하는 상태
     const [comments, setComments] = useState<Comment[]>([]);
+    // WebSocket 연결 관리
     const stompClientRef = useRef<Client | null>(null);
+
+    // 댓글이 현재 편집 중인지 아닌지를 나타내는 상태
+    // const [isEditing, setIsEditing] = useState<boolean>(false);
+    // 현재 편집 중인 댓글의 ID를 저장하는 상태
+    // const [editingCommentId, setEditingCommentId] = useState<number | null>(null);
 
     /* WebSocket */
     const connectWebSocket = () => {
@@ -69,17 +75,17 @@ const CommentApp: React.FC = () => {
         setNewComment(event.target.value);
     };
 
-    const handleEditComment = async () => {
-        if (isEditing && editingCommentId !== null) {
+    const handleEditComment = async (commentId: number, newDescription: string) => {
+        // if (isEditing && editingCommentId !== null) {
             const jwt = sessionStorage.getItem('jwt');
             if (!jwt) {
-                alert('비밀번호가 저장되지 않았습니다.');
+                alert('유저 정보가 틀립니다.');
                 return;
             }
 
             const requestData = {
-                commentId: editingCommentId,
-                newDescription: newComment,
+                commentId: commentId,
+                newDescription: newDescription,
                 jwt
             };
 
@@ -89,10 +95,9 @@ const CommentApp: React.FC = () => {
                 if (response.status === 200) {
                     alert('댓글이 수정되었습니다.');
                     console.log('댓글 수정 완료')
-
-                    setIsEditing(false);
                     setNewComment('');
-                    setEditingCommentId(null);
+                    // setIsEditing(false);
+                    // setEditingCommentId(null);
 
                     const updatedComments = await getAllComments();
 
@@ -105,7 +110,7 @@ const CommentApp: React.FC = () => {
             } catch (error) {
                 console.error('댓글 수정 에러:', error);
             }
-        }
+        // }
     };
 
     const handleDeleteComment = async (commentId: number) => {
@@ -145,16 +150,10 @@ const CommentApp: React.FC = () => {
             <CommentForm
                 newComment={newComment}
                 onInputChange={handleInputChange}
-                onSubmitComment={isEditing ? handleEditComment : handleEditComment}
-                isEditing={isEditing}
             />
             <CommentList
                 comments={comments}
-                onEditComment={(commentId, comment) => {
-                    setIsEditing(true);
-                    setEditingCommentId(commentId);
-                    setNewComment(comment);
-                }}
+                onEditComment={handleEditComment}
                 onDeleteComment={handleDeleteComment}
             />
         </div>
