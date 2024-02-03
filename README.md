@@ -39,7 +39,7 @@ React & TypeScript / Kotlin 사용해 프론트엔드 학습 기록 사이트 �
 - JWT Authentication Filter의 검증 예외 URL
 
 ![img](./Description/img/login-1.png)
-![img](./Description/img/logn-2.png)
+![img](./Description/img/login-2.png)
 
 <br>
 
