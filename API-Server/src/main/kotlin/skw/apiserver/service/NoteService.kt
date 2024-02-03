@@ -39,4 +39,13 @@ class NoteService(
             throw CommonException("Note 조회 실패", HttpStatus.BAD_REQUEST)
         }
     }
+
+    fun deleteNote(id: Long) {
+        try {
+            noteRepository.deleteById(id)
+        } catch (e: Exception) {
+            log.error("Note 삭제 실패 - $e")
+            throw CommonException("Note 삭제 실패", HttpStatus.BAD_REQUEST)
+        }
+    }
 }
