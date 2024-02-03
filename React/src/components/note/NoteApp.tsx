@@ -1,8 +1,41 @@
 import React, {useEffect, useState} from 'react';
 import {Link, Outlet, useLocation} from 'react-router-dom';
-import {ButtonStyle, List, ListContainer, RootContainer, SubContainer, Title} from "../../styles/note/Note.ts";
+import {List, ListContainer, RootContainer, SubContainer, Title} from "../../styles/note/Note.ts";
 import {Note} from "../../model/Note.ts";
 import {deleteNote, getAllNote} from "../../model/Api.ts";
+import styled from "styled-components";
+
+const PostButton = styled.button`
+    background-color: rgba(76, 175, 80, 0.3);
+    border: none;
+    border-radius: 15px;
+    width: 10%;
+    height: 5%;
+    color: white;
+    text-align: center;
+    display: inline-block;
+    font-size: 13px;
+    margin: 4px 2px;
+    cursor: pointer;
+    transition-duration: 0.4s;
+    
+    &:hover {
+        width: 10%;
+    }
+`;
+
+const DeleteButton = styled.button`
+    background-color: rgba(76, 175, 80, 0.3);
+    border: none;
+    border-radius: 15px;
+    color: white;
+    text-align: center;
+    display: inline-block;
+    font-size: 13px;
+    margin: 4px 2px 5px 5px;
+    cursor: pointer;
+    transition-duration: 0.4s;
+`;
 
 const NoteApp: React.FC = () => {
     const [notes, setNotes] = useState<Note[]>([]);
@@ -18,12 +51,17 @@ const NoteApp: React.FC = () => {
     }, [location]);
 
     const handleDelete = async (id: number) => {
-        try {
-            await deleteNote(id);
-            setNotes(notes.filter(note => note.id !== id))
-            fetchNotes()
-        } catch (error) {
-            console.error("Note 삭제 실패")
+        if (sessionStorage.getItem('username') !== '신건우') {
+            alert('개발자 전용 메뉴입니다.');
+        } else {
+
+            try {
+                await deleteNote(id);
+                setNotes(notes.filter(note => note.id !== id))
+                fetchNotes()
+            } catch (error) {
+                console.error("Note 삭제 실패")
+            }
         }
     };
 
@@ -33,9 +71,18 @@ const NoteApp: React.FC = () => {
         <div>
             {location.pathname === "/note" && (
                 <RootContainer>
-                    <ButtonStyle>
-                        <Link to="write">작성</Link>
-                    </ButtonStyle>
+                    <PostButton>
+                        <Link
+                            onClick={(e) => {
+                                e.persist()
+                                if (sessionStorage.getItem('username') !== '신건우') {
+                                    e.preventDefault();
+                                    alert('개발자 전용 메뉴입니다.');
+                                }
+                            }}
+                            style={{textDecoration: 'none', color: 'white'}}
+                            to="write">메모 작성</Link>
+                    </PostButton>
 
                     <SubContainer>
                         <Title>
@@ -58,7 +105,7 @@ const NoteApp: React.FC = () => {
                                                     >
                                                         {note.title}</Link>
                                                     <span>
-                                                        <button onClick={() => handleDelete(note.id)}>삭제</button>
+                                                        <DeleteButton onClick={() => handleDelete(note.id)}>삭제</DeleteButton>
                                                     </span>
                                                 </li>
                                             ))}
