@@ -19,6 +19,12 @@ export const InputStyle = styled.input`
         color: rgba(230, 230, 230, 0.7);
         font-weight: 300;
     }
+
+    &:focus {
+        outline: none;
+        border: 1px solid orange;
+        box-shadow: 0 0 5px orange; /* 주황색 빛난 효과 */
+    }
     
     @media (max-width: 768px) {
         width: 70%;
