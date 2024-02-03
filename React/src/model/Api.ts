@@ -33,15 +33,22 @@ export const getAllComments = async () => {
 
 export async function modifyComment(requestData: ModifyComment) {
     const request = `${url}/api/comment/update/${requestData.commentId}`;
-    const headers = { 'Authorization': 'Bearer ' + requestData.jwt };
-    const data = { newDescription: requestData.newDescription };
+
+    const data = requestData.newDescription
+    const headers = {
+        'Authorization': 'Bearer ' + requestData.jwt,
+        'Content-Type': 'application/json'
+    };
 
     return await axios.patch(request, data, { headers });
 }
 
 export async function deleteComment(requestData: DeleteComment) {
     const request = `${url}/api/comment/delete/${requestData.commentId}`;
-    const headers = { 'Authorization': 'Bearer ' + requestData.jwt };
+    const headers = {
+        'Authorization': 'Bearer ' + requestData.jwt,
+        'Content-Type': 'application/json'
+    };
 
     return await axios.delete(request, { headers });
 }
