@@ -10,8 +10,15 @@ export const InputStyle = styled.input`
     width: 30%;
     height: 50px;
     border: 1px solid #dfe1e5;
+    background-color: rgba(56, 61, 63, 0.4);
+    color: white;
     text-align: center;
     font-size: 12px;
+    
+    &::placeholder {
+        color: rgba(230, 230, 230, 0.7);
+        font-weight: 300;
+    }
     
     @media (max-width: 768px) {
         width: 70%;
