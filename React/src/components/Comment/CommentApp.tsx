@@ -77,11 +77,18 @@ const CommentApp: React.FC = () => {
 
     const handleEditComment = async (commentId: number, newDescription: string) => {
         // if (isEditing && editingCommentId !== null) {
-            const jwt = sessionStorage.getItem('jwt');
-            if (!jwt) {
-                alert('유저 정보가 틀립니다.');
-                return;
-            }
+        const jwt = sessionStorage.getItem('jwt')
+        const username = sessionStorage.getItem('username')
+
+        if (!jwt) {
+            alert('로그인 후 수정 가능합니다.');
+            return;
+        }
+
+        if (!username) {
+            alert('댓글을 작성한 유저 정보가 일치하지 않습니다.');
+            return;
+        }
 
             const requestData = {
                 commentId: commentId,
