@@ -118,7 +118,7 @@ const CommentApp: React.FC = () => {
     const handleDeleteComment = async (commentId: number) => {
         const jwt = sessionStorage.getItem('jwt');
         if (!jwt) {
-            alert('비밀번호가 저장되지 않았습니다.');
+            alert('작성한 회원만 삭제가 가능합니다.');
             return;
         }
 
