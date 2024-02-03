@@ -20,17 +20,17 @@ import skw.apiserver.service.NoteService
 class NoteController(
     private val noteService: NoteService
 ) {
-    @PostMapping
+    @PostMapping("/port")
     fun postNote(@RequestBody data: PostNoteDto): ResponseEntity<Unit> {
         return ResponseEntity(noteService.postNote(data), HttpStatus.CREATED)
     }
 
-    @GetMapping
+    @GetMapping("/list")
     fun getAllNote(): ResponseEntity<List<Note>> {
         return ResponseEntity(noteService.getAllNote(), HttpStatus.OK)
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/delete/{id}")
     fun deleteNote(@PathVariable id: Long) {
         noteService.deleteNote(id)
     }
