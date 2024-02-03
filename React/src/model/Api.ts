@@ -55,16 +55,28 @@ export async function deleteComment(requestData: DeleteComment) {
 }
 
 export const postNote = async (requestData: PostNote) => {
-    const request = `${url}/api/note`;
-    return await axios.post(request, requestData);
+    const token = sessionStorage.getItem('jwt')
+
+    const request = `${url}/api/note/post`;
+    const headers = {
+        'Authorization': 'Bearer ' + token,
+        'Content-Type': 'application/json'
+    };
+    return await axios.post(request, requestData, { headers });
 }
 
 export const getAllNote = async () => {
-    const request = `${url}/api/note`;
+    const request = `${url}/api/note/list`;
     return await axios.get(request)
 }
 
 export const deleteNote = async (id: number) => {
-    const request = `${url}/api/note/${id}`;
-    await axios.delete(request)
+    const token = sessionStorage.getItem('jwt')
+
+    const request = `${url}/api/note/delete/${id}`;
+    const headers = {
+        'Authorization': 'Bearer ' + token,
+        'Content-Type': 'application/json'
+    };
+    await axios.delete(request, { headers })
 }
