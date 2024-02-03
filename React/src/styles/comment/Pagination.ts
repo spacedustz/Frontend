@@ -14,7 +14,7 @@ export const PaginationContainer = styled.div`
     }
 
     button {
-        background-color: rgba(52, 152, 219, 0.1);
+        background-color: rgba(52, 152, 219, 0.3);
         color: #fff;
         border: 1px solid #3498db;
         border-radius: 10px;
