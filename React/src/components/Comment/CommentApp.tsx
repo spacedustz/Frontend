@@ -127,7 +127,7 @@ const CommentApp: React.FC = () => {
         const username = sessionStorage.getItem('username')
 
         if (!jwt) {
-            alert('로그인 후 수정 가능합니다.');
+            alert('로그인 후 삭제 가능합니다.');
             return;
         }
 
