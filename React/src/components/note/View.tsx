@@ -9,8 +9,8 @@ import rehypeSanitize from "rehype-sanitize";
 import styled from "styled-components";
 
 const SyntaxHighlighterContainer = styled.div`
-    width: 90%;
-    margin: 20px auto;
+    //width: 90%;
+    //margin: 20px auto;
     border-radius: 10px;
     overflow: auto;
     background-color: #f7f7f7;
@@ -30,24 +30,36 @@ const components: Components = {
     },
     blockquote({children}) {
         return <blockquote
-            style={{color: 'gray', borderLeft: '3px solid blue', paddingLeft: '10px'}}>{children}</blockquote>;
+            style={
+                {
+                    color: 'black',
+                    borderLeft: '3px solid rgba(30,30,30,0.5)',
+                    paddingLeft: '10px',
+                    background: 'rgba(100, 100, 100, 0.3)'
+                }
+            }>{children}</blockquote>;
     }
 }
 
 const ViewContainer = styled.div`
     display: flex;
     flex-direction: column;
-    padding: 5% 10% 10% 10%;
+    padding: 5% 5% 5% 5%;
     //background-color: rgb(200, 200, 200);
-    background-color: whitesmoke;
+    background-color: rgba(250, 250, 250, 0.6);
     font-size: 15px;
     color: #212529;
     word-break: break-word;
     vertical-align: baseline;
     line-height: 2;
-    
+
     h2 {
-        padding-bottom: 3px;
+        padding-bottom: 5px;
+        font-weight: bold;
+    }
+
+    @media (max-width: 768px) {
+        padding-top: 5%;
     }
 `;
 
@@ -60,10 +72,16 @@ const Title = styled.div`
     flex: 1;
     display: flex;
     justify-content: center;
+
+    h2 {
+        color: rgba(66, 126, 214, 0.7);
+        padding-left: 3px;
+        font-weight: bold;
+    }
 `;
 
 const View: React.FC = () => {
-    const { id } = useParams();
+    const {id} = useParams();
     const note = JSON.parse(localStorage.getItem(id) || '{}');
 
     return (
