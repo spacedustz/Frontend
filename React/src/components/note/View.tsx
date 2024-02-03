@@ -52,6 +52,9 @@ const ViewContainer = styled.div`
     word-break: break-word;
     vertical-align: baseline;
     line-height: 2;
+    flex-wrap: wrap;
+    width: 100%;
+    overflow: auto;
 
     h2 {
         padding-bottom: 5px;
