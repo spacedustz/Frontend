@@ -29,7 +29,8 @@ class SecurityConfig(
         "/api/user/sign-up",
         "/api/user/sign-in",
         "/api/comment",
-        "/api/comment/list"
+        "/api/comment/list",
+        "/api/note"
     )
 
     @Bean
