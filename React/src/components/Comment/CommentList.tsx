@@ -13,11 +13,33 @@ import {
 
 const CommentList: React.FC<CommentListProps> = ({ comments, onEditComment, onDeleteComment }) => {
     const [currentPage, setCurrentPage] = useState(1);
+    const [editingCommentId, setEditingCommentId] = useState<number | null>(null);
+    const [newComment, setNewComment] = useState<string>('');
     const itemsPerPage = 7;
     const lastItemIdx = currentPage * itemsPerPage;
     const firstItemIdx = lastItemIdx - itemsPerPage;
     const currentComments: Comment[] = comments.slice(firstItemIdx, lastItemIdx);
     const paginate = (pageNum: number) => setCurrentPage(pageNum);
+
+    // 수정 버튼 클릭 시 처리
+    const handleEditButtonClick = (commentId: number, description: string) => {
+        setEditingCommentId(commentId);
+        setNewComment(description);
+    };
+
+    const handleCompleteButtonClick = () => {
+        if(editingCommentId !== null) {
+            onEditComment(editingCommentId, newComment);  // 변경된 부분
+        }
+        setEditingCommentId(null);
+        setNewComment('');
+    };
+
+    // 취소 버튼 클릭 시 처리
+    const handleCancelButtonClick = () => {
+        setEditingCommentId(null);
+        setNewComment('');
+    };
 
     return (
         <CommentStyle>
@@ -31,12 +53,25 @@ const CommentList: React.FC<CommentListProps> = ({ comments, onEditComment, onDe
                         </CommentAuthorAndTime>
 
                         <CommentActions>
-                            <EditButton onClick={() => onEditComment(comment.commentId, comment.description)}>수정</EditButton>
-                            <DeleteButton onClick={() => onDeleteComment(comment.commentId)}>삭제</DeleteButton>
+                            {editingCommentId === comment.commentId ? (
+                                <>
+                                    <EditButton onClick={handleCompleteButtonClick}>완료</EditButton>
+                                    <DeleteButton onClick={handleCancelButtonClick}>취소</DeleteButton>
+                                </>
+                            ) : (
+                                <CommentActions>
+                                    <EditButton onClick={() => handleEditButtonClick(comment.commentId, comment.description)}>수정</EditButton>
+                                    <DeleteButton onClick={() => onDeleteComment(comment.commentId)}>삭제</DeleteButton>
+                                </CommentActions>
+                            )}
                         </CommentActions>
                     </CommentTop>
 
-                    <CommentDescription>{comment.description}</CommentDescription>
+                    {editingCommentId === comment.commentId ? (
+                        <input type="text" value={newComment} onChange={(e) => setNewComment(e.target.value)} />
+                    ) : (
+                        <CommentDescription>{comment.description}</CommentDescription>
+                    )}
                 </CommentItem>
             ))}
             <Pagination
