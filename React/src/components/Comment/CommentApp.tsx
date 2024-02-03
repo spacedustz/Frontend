@@ -13,11 +13,6 @@ const CommentApp: React.FC = () => {
     // WebSocket 연결 관리
     const stompClientRef = useRef<Client | null>(null);
 
-    // 댓글이 현재 편집 중인지 아닌지를 나타내는 상태
-    // const [isEditing, setIsEditing] = useState<boolean>(false);
-    // 현재 편집 중인 댓글의 ID를 저장하는 상태
-    // const [editingCommentId, setEditingCommentId] = useState<number | null>(null);
-
     /* WebSocket */
     const connectWebSocket = () => {
         if (stompClientRef.current && stompClientRef.current.connected) {
@@ -76,10 +71,8 @@ const CommentApp: React.FC = () => {
     };
 
     const handleEditComment = async (commentId: number, newDescription: string) => {
-        // if (isEditing && editingCommentId !== null) {
         const jwt = sessionStorage.getItem('jwt')
         const username = sessionStorage.getItem('username')
-
         if (!jwt) {
             alert('로그인 후 수정 가능합니다.');
             return;
@@ -90,42 +83,44 @@ const CommentApp: React.FC = () => {
             return;
         }
 
-            const requestData = {
-                commentId: commentId,
-                newDescription: newDescription,
-                jwt
-            };
+        const comment = comments.find(comment => comment.commentId === commentId);
+        if (!comment || comment.userName !== username) {
+            alert('자신이 작성한 댓글만 수정할 수 있습니다.');
+            return;
+        }
 
-            try {
-                const response = await modifyComment(requestData);
+        const requestData = {
+            commentId: commentId,
+            newDescription: newDescription,
+            jwt
+        };
 
-                if (response.status === 200) {
-                    alert('댓글이 수정되었습니다.');
+        try {
+            const response = await modifyComment(requestData);
 
-                    const name = sessionStorage.getItem('username')
-                    console.log(`${name}님 댓글 수정  - 수정 내용 : ${newDescription}`)
-                    setNewComment('');
-                    // setIsEditing(false);
-                    // setEditingCommentId(null);
+            if (response.status === 200) {
+                alert('댓글이 수정되었습니다.');
 
-                    const updatedComments = await getAllComments();
+                const name = sessionStorage.getItem('username')
+                console.log(`${name}님 댓글 수정  - 수정 내용 : ${newDescription}`)
+                setNewComment('');
 
-                    if (updatedComments.data && Array.isArray(updatedComments.data)) {
-                        setComments(updatedComments.data);
-                    }
-                } else {
-                    alert('비밀번호가 틀립니다.');
+                const updatedComments = await getAllComments();
+
+                if (updatedComments.data && Array.isArray(updatedComments.data)) {
+                    setComments(updatedComments.data);
                 }
-            } catch (error) {
-                console.error('댓글 수정 에러:', error);
+            } else {
+                alert('비밀번호가 틀립니다.');
             }
-        // }
+        } catch (error) {
+            console.error('댓글 수정 에러:', error);
+        }
     };
 
     const handleDeleteComment = async (commentId: number) => {
         const jwt = sessionStorage.getItem('jwt')
         const username = sessionStorage.getItem('username')
-
         if (!jwt) {
             alert('로그인 후 삭제 가능합니다.');
             return;
@@ -133,6 +128,18 @@ const CommentApp: React.FC = () => {
 
         if (!username) {
             alert('댓글을 작성한 유저 정보가 일치하지 않습니다.');
+            return;
+        }
+
+        const commentToDelete = comments.find(comment => comment.commentId === commentId);
+        if (!commentToDelete) {
+            alert('삭제하려는 댓글을 찾을 수 없습니다.');
+            return;
+        }
+
+        // 댓글 작성자와 현재 사용자를 비교
+        if (commentToDelete.userName !== username) {
+            alert('자신이 작성한 댓글만 삭제할 수 있습니다.');
             return;
         }
 
