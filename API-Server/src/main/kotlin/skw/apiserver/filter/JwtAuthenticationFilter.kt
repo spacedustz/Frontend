@@ -41,7 +41,8 @@ class JwtAuthenticationFilter(
             requestURI.endsWith( "/api/user/sign-in") ||
             requestURI.endsWith("/api/user/sign-up") ||
             requestURI.endsWith("/comment") ||
-            requestURI.endsWith("/comment/list")
+            requestURI.endsWith("/comment/list") ||
+            requestURI.endsWith("/api/note")
             ) {
             filterChain.doFilter(request, response)
             return
