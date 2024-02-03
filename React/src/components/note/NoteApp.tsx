@@ -8,15 +8,15 @@ const NoteApp: React.FC = () => {
     const [notes, setNotes] = useState<Note[]>([]);
     const location = useLocation();
 
+    const fetchNotes = async () => {
+        const response = await getAllNote();
+        setNotes(response.data);
+    };
+
     useEffect(() => {
         fetchNotes();
     }, [location]);
 
-    const fetchNotes = async () => {
-        const response = await getAllNote();
-        console.log(response.data)
-        setNotes(response.data);
-    };
     const handleDelete = async (id: number) => {
         try {
             await deleteNote(id);
