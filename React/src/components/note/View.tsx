@@ -63,8 +63,8 @@ const Title = styled.div`
 `;
 
 const View: React.FC = () => {
-    const {title} = useParams<{ title: string }>();
-    const content = localStorage.getItem(title) || '';
+    const { id } = useParams();
+    const note = JSON.parse(localStorage.getItem(id) || '{}');
 
     return (
         <div style={{all: 'initial'}}> {/* 이 부분을 추가합니다 */}
@@ -72,7 +72,7 @@ const View: React.FC = () => {
             <ViewContainer>
                 <Navigation>
                     <Title>
-                        <h2>{title}</h2>
+                        <h2>{note.title}</h2>
                     </Title>
                 </Navigation>
 
@@ -81,7 +81,7 @@ const View: React.FC = () => {
                         components={components}
                         rehypePlugins={[rehypeRaw, rehypeSanitize]}
                         remarkPlugins={[gfm]}
-                        children={content}
+                        children={note.content}
                     >
                     </ReactMarkdown>
                 </div>
