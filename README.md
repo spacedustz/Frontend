@@ -2,7 +2,7 @@
 
 React & TypeScript / Kotlin 사용해 프론트엔드 학습 기록 사이트 만들기
 
-> **초기 화면**
+> **페이지 처음 화면**
 
 ![img](./Description/img/main.png)
 
@@ -10,90 +10,95 @@ React & TypeScript / Kotlin 사용해 프론트엔드 학습 기록 사이트 �
 
 ## 📘 기능
 
-> **추가한 목록**
+### 추가한 목록
 
-- 회원가입 (JWT)
-- 로그인 (JWT)
-- 로그아웃 (JWT)
-- 댓글 (WebSocket 통신)
+- 회원가입 (JWT), 로그인 (JWT), 로그아웃 (JWT)
+- 댓글 추가, 수정, 삭제 (WebSocket)
 - DB는 AWS EC2의 MariaDB Docker Container와 연동 
 
 <br>
 
-<details>
-<summary>회원가입 기능</summary>
+### 회원가입 & 로그인 & 로그아웃 기능
 
 - 회원가입 후 비밀번호는 백엔드에서 Bcrypt로 암호화해서 저장
-- JWT Authentication Filter의 검증 예외 URL
-
-<br>
-
-![img](./Description/img/signup-1.png)
-
-<br>
-
-![img](./Description/img/signup-2.png)
-
-</details>
-
-<br>
+- JWT Authentication Filter의 검증 예외 URL로 지정
 
 <details>
-<summary>로그인 기능</summary>
+<summary>펼치기</summary>
+
+> **🚩 회원 가입**
+
+![img](./Description/img/signup-1.png)
+![img](./Description/img/signup-2.png)
+
+<br>
+
+> **🚩 로그인**
 
 - 유저가 로그인 시 백엔드에서 받은 JWT Token을 프론트엔드 단에서 LocalStorage에 들고 있음
 - JWT Authentication Filter의 검증 예외 URL
 
-<br>
-
 ![img](./Description/img/login-1.png)
-
-<br>
-
 ![img](./Description/img/logn-2.png)
 
-</details>
-
 <br>
 
-<details>
-<summary>로그아웃 기능</summary>
+> **🚩 로그아웃**
 
 - 유저가 로그아웃 시 LocalStorage의 JWT Token 제거
 
 ![img](./Description/img/logout-1.png)
-
-<br>
-
 ![img](./Description/img/logout-2.png)
 
 </details>
 
 <br>
 
-<details>
-<summary>댓글 기능</summary>
+### 댓글 기능
 
-- Frontend <-> Backend WebSocket 통신
+- Frontend <-> Backend WebSocket Publish & Subscribe
 - WebSocket Endpoint URL : ws
-- WebSocket Channel Name : '/api/comment/list'
-- 로그인을 안하면 댓글 남기기 불가능
-- 댓글 달린걸 그냥 보는건 모든 유저(anonymous 포함) 허용
-- 페이지네이션 추가
+- WebSocket Channel Name : '/comment/list'
+- 로그인을 안하면 댓글 남기기 불가능 (Session Storage JWT Token 검증)
+- 댓글 달린걸 그냥 보는건 모든 유저(anonymous 포함) 허용 (Spring Security 내부 설정)
+- Pagination 추가
+
+<details>
+<summary>펼치기</summary>
+
+> **🚩 로그인을 안하고 댓긍 등록 시, Session Storage의 JWT 토큰 검증 불가로 인해 댓글 작성 불가**
 
 ![img](./Description/img/403.png)
 
 <br>
 
+> **🚩 댓글 추가**
+
 ![img](./Description/img/comment-1.png)
 
 <br>
 
-![img](./Description/img/comment-2.png)
+> **🚩 댓글 수정**
+
+![img](./Description/img/update-comment-1.png)
+
+![img](./Description/img/update-comment-2.png)
+
+![img](./Description/img/update-comment-3.png)
+
+![img](./Description/img/update-comment-4.png)
 
 <br>
 
-![img](./Description/img/comment-3.png)
+> **🚩 댓글 삭제**
+
+![img](./Description/img/delete-comment.png)
+
+<br>
+
+> **🚩 Pagination 추가**
+
+![img](./Description/img/page.png)
 
 </details>
 
