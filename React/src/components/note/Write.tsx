@@ -2,12 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import {postNote} from "../../model/Api.ts";
-
-interface Note {
-    title: string;
-    content: string;
-    category: string;
-}
+import {PostNote} from "../../model/Note.ts";
 
 const Header = styled.div`
     display: flex;
@@ -42,7 +37,7 @@ const Write: React.FC = () => {
     const navigate = useNavigate();
 
     const handleSubmit = () => {
-        const note: Note = {
+        const note: PostNote = {
             title: title,
             content: content,
             category: category,
