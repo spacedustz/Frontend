@@ -76,10 +76,11 @@ export const List = styled.div`
             text-align: left;
             margin-top: 20px;
             list-style-type: none;
+            font-size: 12px;
         }
 
         h4 {
-            font-size: 15px;
+            font-size: 16px;
             color: rgba(66, 126,214, 0.7);
             padding-left: 3px;
             font-weight: bold;
