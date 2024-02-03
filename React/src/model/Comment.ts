@@ -28,10 +28,6 @@ type CommentContextType = {
 
 export const CommentContext = createContext<CommentContextType | undefined>(undefined);
 
-export interface CommentListProps {
-    comments: Comment[];
-}
-
 export interface PaginationProps {
     itemsPerPage: number;
     totalItems: number;
@@ -42,8 +38,6 @@ export interface PaginationProps {
 export interface CommentFormProps {
     newComment: string;
     onInputChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
-    onSubmitComment: () => Promise<void>;
-    isEditing: boolean;
 }
 
 export interface CommentListProps {
