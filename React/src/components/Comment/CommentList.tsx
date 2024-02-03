@@ -36,6 +36,12 @@ const CommentList: React.FC<CommentListProps> = ({comments, onEditComment, onDel
             return;
         }
 
+        const comment = comments.find(comment => comment.commentId === commentId);
+        if (!comment || comment.userName !== username) {
+            alert('자신이 작성한 댓글만 수정할 수 있습니다.');
+            return;
+        }
+
         setEditingCommentId(commentId);
         setNewComment(description);
     };
