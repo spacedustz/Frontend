@@ -11,7 +11,7 @@ import {
     CommentUserType, DeleteButton, EditButton
 } from "../../styles/comment/List.ts";
 
-const CommentList: React.FC<CommentListProps> = ({ comments, onEditComment, onDeleteComment }) => {
+const CommentList: React.FC<CommentListProps> = ({comments, onEditComment, onDeleteComment}) => {
     const [currentPage, setCurrentPage] = useState(1);
     const [editingCommentId, setEditingCommentId] = useState<number | null>(null);
     const [newComment, setNewComment] = useState<string>('');
@@ -23,12 +23,25 @@ const CommentList: React.FC<CommentListProps> = ({ comments, onEditComment, onDe
 
     // 수정 버튼 클릭 시 처리
     const handleEditButtonClick = (commentId: number, description: string) => {
+        const jwt = sessionStorage.getItem('jwt')
+        const username = sessionStorage.getItem('username')
+
+        if (!jwt) {
+            alert('로그인 후 수정 가능합니다.');
+            return;
+        }
+
+        if (!username) {
+            alert('댓글을 작성한 유저 정보가 일치하지 않습니다.');
+            return;
+        }
+
         setEditingCommentId(commentId);
         setNewComment(description);
     };
 
     const handleCompleteButtonClick = () => {
-        if(editingCommentId !== null) {
+        if (editingCommentId !== null) {
             onEditComment(editingCommentId, newComment);  // 변경된 부분
         }
         setEditingCommentId(null);
@@ -60,7 +73,8 @@ const CommentList: React.FC<CommentListProps> = ({ comments, onEditComment, onDe
                                 </>
                             ) : (
                                 <CommentActions>
-                                    <EditButton onClick={() => handleEditButtonClick(comment.commentId, comment.description)}>수정</EditButton>
+                                    <EditButton
+                                        onClick={() => handleEditButtonClick(comment.commentId, comment.description)}>수정</EditButton>
                                     <DeleteButton onClick={() => onDeleteComment(comment.commentId)}>삭제</DeleteButton>
                                 </CommentActions>
                             )}
@@ -68,7 +82,7 @@ const CommentList: React.FC<CommentListProps> = ({ comments, onEditComment, onDe
                     </CommentTop>
 
                     {editingCommentId === comment.commentId ? (
-                        <input type="text" value={newComment} onChange={(e) => setNewComment(e.target.value)} />
+                        <input type="text" value={newComment} onChange={(e) => setNewComment(e.target.value)}/>
                     ) : (
                         <CommentDescription>{comment.description}</CommentDescription>
                     )}
