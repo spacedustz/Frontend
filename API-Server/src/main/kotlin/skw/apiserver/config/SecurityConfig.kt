@@ -39,8 +39,8 @@ class SecurityConfig(
         .authorizeHttpRequests { authorize ->
             authorize
                 .requestMatchers("/api/admin/*").hasRole(UserType.개발자.name)
-                .requestMatchers(*signupPages).permitAll()
-                .anyRequest().authenticated()
+//                .requestMatchers(*signupPages).permitAll()
+                .anyRequest().permitAll()
         }
         .sessionManagement { session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS) }
         .addFilterBefore(jwtAuthenticationFilter, BasicAuthenticationFilter::class.java)
