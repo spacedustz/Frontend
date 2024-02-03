@@ -14,8 +14,9 @@ React & TypeScript / Kotlin 사용해 프론트엔드 학습 기록 사이트 �
 
 - 회원가입 / 로그인 / 로그아웃 (Spring Security + JWT)
 - **댓글** 추가 / 수정 / 삭제 (Web Socket)
-- **마크다운** 작성 / 마크다운 Viewer 기능 -> **Markdown 브랜치에 적용되어 있음 (main 브랜치는 아직)**
-  - Code Highlighter 적용
+- **마크다운** 작성 / 마크다운 Viewer 기능 ->
+  - **User Type이 관리자가 아니면 글 작성, 수정, 삭제 불가능** (백엔드에서 JWT Authentication Filter 검증 함)
+  - Code Highlighter(코드 블럭) 적용
   - `<br>` 태그 줄바꿈으로 치환
   - 마크다운 문법 중 `>` blockquate 적용
 
@@ -109,16 +110,20 @@ React & TypeScript / Kotlin 사용해 프론트엔드 학습 기록 사이트 �
 
 ### 마크다운 작성 & 보기 기능
 
-- Code Highlighter 적용
+- Code Highlighter(코드 블럭) 적용
 - `<br>` 줄바꿈으로 치환
 - 마크다운 문법 중 `>` blockquate 적용
 
 <details>
 <summary>펼치기</summary>
 
-> **🚩 작성한 마크다운 글 Viewer**
+> **🚩 마크다운 글 작성 & 작성한 마크다운 글 Viewer**
 
 ![img](./Description/img/markdown.png)
+
+![img](./Description/img/markdown-2.png)
+
+![img](./Description/img/markdown-3.png)
 
 </details>
 
