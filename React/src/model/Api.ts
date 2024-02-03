@@ -1,6 +1,6 @@
 import axios from "axios";
 import {DeleteComment, ModifyComment} from "./Comment.ts";
-import {Note} from "./Note.ts";
+import {PostNote} from "./Note.ts";
 
 export interface User {
     name: string
@@ -54,7 +54,7 @@ export async function deleteComment(requestData: DeleteComment) {
     return await axios.delete(request, { headers });
 }
 
-export const postNote = async (requestData: Note) => {
+export const postNote = async (requestData: PostNote) => {
     const request = `${url}/api/note`;
     return await axios.post(request, requestData);
 }
@@ -62,4 +62,9 @@ export const postNote = async (requestData: Note) => {
 export const getAllNote = async () => {
     const request = `${url}/api/note`;
     return await axios.get(request)
+}
+
+export const deleteNote = async (id: number) => {
+    const request = `${url}/api/note/${id}`;
+    await axios.delete(request)
 }
