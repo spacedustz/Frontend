@@ -9,6 +9,9 @@ const CommentForm: React.FC<CommentFormProps> = ({ newComment, onInputChange }) 
             try {
                 await postComment(newComment);
                 onInputChange({ target: { value: '' } } as React.ChangeEvent<HTMLInputElement>);
+
+                const name = sessionStorage.getItem('username')
+                console.log(`${name}님 댓글 작성 완료 - 작성 내용 : ${newComment}`)
             } catch (error) {
                 alert('댓글은 로그인 후 작성 가능합니다.');
                 console.error('댓글 추가 - Authorization Failed:', error);
