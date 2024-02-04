@@ -2,18 +2,21 @@ import React from 'react';
 import ReactMarkdown, {Components} from 'react-markdown';
 import gfm from 'remark-gfm';
 import {useParams} from "react-router-dom";
-import {Prism as SyntaxHighlighter, SyntaxHighlighterProps} from 'react-syntax-highlighter';
-import {solarizedlight} from 'react-syntax-highlighter/dist/esm/styles/prism';
+import {Prism as SyntaxHighlighter} from 'react-syntax-highlighter';
 import rehypeRaw from "rehype-raw";
 import rehypeSanitize from "rehype-sanitize";
 import styled from "styled-components";
+import dracula from 'react-syntax-highlighter/dist/esm/styles/prism/dracula';
 
 const SyntaxHighlighterContainer = styled.div`
-    //width: 90%;
-    //margin: 20px auto;
-    border-radius: 10px;
     overflow: auto;
-    background-color: #f7f7f7;
+    background-color: gray;
+    border-radius: 10px;
+`;
+
+const LanguageLabel = styled.div`
+    background-color: gray;
+    padding-left: 7px;
 `;
 
 const components: Components = {
@@ -21,10 +24,19 @@ const components: Components = {
         const match = className ? /language-(\w+)/.exec(className) : null;
         return match
             ? <SyntaxHighlighterContainer>
-                <SyntaxHighlighter style={solarizedlight as SyntaxHighlighterProps['style']}
-                                   language={match[1] || ''}
-                                   PreTag="div"
-                                   children={String(children).replace(/\n$/, '')} {...props} />
+                <LanguageLabel>{match[1]}</LanguageLabel>
+                <SyntaxHighlighter
+                    style={{
+                        ...dracula,
+                        'pre[class*="language-"]': {
+                            ...dracula['pre[class*="language-"]'],
+                            margin: '0',
+                        },
+                    }}
+                    language={match[1] || ''}
+                    PreTag="div"
+                    children={String(children).replace(/\n$/, '')} {...props}
+                />
             </SyntaxHighlighterContainer>
             : <code className={className} {...props}>{children}</code>
     },
@@ -39,7 +51,7 @@ const components: Components = {
                 }
             }>{children}</blockquote>;
     }
-}
+};
 
 const ViewContainer = styled.div`
     display: flex;
@@ -71,13 +83,13 @@ const ViewContainer = styled.div`
         flex-wrap: wrap;
         word-wrap: break-word;
         font-size: 9px;
-        
+
         h2 {
             padding-bottom: 3px;
             font-weight: bold;
             font-size: 13px;
         }
-        
+
         h3 {
             padding-bottom: 5px;
             font-weight: bold;
@@ -86,37 +98,13 @@ const ViewContainer = styled.div`
     }
 `;
 
-const Navigation = styled.div`
-    display: flex;
-    justify-content: space-between;
-`;
-
-const Title = styled.div`
-    flex: 1;
-    display: flex;
-    justify-content: center;
-
-    h2 {
-        color: rgba(66, 126, 214, 0.7);
-        padding-left: 3px;
-        font-weight: bold;
-    }
-`;
-
 const View: React.FC = () => {
     const {id} = useParams();
     const note = JSON.parse(localStorage.getItem(id) || '{}');
 
     return (
-        <div style={{all: 'initial'}}> {/* 이 부분을 추가합니다 */}
-            {/*<div>*/}
+        <div style={{all: 'initial'}}>
             <ViewContainer>
-                <Navigation>
-                    <Title>
-                        <h2>{note.title}</h2>
-                    </Title>
-                </Navigation>
-
                 <div style={{padding: "30px"}}>
                     <ReactMarkdown
                         components={components}
