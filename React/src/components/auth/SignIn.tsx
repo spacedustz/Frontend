@@ -48,11 +48,11 @@ const SignIn: React.FC = () => {
 
                 console.log(user.name + ' 님 로그인에 성공 하셨습니다.')
             } else if (response.status === 400) {
-                alert('유저 이름이나 비밀번호가 일치하지 않습니다.');
+                alert('AuthGuard - 유저 이름이나 비밀번호가 일치하지 않습니다.');
             }
         } catch (error) {
-            console.error('로그인 실패 : ' + error);
-            alert('유저 이름이나 비밀번호가 일치하지 않습니다.');
+            console.error('AuthGuard - 로그인 실패 : ' + error);
+            alert('AuthGuard - 유저 이름이나 비밀번호가 일치하지 않습니다.');
         }
     };
 

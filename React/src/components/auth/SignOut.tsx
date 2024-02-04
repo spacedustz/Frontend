@@ -11,7 +11,7 @@ const SignOut: React.FC = () => {
         setLoggedIn(false)
         setLoggedInUserName('')
         window.location.reload(); // 페이지 새로고침으로 상태 초기화
-        console.log('로그아웃 - Session Storage JWT Token 제거 완료')
+        console.log('AuthGuard - 로그아웃 - Session Storage JWT Token 제거 완료')
     };
 
     return (

@@ -14,7 +14,7 @@ const CommentForm: React.FC<CommentFormProps> = ({newComment, onInputChange}) =>
             }
 
             if (newComment.trim() === '') {
-                alert('빈 값은 전송이 안됩니다!');
+                alert('AuthGuard - 빈 값은 전송이 안됩니다!');
                 console.log('AuthGuard - 빈 값은 전송이 안됩니다!')
                 return
             }
@@ -27,7 +27,7 @@ const CommentForm: React.FC<CommentFormProps> = ({newComment, onInputChange}) =>
             console.log(`${name}님 댓글 작성 완료 - 작성 내용 : ${newComment}`)
         } catch (error) {
             alert('AuthGuard - 로그인 후 등록 가능 가능합니다.');
-            console.error('댓글 추가 - Authorization Failed:', error);
+            console.error('AuthGuard - 댓글 추가 - Authorization Failed:', error);
         }
     };
 

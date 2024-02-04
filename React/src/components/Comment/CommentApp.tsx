@@ -74,18 +74,18 @@ const CommentApp: React.FC = () => {
         const jwt = sessionStorage.getItem('jwt')
         const username = sessionStorage.getItem('username')
         if (!jwt) {
-            alert('로그인 후 수정 가능합니다.');
+            alert('AuthGuard - 로그인 후 수정 가능합니다.');
             return;
         }
 
         if (!username) {
-            alert('댓글을 작성한 유저 정보가 일치하지 않습니다.');
+            alert('AuthGuard - 댓글을 작성한 유저 정보가 일치하지 않습니다.');
             return;
         }
 
         const comment = comments.find(comment => comment.commentId === commentId);
         if (!comment || comment.userName !== username) {
-            alert('자신이 작성한 댓글만 수정할 수 있습니다.');
+            alert('AuthGuard - 자신이 작성한 댓글만 수정할 수 있습니다.');
             console.log('AuthGuard - 자신이 작성한 댓글이 아닙니다.')
             return;
         }
@@ -100,10 +100,10 @@ const CommentApp: React.FC = () => {
             const response = await modifyComment(requestData);
 
             if (response.status === 200) {
-                alert('댓글이 수정되었습니다.');
+                alert('AuthGuard - 댓글이 수정되었습니다.');
 
                 const name = sessionStorage.getItem('username')
-                console.log(`${name}님 댓글 수정  - 수정 내용 : ${newDescription}`)
+                console.log(`AuthGuard - ${name}님 댓글 수정  - 수정 내용 : ${newDescription}`)
                 setNewComment('');
 
                 const updatedComments = await getAllComments();
@@ -112,10 +112,10 @@ const CommentApp: React.FC = () => {
                     setComments(updatedComments.data);
                 }
             } else {
-                alert('비밀번호가 틀립니다.');
+                alert('AuthGuard - 비밀번호가 틀립니다.');
             }
         } catch (error) {
-            console.error('댓글 수정 에러:', error);
+            console.error('AuthGuard - 댓글 수정 에러:', error);
         }
     };
 
@@ -123,24 +123,24 @@ const CommentApp: React.FC = () => {
         const jwt = sessionStorage.getItem('jwt')
         const username = sessionStorage.getItem('username')
         if (!jwt) {
-            alert('로그인 후 삭제 가능합니다.');
-            console.log('AuthGuard - 로그인이 필요합니다.')
+            alert('AuthGuard - 로그인 후 삭제 가능합니다.');
+            console.log('AuthGuard - AuthGuard - 로그인이 필요합니다.')
             return;
         }
 
         if (!username) {
-            alert('댓글을 작성한 유저 정보가 일치하지 않습니다.');
+            alert('AuthGuard - 댓글을 작성한 유저 정보가 일치하지 않습니다.');
             return;
         }
 
         const commentToDelete = comments.find(comment => comment.commentId === commentId);
         if (!commentToDelete) {
-            alert('삭제하려는 댓글을 찾을 수 없습니다.');
+            alert('AuthGuard - 삭제하려는 댓글을 찾을 수 없습니다.');
             return;
         }
 
         if ((commentToDelete.userName !== username) && username !== '신건우') {
-            alert('자신이 작성한 댓글만 삭제할 수 있습니다.');
+            alert('AuthGuard - 자신이 작성한 댓글만 삭제할 수 있습니다.');
             console.log('AuthGuard - 자신이 작성한 댓글이 아닙니다.')
             return;
         }
@@ -155,8 +155,8 @@ const CommentApp: React.FC = () => {
 
             if (response.status === 200) {
                 const name = sessionStorage.getItem('username')
-                console.log(`${name}님 댓글 삭제 완료`)
-                alert('댓글이 삭제되었습니다.');
+                console.log(`AuthGuard - ${name}님 댓글 삭제 완료`)
+                alert('AuthGuard - 댓글이 삭제되었습니다.');
 
                 const updatedComments = await getAllComments();
 
@@ -164,10 +164,10 @@ const CommentApp: React.FC = () => {
                     setComments(updatedComments.data);
                 }
             } else {
-                alert('비밀번호가 틀립니다.');
+                alert('AuthGuard - 비밀번호가 틀립니다.');
             }
         } catch (error) {
-            console.error('댓글 삭제 에러:', error);
+            console.error('AuthGuard - 댓글 삭제 에러:', error);
         }
     };
 
