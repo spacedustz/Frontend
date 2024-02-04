@@ -1,36 +1,16 @@
 import React, {useEffect, useState} from 'react';
 import {Link, Outlet, useLocation} from 'react-router-dom';
-import {List, ListContainer, RootContainer, SubContainer, Title} from "../../styles/note/Note.ts";
+import {
+    DeleteButton,
+    List,
+    ListContainer,
+    PostButton,
+    RootContainer,
+    SubContainer,
+    Title
+} from "../../styles/note/Note.ts";
 import {Note} from "../../model/Note.ts";
 import {deleteNote, getAllNote} from "../../model/Api.ts";
-import styled from "styled-components";
-
-const PostButton = styled.button`
-    background-color: rgba(76, 175, 80, 0.3);
-    border: none;
-    border-radius: 15px;
-    height: 5%;
-    color: white;
-    text-align: center;
-    display: inline-block;
-    font-size: 13px;
-    margin: 4px 2px;
-    cursor: pointer;
-    transition-duration: 0.4s;
-`;
-
-const DeleteButton = styled.button`
-    background-color: rgba(76, 175, 80, 0.3);
-    border: none;
-    border-radius: 15px;
-    color: white;
-    text-align: center;
-    display: inline-block;
-    font-size: 13px;
-    margin: 4px 2px 5px 5px;
-    cursor: pointer;
-    transition-duration: 0.4s;
-`;
 
 const NoteApp: React.FC = () => {
     const [notes, setNotes] = useState<Note[]>([]);
