@@ -1,8 +1,17 @@
 ## 📚 프론트엔드 학습 기록 사이트 만들기 📚
 
-Frontend : React & TypeScript
+**Frontend**
+-  📂 React Directory
+- Language : TypeScript
+- Framework : React (yarn & vite)
 
-Backend : Kotlin & Spring
+<br>
+
+**Backend**
+
+- 📂 API-Server Directory
+- Language : Kotlin
+- Framework : Spring Boot 3.2.1 (JDK 17)
 
 <br>
 
