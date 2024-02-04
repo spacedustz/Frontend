@@ -7,6 +7,7 @@ import rehypeRaw from "rehype-raw";
 import rehypeSanitize from "rehype-sanitize";
 import styled from "styled-components";
 import dracula from 'react-syntax-highlighter/dist/esm/styles/prism/dracula';
+import {ViewContainer} from "../../styles/container/ViewContainer.ts";
 
 const SyntaxHighlighterContainer = styled.div`
     overflow: auto;
@@ -52,51 +53,6 @@ const components: Components = {
             }>{children}</blockquote>;
     }
 };
-
-const ViewContainer = styled.div`
-    display: flex;
-    flex-direction: column;
-    padding: 5% 5% 5% 5%;
-    //background-color: rgb(200, 200, 200);
-    background-color: rgba(250, 250, 250, 0.6);
-    font-size: 15px;
-    color: #212529;
-    word-break: break-word;
-    vertical-align: baseline;
-    line-height: 2;
-    flex-wrap: wrap;
-    width: 100%;
-    overflow: auto;
-
-    h2 {
-        padding-bottom: 3px;
-        font-weight: bold;
-    }
-
-    h3 {
-        font-weight: bold;
-        font-size: 20px;
-    }
-
-    @media (max-width: 768px) {
-        padding-top: 5%;
-        flex-wrap: wrap;
-        word-wrap: break-word;
-        font-size: 9px;
-
-        h2 {
-            padding-bottom: 3px;
-            font-weight: bold;
-            font-size: 15px;
-        }
-
-        h3 {
-            padding-bottom: 5px;
-            font-weight: bold;
-            font-size: 12px;
-        }
-    }
-`;
 
 const View: React.FC = () => {
     const {id} = useParams();
