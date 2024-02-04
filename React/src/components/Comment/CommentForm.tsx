@@ -1,23 +1,33 @@
 import React from 'react';
 import {postComment} from "../../model/Api.ts";
-import {ButtonStyle, CommentFormContainer, FormHeader, InputStyle, SubContainer} from "../../styles/comment/Form.ts";
+import {ButtonStyle, CommentFormContainer, FormHeader, InputStyle} from "../../styles/comment/Form.ts";
 import {CommentFormProps} from "../../model/Comment.ts";
 
 const CommentForm: React.FC<CommentFormProps> = ({newComment, onInputChange}) => {
     const handleAddComment = async () => {
-        if (newComment.trim() !== '') {
-            try {
-                await postComment(newComment);
-                onInputChange({target: {value: ''}} as React.ChangeEvent<HTMLInputElement>);
+        const jwt = sessionStorage.getItem('jwt')
 
-                const name = sessionStorage.getItem('username')
-                console.log(`${name}님 댓글 작성 완료 - 작성 내용 : ${newComment}`)
-            } catch (error) {
-                alert('댓글은 로그인 후 작성 가능합니다.');
-                console.error('댓글 추가 - Authorization Failed:', error);
+            if (!jwt) {
+                alert('AuthGuard - 로그인 후 등록 가능합니다.');
+                console.log('AuthGuard - 로그인이 필요합니다.')
+                return
             }
-        } else {
-            alert('빈 값은 전송이 안됩니다!');
+
+            if (newComment.trim() === '') {
+                alert('빈 값은 전송이 안됩니다!');
+                console.log('AuthGuard - 빈 값은 전송이 안됩니다!')
+                return
+            }
+
+        try {
+            await postComment(newComment);
+            onInputChange({target: {value: ''}} as React.ChangeEvent<HTMLInputElement>);
+
+            const name = sessionStorage.getItem('username')
+            console.log(`${name}님 댓글 작성 완료 - 작성 내용 : ${newComment}`)
+        } catch (error) {
+            alert('AuthGuard - 로그인 후 등록 가능 가능합니다.');
+            console.error('댓글 추가 - Authorization Failed:', error);
         }
     };
 
