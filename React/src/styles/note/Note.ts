@@ -1,5 +1,19 @@
-import styled from "styled-components";
-import {navColorChange} from "../container/NavigatinContainer.ts";
+import styled, {keyframes} from "styled-components";
+
+export const navColorChange = keyframes`
+    0% {
+        background-color: rgba(250, 250, 210, 0);
+        color: rgba(177, 50, 150, 0.7);
+    }
+    50% {
+        background-color: rgba(250, 250, 210, 0);
+        color: rgba(50, 100, 210, 0.6);
+    }
+    100% {
+        background-color: rgba(250, 250, 210, 0);
+        color: rgba(150, 150, 210, 0.5);
+    }
+`;
 
 export const RootContainer = styled.div`
     display: flex;
@@ -14,9 +28,9 @@ export const SubContainer = styled.div`
     color: #333;
     border: 1px solid orange;
     background-color: rgba(249, 249, 249, 0.1);
-    padding: 20px;
     //max-width: 600px; /* 필요에 따라 조절 */
-    margin: 20px;
+    padding-top: 20px;
+    margin: 15px;
     border-radius: 10px;
 `;
 
@@ -26,6 +40,10 @@ export const Title = styled.div`
     font-size: 1.5em;
     margin-bottom: 20px;
     text-decoration: none;
+    
+    h4 {
+        font-size: 1.7rem;
+    }
 `;
 
 export const ListContainer = styled.div`
@@ -46,7 +64,8 @@ export const List = styled.div`
     }
     
     h4 {
-        color: rgba(66, 126,214, 0.7);
+        border-bottom: 2px solid rgba(20,20,20,0.8); 
+        color: rgba(20,20,20,0.9);
         padding-left: 3px;
         font-weight: bold;
     }
@@ -58,7 +77,7 @@ export const List = styled.div`
 
         &:hover {
             background-color: rgba(250, 250, 210, 0);
-            color: rgba(250, 250, 210, 0.5);
+            transform: scale(1.12);
             transform: scale(1.12);
             transition: color 0.5s;
             animation: none;
@@ -81,7 +100,8 @@ export const List = styled.div`
 
         h4 {
             font-size: 16px;
-            color: rgba(66, 126,214, 0.7);
+            border-bottom: 2px solid rgba(20,20,20,0.8);
+            color: rgba(20,20,20,0.9);
             padding-left: 3px;
             font-weight: bold;
         }
@@ -93,7 +113,6 @@ export const List = styled.div`
 
             &:hover {
                 background-color: rgba(250, 250, 210, 0);
-                color: rgba(250, 250, 210, 0.5);
                 transform: scale(1.12);
                 transition: color 0.5s;
                 animation: none;
