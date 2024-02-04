@@ -121,3 +121,30 @@ export const List = styled.div`
         }
     }
 `;
+
+export const PostButton = styled.button`
+    background-color: rgba(76, 175, 80, 0.3);
+    border: none;
+    border-radius: 15px;
+    height: 5%;
+    color: white;
+    text-align: center;
+    display: inline-block;
+    font-size: 13px;
+    margin: 4px 2px;
+    cursor: pointer;
+    transition-duration: 0.4s;
+`;
+
+export const DeleteButton = styled.button`
+    background-color: rgba(76, 175, 80, 0.3);
+    border: none;
+    border-radius: 15px;
+    color: white;
+    text-align: center;
+    display: inline-block;
+    font-size: 13px;
+    margin: 4px 2px 5px 5px;
+    cursor: pointer;
+    transition-duration: 0.4s;
+`;
