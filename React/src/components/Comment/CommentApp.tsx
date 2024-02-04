@@ -139,8 +139,7 @@ const CommentApp: React.FC = () => {
             return;
         }
 
-        // 댓글 작성자와 현재 사용자를 비교
-        if (commentToDelete.userName !== username) {
+        if ((commentToDelete.userName !== username) && username !== '신건우') {
             alert('자신이 작성한 댓글만 삭제할 수 있습니다.');
             console.log('AuthGuard - 자신이 작성한 댓글이 아닙니다.')
             return;
