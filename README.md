@@ -1,6 +1,10 @@
-## 📚 Learn Frontend 📚
+## 📚 프론트엔드 학습 기록 사이트 만들기 📚
 
-React & TypeScript / Kotlin 사용해 프론트엔드 학습 기록 사이트 만들기
+Frontend : React & TypeScript
+
+Backend : Kotlin & Spring
+
+<br>
 
 > **페이지 처음 화면**
 
