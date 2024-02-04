@@ -1,16 +1,16 @@
 import Card from 'react-bootstrap/Card';
 import React from "react";
-import CardContainer, {CardTitle, MainCard} from "../styles/container/CardContainer.ts";
+import CardContainer, {MainCard} from "../styles/container/CardContainer.ts";
 
 const ProfileCard: React.FC = () => {
     return (
         <CardContainer>
             <MainCard style={{width: '20rem'}}>
-                <Card.Img variant="top" src="https://techstack-generator.vercel.app/react-icon.svg"/>
+                {/*<Card.Img variant="top" src="https://techstack-generator.vercel.app/react-icon.svg"/>*/}
+                <Card.Img variant="top" src="../public/assets/profile/profile-logo.png" />
                 <Card.Body>
-                    <CardTitle>😺 신건우 😺</CardTitle><br/>
-                    <strong>Frontend & React</strong><br/>
-                    <strong>학습 기록 사이트</strong>
+                    <strong>Frontend 학습 기록</strong><br/>
+                    <a href="https://github.com/spacedustz/Frontend" target="_blank">Visit Repository</a>
                 </Card.Body>
             </MainCard>
         </CardContainer>
