@@ -28,11 +28,17 @@ export const InputStyle = styled.input`
     
     @media (max-width: 768px) {
         width: 70%;
+        font-size: 11px;
     }
 `;
 
 export const FormHeader = styled.h3`
     color: white;
+    margin-bottom: 20px;
+    
+    @media (max-width: 768px) {
+        margin-bottom: 20px;
+    }
 `;
 
 export const ButtonStyle = styled.button`
@@ -45,7 +51,7 @@ export const ButtonStyle = styled.button`
     font-size: 13px;
     line-height: 38px;
     font-family: 'Spoqa Han Sans', sans-serif;
-    margin: 11px 4px;
+    margin: 11px 4px 20px;
     padding: 0 16px;
     min-width: 54px;
     text-align: center;
