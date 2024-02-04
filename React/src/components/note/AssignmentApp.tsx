@@ -12,7 +12,7 @@ import {
 import {Note} from "../../model/Note.ts";
 import {deleteNote, getAllNote} from "../../model/Api.ts";
 
-const NoteApp: React.FC = () => {
+const AssignmentApp: React.FC = () => {
     const [notes, setNotes] = useState<Note[]>([]);
     const location = useLocation();
 
@@ -32,15 +32,15 @@ const NoteApp: React.FC = () => {
             try {
                 await deleteNote(id);
                 setNotes(notes.filter(note => note.id !== id))
-                await fetchNotes()
+                fetchNotes()
             } catch (error) {
                 console.error("Note 삭제 실패")
             }
         }
     };
 
-    const displayCategories = ["HTML & CSS", "JavaScript"];
-    const title = "📚 공부 노트 📚";
+    const displayCategories = ["Assignment"];
+    const title = "📚 과제 📚";
 
     return (
         <div>
@@ -97,4 +97,4 @@ const NoteApp: React.FC = () => {
     );
 };
 
-export default NoteApp;
+export default AssignmentApp;
