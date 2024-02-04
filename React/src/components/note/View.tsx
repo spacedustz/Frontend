@@ -75,7 +75,7 @@ const ViewContainer = styled.div`
 
     h3 {
         font-weight: bold;
-        font-size: 11px;
+        font-size: 20px;
     }
 
     @media (max-width: 768px) {
@@ -87,13 +87,13 @@ const ViewContainer = styled.div`
         h2 {
             padding-bottom: 3px;
             font-weight: bold;
-            font-size: 13px;
+            font-size: 15px;
         }
 
         h3 {
             padding-bottom: 5px;
             font-weight: bold;
-            font-size: 11px;
+            font-size: 12px;
         }
     }
 `;
