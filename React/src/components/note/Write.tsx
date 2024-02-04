@@ -63,6 +63,7 @@ const Write: React.FC = () => {
                 <CategorySelect value={category} onChange={(e) => setCategory(e.target.value)}>
                     <option value="HTML & CSS">HTML & CSS</option>
                     <option value="JavaScript">JavaScript</option>
+                    <option value="React & TypeScript">React & TypeScript</option>
                 </CategorySelect>
                 <TitleInput
                     type="text"
