@@ -35,7 +35,13 @@ const CardContainer = styled(Container)`
     margin-top: 20px;
 
     img {
-        width: 100px;
+        width: 50%;
+        height: 100%;
+        
+        @media (max-width: 768px) {
+            width: 37%;
+            height: 90%;
+        }
     }
 
     a {
