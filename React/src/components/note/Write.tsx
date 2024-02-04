@@ -1,34 +1,8 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import styled from 'styled-components';
 import {postNote} from "../../model/Api.ts";
 import {PostNote} from "../../model/Note.ts";
-
-const Header = styled.div`
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-bottom: 10px;
-`;
-
-const TitleInput = styled.input`
-    margin: 0 10px;
-`;
-
-const CategorySelect = styled.select`
-    margin-right: auto;
-`;
-
-const SubmitButton = styled.button`
-    margin-left: auto;
-`;
-
-const ContentTextarea = styled.textarea`
-    display: block;
-    width: 100%;
-    height: 200px;
-    margin: 0 auto;
-`;
+import {CategorySelect, ContentTextarea, Header, SubmitButton, TitleInput} from "../../styles/note/Write.ts";
 
 const Write: React.FC = () => {
     const [title, setTitle] = useState('');
