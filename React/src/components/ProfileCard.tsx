@@ -10,7 +10,7 @@ const ProfileCard: React.FC = () => {
                 <Card.Img variant="top" src="../public/assets/profile/profile-logo.png" />
                 <Card.Body>
                     <strong>Frontend 학습 기록</strong><br/>
-                    <a href="https://github.com/spacedustz/Frontend" target="_blank">Visit Repository</a>
+                    <a href="https://github.com/spacedustz/Frontend" target="_blank">View Repository</a>
                 </Card.Body>
             </MainCard>
         </CardContainer>
