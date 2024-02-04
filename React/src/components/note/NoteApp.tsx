@@ -66,11 +66,12 @@ const NoteApp: React.FC = () => {
         <div>
             {location.pathname === "/note" && (
                 <RootContainer>
-                    <SubContainer>
-                        <Title>
-                            <h4>공부 노트</h4>
-                        </Title>
+                    <Title>
+                        <h4>📚 공부 노트 📚</h4>
+                    </Title>
 
+
+                    <SubContainer>
                         <PostButton>
                             <Link
                                 onClick={(e) => {
@@ -98,7 +99,7 @@ const NoteApp: React.FC = () => {
                                                         to={`${note.id}`}
                                                         onClick={() => localStorage.setItem(String(note.id), JSON.stringify(note))}
                                                     >
-                                                        {note.title}</Link>
+                                                        📄 {note.title}</Link>
                                                     <span>
                                                         {sessionStorage.getItem('username') === '신건우' && (
                                                             <DeleteButton
