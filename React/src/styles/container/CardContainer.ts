@@ -9,10 +9,6 @@ export const MainCard = styled(Card)`
     align-items: center;
 `;
 
-export const CardTitle = styled.h5`
-    font-size: 20px;
-`;
-
 export const cardColorChange = keyframes`
     0% {
         background-color: rgba(250, 250, 210, 0);

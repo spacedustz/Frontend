@@ -20,7 +20,11 @@ const Write: React.FC = () => {
         try {
             postNote(note).then(r => {
                 if (r.status === 201) {
-                    navigate('/note')
+                    if (category === "Assignment") {
+                        navigate('/assignment');
+                    } else {
+                        navigate('/note');
+                    }
                     console.log("글 작성 성공!")
                 } else {
                     console.error(`글 작성 실패`)
@@ -38,6 +42,7 @@ const Write: React.FC = () => {
                     <option value="HTML & CSS">HTML & CSS</option>
                     <option value="JavaScript">JavaScript</option>
                     <option value="React & TypeScript">React & TypeScript</option>
+                    <option value="Assignment">Assignment</option>
                 </CategorySelect>
                 <TitleInput
                     type="text"
