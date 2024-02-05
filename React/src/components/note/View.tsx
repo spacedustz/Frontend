@@ -12,6 +12,7 @@ import {ViewContainer} from "../../styles/container/ViewContainer.ts";
 const SyntaxHighlighterContainer = styled.div`
     background-color: #37393b;
     border-radius: 10px;
+    font-weight: 550;
 `;
 
 const LanguageLabel = styled.div`
@@ -45,9 +46,12 @@ const components: Components = {
         return <blockquote
             style={
                 {
-                    color: 'black',
-                    borderLeft: '3px solid rgba(30,30,30,0.5)',
+                    fontSize: '14px',
+                    color: 'white',
+                    borderLeft: '5px solid lightblue',
                     paddingLeft: '10px',
+                    height: '2rem',
+                    borderRadius: '3px',
                     background: 'rgba(100, 100, 100, 0.3)',
                 }
             }>{children}</blockquote>;
