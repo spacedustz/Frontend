@@ -5,9 +5,11 @@ export const ViewContainer = styled.div`
     flex-direction: column;
     padding: 5% 5% 5% 5%;
     //background-color: rgb(200, 200, 200);
-    background-color: rgba(250, 250, 250, 0.8);
+    //background-color: rgba(250, 250, 250, 0.8);
+    //color: #212529;
+    background-color: rgba(27, 29, 30, 0.8);
+    color: rgb(209, 205, 199);
     font-size: 15px;
-    color: #212529;
     word-break: break-word;
     vertical-align: baseline;
     line-height: 2;

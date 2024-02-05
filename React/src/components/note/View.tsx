@@ -10,14 +10,15 @@ import dracula from 'react-syntax-highlighter/dist/esm/styles/prism/dracula';
 import {ViewContainer} from "../../styles/container/ViewContainer.ts";
 
 const SyntaxHighlighterContainer = styled.div`
-    overflow: auto;
-    background-color: gray;
+    background-color: #37393b;
     border-radius: 10px;
 `;
 
 const LanguageLabel = styled.div`
-    background-color: gray;
-    padding-left: 7px;
+    background-color: #37393b;
+    padding-left: 10px;
+    padding-top: 3px;
+    color: #c4c7c5;
 `;
 
 const components: Components = {
@@ -30,7 +31,7 @@ const components: Components = {
                 <SyntaxHighlighter
                     style={{
                         ...dracula,
-                        margin: 0
+                        margin: 0,
                     }}
                     language={match[1] || ''}
                     PreTag="div"
@@ -38,7 +39,7 @@ const components: Components = {
                     {...props}
                 />
             </SyntaxHighlighterContainer>
-            : <code className={className} {...props}>{children}</code>
+            : <code className={className} style={{ margin: 0 }} {...props}>{children}</code>
     },
     blockquote({children}) {
         return <blockquote
@@ -47,7 +48,7 @@ const components: Components = {
                     color: 'black',
                     borderLeft: '3px solid rgba(30,30,30,0.5)',
                     paddingLeft: '10px',
-                    background: 'rgba(100, 100, 100, 0.3)'
+                    background: 'rgba(100, 100, 100, 0.3)',
                 }
             }>{children}</blockquote>;
     }
