@@ -34,7 +34,7 @@ class CommentService(
     fun init() {
         val developer: User = userRepository.findById(1L).orElse(null)
         val count = commentRepository.count()
-        if (count == 0L) commentRepository.save(Comment.createOf("첫 댓글", developer))
+        if (count == 0L) commentRepository.save(Comment.createOf("☃\uFE0F", developer))
     }
 
     @Scheduled(initialDelay = 2000, fixedDelay = 2000)
