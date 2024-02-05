@@ -1,7 +1,8 @@
 import React from 'react';
 import {postComment} from "../../model/Api.ts";
-import {ButtonStyle, CommentFormContainer, FormHeader, InputStyle} from "../../styles/comment/Form.ts";
+import {ButtonStyle, CommentFormContainer, InputStyle} from "../../styles/comment/Form.ts";
 import {CommentFormProps} from "../../model/Comment.ts";
+import {Title} from "../../styles/note/Note.ts";
 
 const CommentForm: React.FC<CommentFormProps> = ({newComment, onInputChange}) => {
     const handleAddComment = async () => {
@@ -33,7 +34,7 @@ const CommentForm: React.FC<CommentFormProps> = ({newComment, onInputChange}) =>
 
     return (
         <CommentFormContainer>
-            <FormHeader>🐣 Guest Book 🐣 </FormHeader>
+            <Title><h4>🐣 Guest Book 🐣</h4></Title>
                 <InputStyle
                     type="text"
                     value={newComment}
