@@ -5,6 +5,10 @@ export const TabsStyle = styled(Tabs)`
     overflow: hidden;
     background-color: lightblue;
     
+    &.mb-3 {
+        margin-bottom: 0 !important;
+    }
+    
     button {
         color: black;
 
