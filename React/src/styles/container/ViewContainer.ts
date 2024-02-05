@@ -16,6 +16,7 @@ export const ViewContainer = styled.div`
     flex-wrap: wrap;
     width: 100%;
     overflow: auto;
+    min-height: 100vh;
 
     h2 {
         padding-bottom: 3px;
