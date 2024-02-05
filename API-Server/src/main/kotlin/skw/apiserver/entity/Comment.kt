@@ -27,7 +27,7 @@ data class Comment(
     companion object {
         fun createOf(description: String, user: User): Comment {
             val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH시 mm분 ss초")
-            return Comment(description, LocalDateTime.now().atZone(ZoneId.of("Asia/Seoul")).format(formatter).toString(), user)
+            return Comment(description, LocalDateTime.now(ZoneId.of("Asia/Seoul")).format(formatter).toString(), user)
         }
     }
 }
