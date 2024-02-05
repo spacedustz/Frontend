@@ -64,10 +64,12 @@ export const List = styled.div`
     }
     
     h4 {
-        border-bottom: 2px solid rgba(20,20,20,0.8); 
-        color: rgba(20,20,20,0.9);
+        //border-bottom: 2px solid rgba(20,20,20,0.65); 
+        color: rgba(240,240,240,0.9);
         padding-left: 3px;
         font-weight: bold;
+        padding-bottom: 4px;
+        font-size: 17px;
     }
 
     a {
@@ -103,11 +105,12 @@ export const List = styled.div`
         }
 
         h4 {
-            font-size: 16px;
-            border-bottom: 2px solid rgba(20,20,20,0.8);
-            color: rgba(20,20,20,0.9);
+            font-size: 15px;
+            //border-bottom: 2px solid rgba(20,20,20,0.65);
+            color: rgba(240,240,240,0.9);
             padding-left: 3px;
             font-weight: bold;
+            padding-bottom: 4px;
         }
 
         a {
