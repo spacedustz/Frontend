@@ -38,6 +38,12 @@ export const NavStyle = styled(Navbar)`
             font-size: 10px;
         }
     }
+    
+    button {
+        @media (max-width: 768px) {
+            font-size: 10px;
+        }
+    }
 `;
 
 export const NavImageStyle = styled.img`
@@ -46,8 +52,9 @@ export const NavImageStyle = styled.img`
     margin-right: 10px;
 
     @media (max-width: 768px) {
-        width: 13px;
-        height: 13px;
+        width: 15px;
+        height: 15px;
+        margin-right: 2px;
     }
 `;
 
