@@ -38,11 +38,11 @@ export const Title = styled.div`
     text-align: center;
     color: white;
     font-size: 1.5em;
-    margin-bottom: 20px;
     text-decoration: none;
     
     h4 {
         font-size: 1.7rem;
+        margin-top: 13%;
     }
 `;
 
