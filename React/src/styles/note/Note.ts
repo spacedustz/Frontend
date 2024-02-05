@@ -74,14 +74,18 @@ export const List = styled.div`
         margin: 2px;
         animation: ${navColorChange} 3s infinite;
         text-decoration: none;
+        position: relative;
+        right: 20px;
 
         &:hover {
             background-color: rgba(250, 250, 210, 0);
             transform: scale(1.12);
-            transform: scale(1.12);
             transition: color 0.5s;
             animation: none;
             text-decoration: none;
+        }
+        
+        @media (max-width: 768px) {
         }
     }
     
