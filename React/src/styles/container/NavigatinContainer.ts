@@ -33,6 +33,10 @@ export const NavStyle = styled(Navbar)`
             transition: color 0.5s;
             animation: none;
         }
+        
+        @media (max-width: 768px) {
+            font-size: 10px;
+        }
     }
 `;
 
@@ -42,13 +46,13 @@ export const NavImageStyle = styled.img`
     margin-right: 10px;
 
     @media (max-width: 768px) {
-        width: 15px;
-        height: 15px;
+        width: 13px;
+        height: 13px;
     }
 `;
 
 export const NavSignInStyle = styled.div`
     @media (max-width: 768px) {
-        transform: scale(0.8);
+        transform: scale(0.65);
     }
 `;
