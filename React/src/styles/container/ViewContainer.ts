@@ -5,7 +5,7 @@ export const ViewContainer = styled.div`
     flex-direction: column;
     padding: 5% 5% 5% 5%;
     //background-color: rgb(200, 200, 200);
-    background-color: rgba(250, 250, 250, 0.6);
+    background-color: rgba(250, 250, 250, 0.8);
     font-size: 15px;
     color: #212529;
     word-break: break-word;
