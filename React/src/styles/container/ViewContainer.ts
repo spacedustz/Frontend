@@ -21,6 +21,7 @@ export const ViewContainer = styled.div`
     h2 {
         padding-bottom: 3px;
         font-weight: bold;
+        font-size: 25px;
     }
 
     h3 {
@@ -37,13 +38,13 @@ export const ViewContainer = styled.div`
         h2 {
             padding-bottom: 3px;
             font-weight: bold;
-            font-size: 15px;
+            font-size: 16px;
         }
 
         h3 {
             padding-bottom: 5px;
             font-weight: bold;
-            font-size: 12px;
+            font-size: 13px;
         }
     }
 `;
