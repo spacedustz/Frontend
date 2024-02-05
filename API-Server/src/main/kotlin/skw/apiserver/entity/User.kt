@@ -32,7 +32,7 @@ class User(
         fun createOf(request: SignUpRequest, encoder: PasswordEncoder) = User(
             name = request.name,
             password = encoder.encode(request.password),
-            createdAt =  LocalDateTime.now().atZone(ZoneId.of("Asia/Seoul")).format(formatter).toString()
+            createdAt =  LocalDateTime.now(ZoneId.of("Asia/Seoul")).format(formatter).toString()
         )
     }
 
@@ -40,6 +40,6 @@ class User(
         val formatter: DateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH시 mm분 ss초")
 
         this.password = newUser.newPassword?.takeIf { it.isNotBlank() }?.let { encoder.encode(it) }?: this.password
-        this.modifiedAt = LocalDateTime.now().atZone(ZoneId.of("Asia/Seoul")).format(formatter).toString();
+        this.modifiedAt = LocalDateTime.now(ZoneId.of("Asia/Seoul")).format(formatter).toString();
     }
 }
