@@ -23,9 +23,9 @@ const LanguageLabel = styled.div`
 const components: Components = {
     code({className, children, ...props}) {
         const match = className ? /language-(\w+)/.exec(className) : null;
-        return match
-            ? <SyntaxHighlighterContainer>
-                <LanguageLabel>{match[1]}</LanguageLabel>
+        return (
+            <SyntaxHighlighterContainer>
+                {match && <LanguageLabel>{match[1]}</LanguageLabel>}
                 <SyntaxHighlighter
                     style={{
                         ...dracula,
@@ -34,12 +34,12 @@ const components: Components = {
                             margin: '0',
                         },
                     }}
-                    language={match[1] || ''}
+                    language={match ? match[1] : ''}
                     PreTag="div"
                     children={String(children).replace(/\n$/, '')} {...props}
                 />
             </SyntaxHighlighterContainer>
-            : <code className={className} {...props}>{children}</code>
+        );
     },
     blockquote({children}) {
         return <blockquote
