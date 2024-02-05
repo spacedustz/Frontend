@@ -29,6 +29,26 @@ body {
     }
 }
 
+* {
+    font-family: 'Malgun Gothic', serif;
+}
+
+/*:root {*/
+/*    --font-global: "Dongle";*/
+/*}*/
+
+/**,*/
+/*body,*/
+/*html {*/
+/*    font-family: 'Spoqa Han Sans', sans-serif;*/
+/*}*/
+
+/*!* react-syntax-highlight 제외 *!*/
+/*.syntaxhighlighter,*/
+/*.syntaxhighlighter pre {*/
+/*    font-family: 'JetBrains Mono', monospace;*/
+/*}*/
+
 /*:root {*/
 /*  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;*/
 /*  line-height: 1.5;*/
