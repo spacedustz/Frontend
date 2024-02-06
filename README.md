@@ -17,7 +17,7 @@
 
 > **페이지 처음 화면**
 
-![img](./Description/img/main.png)
+![img](./Description/img/home.png)
 
 ---
 
@@ -132,11 +132,9 @@
 
 > **🚩 마크다운 글 작성 & 작성한 마크다운 글 Viewer**
 
-![img](./Description/img/markdown.png)
+![img](./Description/img/md-1.png)
 
-![img](./Description/img/markdown-2.png)
-
-![img](./Description/img/markdown-3.png)
+![img](./Description/img/md-2.png)
 
 </details>
 
