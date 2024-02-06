@@ -4,7 +4,7 @@ spring:
 
 ---
 server:
-  port: 9992
+  port: 8080
 
 spring:
   config:
@@ -12,7 +12,7 @@ spring:
       on-profile: prod
 
   datasource:
-    url: jdbc:mariadb://43.202.203.180:5000/skw
+    url: jdbc:mariadb://13.24.2.62:5000/skw
     username: skw
     password: 1234
     driver-class-name: org.mariadb.jdbc.Driver
