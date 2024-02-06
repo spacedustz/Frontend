@@ -76,7 +76,7 @@ export const CommentTime = styled.div`
     margin: 10px;
     font-weight: 300;
     font-size: 0.8em;
-    color: rgba(200, 200, 200, 0.8);
+    color: rgba(0, 0, 0, 0.8);
 
     @media (max-width: 768px) {  // 화면 크기가 768px 이하인 경우
         font-size: 0.6em;
