@@ -107,7 +107,7 @@ export const List = styled.div`
         h4 {
             font-size: 15px;
             //border-bottom: 2px solid rgba(20,20,20,0.65);
-            color: rgba(40,40,40,0.9);
+            color: white;
             padding-left: 3px;
             font-weight: bold;
             padding-bottom: 4px;
