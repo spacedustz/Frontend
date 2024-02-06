@@ -205,8 +205,8 @@ docker run -d --privileged --name skw -e MARIADB_ROOT_PASSWORD=1234 -p 5000:3306
 
 # 기타 패키지 & 방화벽 설정
 apt -y install wget curl firewalld git
-npm install -g yarn vite typescript
-yarn global add react-bootstrap react-router-dom styled-components axios @types/react-bootstrap @types/react-router-dom
+npm install -g yarn
+yarn global add typescript vite
 
 ufw disable
 systemctl enable firewalld
