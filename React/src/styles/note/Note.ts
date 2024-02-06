@@ -3,15 +3,15 @@ import styled, {keyframes} from "styled-components";
 export const navColorChange = keyframes`
     0% {
         background-color: rgba(250, 250, 210, 0);
-        color: rgba(177, 50, 150, 0.7);
+        color: rgba(177, 50, 170, 0.84);
     }
     50% {
         background-color: rgba(250, 250, 210, 0);
-        color: rgba(50, 100, 210, 0.6);
+        color: rgba(70, 100, 210, 0.72);
     }
     100% {
         background-color: rgba(250, 250, 210, 0);
-        color: rgba(150, 150, 210, 0.5);
+        color: rgba(130, 130, 210, 0.6);
     }
 `;
 
@@ -27,7 +27,7 @@ export const SubContainer = styled.div`
     font-family: Arial, sans-serif;
     color: #333;
     border: 1px solid orange;
-    background-color: rgba(249, 249, 249, 0.1);
+    background-color: rgba(249, 249, 249, 0.3);
     //max-width: 600px; /* 필요에 따라 조절 */
     padding-top: 20px;
     margin: 15px;
@@ -36,7 +36,7 @@ export const SubContainer = styled.div`
 
 export const Title = styled.div`
     text-align: center;
-    color: white;
+    color: black;
     font-size: 1.5em;
     text-decoration: none;
     
@@ -65,7 +65,7 @@ export const List = styled.div`
     
     h4 {
         //border-bottom: 2px solid rgba(20,20,20,0.65); 
-        color: rgba(240,240,240,0.9);
+        color: rgba(40,40,40,0.9);
         padding-left: 3px;
         font-weight: bold;
         padding-bottom: 4px;
@@ -130,7 +130,7 @@ export const List = styled.div`
 `;
 
 export const PostButton = styled.button`
-    background-color: rgba(76, 175, 80, 0.3);
+    background-color: rgba(76, 175, 80, 0.5);
     border: none;
     border-radius: 15px;
     height: 5%;
