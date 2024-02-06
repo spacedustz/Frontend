@@ -11,7 +11,7 @@ export const navColorChange = keyframes`
     }
     100% {
         background-color: rgba(250, 250, 210, 0);
-        color: rgba(130, 130, 210, 0.6);
+        color: rgba(130, 130, 210, 1);
     }
 `;
 
@@ -27,7 +27,7 @@ export const SubContainer = styled.div`
     font-family: Arial, sans-serif;
     color: #333;
     border: 1px solid orange;
-    background-color: rgba(249, 249, 249, 0.3);
+    background-color: rgba(49, 49, 49, 0.1);
     //max-width: 600px; /* 필요에 따라 조절 */
     padding-top: 20px;
     margin: 15px;
