@@ -132,7 +132,7 @@ export const NumberGameNote = {
         '    const [randomNumber, setRandomNumber] = useState<number>(Math.floor(Math.random() * 100) + 1);\n' +
         '    const [previousGuesses, setPreviousGuesses] = useState<string[]>([]);\n' +
         '    const [restartCountdown, setRestartCountdown] = useState<number | null>(null);\n' +
-        '    const [isExploding, setIsExploding] = React.useState(false);\n' +
+        '    const [isExploding, setIsExploding] = useState(false);\n' +
         '\n' +
         '    useEffect(() => {\n' +
         '        console.log(randomNumber)\n' +
