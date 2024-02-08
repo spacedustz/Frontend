@@ -5,6 +5,55 @@ import MarkdownComponent from "../note/MarkdownComponent.tsx";
 import rehypeRaw from "rehype-raw";
 import rehypeSanitize from "rehype-sanitize";
 import gfm from "remark-gfm";
+import styled from "styled-components";
+import ConfettiExplosion from "react-confetti-explosion";
+import {NumberGameNote} from "../../model/Assignment.ts";
+
+const GameContainer = styled.div`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 30px;
+`;
+
+const StyledInput = styled.input`
+    margin: 10px;
+    padding: 5px;
+    font-size: 16px;
+
+    &:focus {
+        outline: none;
+        border: 1px solid orange;
+        box-shadow: 0 0 5px orange;
+    }
+
+    &::placeholder {
+        color: rgba(30, 30, 30, 0.7);
+        font-weight: 300;
+        font-size: 15px;
+        padding-left: 10px;
+    }
+`;
+
+const StyledButton = styled.button`
+    padding: 5px 10px;
+    font-size: 16px;
+    background-color: #4CAF50; /* Green */
+    border: none;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    margin: 4px 2px;
+    transition-duration: 0.4s;
+    cursor: pointer;
+
+    &:disabled {
+        background-color: #cccccc;
+        cursor: not-allowed;
+    }
+`;
 
 /**
  * TODO
@@ -24,6 +73,8 @@ import gfm from "remark-gfm";
  * @remainingAttempts : 사용자의 게임에서 남은 횟수 저장, 0이 되면 게임 종료
  * @randomNumber : 1 ~ 100 사이 임의의 난수를 생성해 상태로 관리
  * @priviousGuesses : 사용자가 이전에 입력한 추측값을 저장하는 배열
+ * @restartCountdown : 사용자의 기회가 전부 소진되거나, 정답을 맟췄을때 자동으로 게임 재시작을 하기 위한 Countdown Interval 표시
+ * @isExploding : 정답을 맟출 시 폭죽 효과 애니메이션 추가
  */
 const NumberGuess: React.FC = () => {
     const [userGuess, setUserGuess] = useState<string>('');
@@ -31,10 +82,46 @@ const NumberGuess: React.FC = () => {
     const [remainingAttempts, setRemainingAttempts] = useState<number>(5);
     const [randomNumber, setRandomNumber] = useState<number>(Math.floor(Math.random() * 100) + 1);
     const [previousGuesses, setPreviousGuesses] = useState<string[]>([]);
+    const [restartCountdown, setRestartCountdown] = useState<number | null>(null);
+    const [isExploding, setIsExploding] = React.useState(false);
 
     useEffect(() => {
         console.log(randomNumber)
     }, [randomNumber]);
+
+    useEffect(() => {
+        let countdownInterval: number | null = null;
+
+        if (restartCountdown !== null) {
+            countdownInterval = window.setInterval(() => {
+                setRestartCountdown(prev => {
+                    if (prev !== null && prev > 1) {
+                        return prev - 1;
+                    } else {
+                        window.clearInterval(countdownInterval!);
+                        resetGame();
+                        return null;
+                    }
+                });
+            }, 1000);
+        }
+
+        return () => {
+            if (countdownInterval) {
+                window.clearInterval(countdownInterval);
+            }
+        };
+    }, [restartCountdown]);
+
+    useEffect(() => {
+        if (isExploding) {
+            const timeout = setTimeout(() => {
+                setIsExploding(false);
+            }, 500);
+
+            return () => clearTimeout(timeout);
+        }
+    }, [isExploding]);
 
     const verifyUserGuess = () => {
         const parsedUserGuess = parseInt(userGuess);
@@ -42,17 +129,20 @@ const NumberGuess: React.FC = () => {
         if (!isNaN(parsedUserGuess)) {
             if (parsedUserGuess < 1 || parsedUserGuess > 100) {
                 alert("범위 밖입니다.");
+                setUserGuess('');
                 return;
             }
 
             if (previousGuesses.includes(userGuess)) {
                 alert("이미 입력한 숫자입니다.");
+                setUserGuess('');
                 return;
             }
 
             if (parsedUserGuess === randomNumber) {
                 setGameMessage("맞췄습니다!");
                 setRemainingAttempts(0);
+                setIsExploding(true);
             } else if (parsedUserGuess > randomNumber) {
                 setGameMessage("Down");
                 setRemainingAttempts(prev => prev - 1);
@@ -66,6 +156,12 @@ const NumberGuess: React.FC = () => {
         } else {
             alert("숫자만 입력 가능합니다.");
         }
+
+        if (parsedUserGuess === randomNumber || remainingAttempts === 1) {
+            setGameMessage(parsedUserGuess === randomNumber ? "맞췄습니다!" : "기회를 모두 소진 하였습니다.");
+            setRemainingAttempts(0);
+            setRestartCountdown(5);
+        }
     };
 
     const resetGame = () => {
@@ -76,23 +172,32 @@ const NumberGuess: React.FC = () => {
         setPreviousGuesses([]);
     };
 
-
-    const note = {
-        content: ''
-    };
-
     return (
         <div>
-            <div>
-                <h4 style={{marginTop: "30px"}}>🕹️ 숫자 맞추기 게임 🕹️</h4>
-                <p>1 ~ 100 범위의 랜덤 숫자 맟추기</p>
-                <input type="text" value={userGuess} onChange={(e) => setUserGuess(e.target.value)}/>
-                <button onClick={verifyUserGuess} disabled={remainingAttempts === 0}>Go</button>
-                <button onClick={resetGame}>Reset</button>
-                <p>{gameMessage}</p>
-                <p>남은 기회: {remainingAttempts}</p>
-                <p>이미 입력한 숫자들 : {previousGuesses.join(', ')}</p>
+            <div style={{position: 'fixed', top: '50%', left: '50%', transform: 'translate(-50%, -50%)'}}>
+                {isExploding && <ConfettiExplosion/>}
             </div>
+
+            <GameContainer>
+                <div>
+                    <h4 style={{marginTop: "30px"}}>🕹️ 숫자 맞추기 게임 🕹️</h4>
+                    <p>1 ~ 100 범위의 랜덤 숫자 맟추기</p>
+                    <StyledInput
+                        type="text"
+                        value={userGuess}
+                        onChange={(e) => setUserGuess(e.target.value)}
+                        placeholder="숫자를 입력해주세요."
+                    />
+                    <StyledButton onClick={verifyUserGuess} disabled={remainingAttempts === 0}>Go</StyledButton>
+                    <StyledButton onClick={resetGame}>Reset</StyledButton>
+                    <p>{gameMessage}</p>
+                    <p>남은 기회: {remainingAttempts}</p>
+                    {restartCountdown !== null && (
+                        <p>{restartCountdown}초 후 게임이 재시작 됩니다...</p>
+                    )}
+                    <p>이미 입력한 숫자들 : {previousGuesses.join(', ')}</p>
+                </div>
+            </GameContainer>
 
             <div style={{all: 'initial'}}>
                 <ViewContainer>
@@ -101,7 +206,7 @@ const NumberGuess: React.FC = () => {
                             components={MarkdownComponent}
                             rehypePlugins={[rehypeRaw, rehypeSanitize]}
                             remarkPlugins={[gfm]}
-                            children={note.content}
+                            children={NumberGameNote.content}
                         >
                         </ReactMarkdown>
                     </div>
