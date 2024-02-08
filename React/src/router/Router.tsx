@@ -1,7 +1,7 @@
 import React, {Suspense} from "react";
 import {BrowserRouter, Route, Routes} from "react-router-dom";
 import MainTabs from "../components/MainTabs.tsx";
-import CommentApp from "../components/Comment/CommentApp.tsx";
+import CommentApp from "../components/comment/CommentApp.tsx";
 import NoteApp from "../components/note/NoteApp.tsx";
 import Write from "../components/note/Write.tsx";
 import View from "../components/note/View.tsx";
