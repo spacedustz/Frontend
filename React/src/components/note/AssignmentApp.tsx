@@ -63,33 +63,45 @@ const AssignmentApp: React.FC = () => {
                             to="write">메모 작성</Link>
                     </PostButton>
 
-                    <ListContainer>
-                        {displayCategories.map((category) => (
-                            <List key={category}>
-                                <h4>{category}</h4>
+                    <div style={{display: "flex"}}>
+                        <ListContainer>
+                            {displayCategories.map((category) => (
+                                <List key={category}>
+                                    <h4>{category}</h4>
 
-                                <ul>
-                                    {notes
-                                        .filter((note) => note.category === category)
-                                        .map((note, index) => (
-                                            <li key={index}>
-                                                <Link
-                                                    to={`${note.id}`}
-                                                    onClick={() => localStorage.setItem(String(note.id), JSON.stringify(note))}
-                                                >
-                                                    📄 {note.title}</Link>
-                                                <span>
+                                    <ul>
+                                        {notes
+                                            .filter((note) => note.category === category)
+                                            .map((note, index) => (
+                                                <li key={index}>
+                                                    <Link
+                                                        to={`${note.id}`}
+                                                        onClick={() => localStorage.setItem(String(note.id), JSON.stringify(note))}
+                                                    >
+                                                        📄 {note.title}</Link>
+                                                    <span>
                                                     {sessionStorage.getItem('username') === '신건우' && (
                                                         <DeleteButton
                                                             onClick={() => handleDelete(note.id)}>삭제</DeleteButton>
                                                     )}
                                                 </span>
-                                            </li>
-                                        ))}
+                                                </li>
+                                            ))}
+                                    </ul>
+                                </List>
+
+                            ))}
+                        </ListContainer>
+
+                        <ListContainer>
+                            <List>
+                                <h4>Application</h4>
+                                <ul>
+                                    <li><Link to="/assignment/numberguess">🕹️ Number Guess 게임</Link></li>
                                 </ul>
                             </List>
-                        ))}
-                    </ListContainer>
+                        </ListContainer>
+                    </div>
                 </SubContainer>
             </RootContainer>
             {/*<Outlet/>*/}
