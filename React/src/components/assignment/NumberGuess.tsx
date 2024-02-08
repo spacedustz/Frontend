@@ -1,10 +1,16 @@
 import React, {useEffect, useState} from "react";
+import {ViewContainer} from "../../styles/container/ViewContainer.ts";
+import ReactMarkdown from "react-markdown";
+import MarkdownComponent from "../note/MarkdownComponent.tsx";
+import rehypeRaw from "rehype-raw";
+import rehypeSanitize from "rehype-sanitize";
+import gfm from "remark-gfm";
 
 /**
  * TODO
  * 랜덤번호를 내부적으로 지정 (1~100 사이)
  * 유저가 번호 입력 후 Go 버튼 누름 (총 기회 5번)
- * 유저가 번호르 맟추면 "맟췄습니다!"
+ * 유저가 번호를 맟추면 "맟췄습니다!"
  * 유저가 제출한 숫자가 정답보다 낮으면 "Down", 높으면 "Up"
  * Reset 버튼을 누르면 Game Reset
  * 5번의 기회를 다쓰면 게임 종료 (Go 버튼 Disable)
@@ -70,15 +76,37 @@ const NumberGuess: React.FC = () => {
         setPreviousGuesses([]);
     };
 
+
+    const note = {
+        content: ''
+    };
+
     return (
         <div>
-            <h4 style={{marginTop: "30px"}}>🕹️ 숫자 맞추기 게임 🕹️</h4>
-            <input type="text" value={userGuess} onChange={(e) => setUserGuess(e.target.value)} />
-            <button onClick={verifyUserGuess} disabled={remainingAttempts === 0}>Go</button>
-            <button onClick={resetGame}>Reset</button>
-            <p>{gameMessage}</p>
-            <p>남은 기회: {remainingAttempts}</p>
-            <p>이미 입력한 숫자들 : {previousGuesses.join(', ')}</p>
+            <div>
+                <h4 style={{marginTop: "30px"}}>🕹️ 숫자 맞추기 게임 🕹️</h4>
+                <p>1 ~ 100 범위의 랜덤 숫자 맟추기</p>
+                <input type="text" value={userGuess} onChange={(e) => setUserGuess(e.target.value)}/>
+                <button onClick={verifyUserGuess} disabled={remainingAttempts === 0}>Go</button>
+                <button onClick={resetGame}>Reset</button>
+                <p>{gameMessage}</p>
+                <p>남은 기회: {remainingAttempts}</p>
+                <p>이미 입력한 숫자들 : {previousGuesses.join(', ')}</p>
+            </div>
+
+            <div style={{all: 'initial'}}>
+                <ViewContainer>
+                    <div style={{padding: "30px"}}>
+                        <ReactMarkdown
+                            components={MarkdownComponent}
+                            rehypePlugins={[rehypeRaw, rehypeSanitize]}
+                            remarkPlugins={[gfm]}
+                            children={note.content}
+                        >
+                        </ReactMarkdown>
+                    </div>
+                </ViewContainer>
+            </div>
         </div>
     );
 };
