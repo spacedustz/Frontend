@@ -59,14 +59,15 @@ export const Tab = styled.div`
     cursor: pointer;
 `;
 
-export const UnderLine = styled.div`
-    width: 60px;
+export const UnderLine = styled.div<{tab: string}>`
+    width: 64px;
     height: 3px;
     background-color: lightseagreen;
     position: absolute;
-    left: 0;
+    left: ${props => props.tab === '전체' ? '0px' : props.tab === '진행중' ? '75px' : '143px'};
     top: 50px;
     padding: 0;
+    transition: left 0.5s ease-in-out;
 `;
 
 export const Tasks = styled.div`
