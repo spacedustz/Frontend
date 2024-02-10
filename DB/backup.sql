@@ -119,8 +119,8 @@ CREATE TABLE `user` (
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
 INSERT INTO `user` VALUES
-(1,'2024-02-06 02시 14분 52초','','신건우','$2a$10$ZP820xlBoRVHcwbrx1rCjOjsf80k/o5dfMuaVnfTHL.NO5JL4MmwO','개발자'),
-(2,'2024-02-07 18시 06분 54초','','','$2a$10$VBaEcCqzWa3wIBXlqprFE.V27ojRGD842YvGpMOKXg3De7SpMKOEy','유저');
+(1,'2024-02-06 02시 14분 52초','','신건우','','개발자'),
+(2,'2024-02-07 18시 06분 54초','','','','유저');
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
