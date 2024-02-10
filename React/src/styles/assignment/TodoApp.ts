@@ -45,6 +45,8 @@ export const StyledButton = styled.button`
 `;
 export const HeaderSection = styled.section`
     border: 1px solid lightgray;
+    width: 100%;
+    background-color: aliceblue;
 `;
 
 export const HeaderTab = styled.div`
@@ -58,8 +60,8 @@ export const Tab = styled.div`
 `;
 
 export const UnderLine = styled.div`
-    width: 50px;
-    height: 1px;
+    width: 60px;
+    height: 3px;
     background-color: pink;
     position: absolute;
     left: 0;
@@ -72,4 +74,14 @@ export const Tasks = styled.div`
     flex-direction: row;
     justify-content: space-between;
     padding: 1em;
+    width: 100%;
+`;
+
+export const DoneTasks = styled.div`
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 1em;
+    width: 100%;
+    background-color: lightgray;
 `;
