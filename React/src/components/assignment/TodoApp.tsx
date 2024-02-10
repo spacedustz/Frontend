@@ -51,6 +51,24 @@ const TodoApp: React.FC = () => {
         setTaskList(taskList.filter(task => task.id !== id));
     }
 
+    const filterTabs = (tab: string) => {
+        if (tab !== null && tab !== undefined && tab !== "") {
+            if (tab === '전체') {
+
+            }
+
+            else if (tab === '진행중') {
+
+            }
+
+            else if (tab === '완료') {
+
+            }
+        } else {
+            console.log('Tab 선택 에러 발생')
+        }
+    }
+
     return (
         <div style={{all: "initial"}}>
             <TodoContainer>
@@ -69,9 +87,9 @@ const TodoApp: React.FC = () => {
                 <HeaderSection>
                     <HeaderTab>
                         <UnderLine/>
-                        <Tab>전체</Tab>
-                        <Tab>진행중</Tab>
-                        <Tab>완료</Tab>
+                        <Tab onClick={() =>filterTabs('전체')}>전체</Tab>
+                        <Tab onClick={() =>filterTabs('진행중')}>진행중</Tab>
+                        <Tab onClick={() =>filterTabs('완료')}>완료</Tab>
                     </HeaderTab>
 
                     <div>
