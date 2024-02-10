@@ -9,6 +9,7 @@ import Navigation from "../components/Navigation.tsx";
 import ProfileCard from "../components/ProfileCard.tsx";
 import AssignmentApp from "../components/note/AssignmentApp.tsx";
 import NumberGuess from "../components/assignment/NumberGuess.tsx";
+import TodoApp from "../components/assignment/TodoApp.tsx";
 
 const Router: React.FC = () => {
     return (
@@ -23,6 +24,7 @@ const Router: React.FC = () => {
                         <Route path="assignment/write" element={<Write />} />
                         <Route path="assignment/:id" element={<View />} />
                         <Route path="assignment/numberguess" element={<NumberGuess />} />
+                        <Route path="assignment/todoapp" element={<TodoApp />} />
 
                         <Route path="note" element={<NoteApp />} />
                         <Route path="note/write" element={<Write />} />
