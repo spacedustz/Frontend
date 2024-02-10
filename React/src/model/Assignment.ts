@@ -275,3 +275,277 @@ export const NumberGameNote = {
         '\n' +
         '</details>'
 }
+
+export const TodoAppNote = {
+    content: '## 🕹️ 할일 앱 만들기 🕹️️\n' +
+        '\n' +
+        '<br>\n' +
+        '\n' +
+        '### 📘 요구사항\n' +
+        '\n' +
+        '- `완료` Item 추가, 수정, 삭제\n' +
+        '- `완료` 리스트 (전체 목록, 완료 내역, 미완료 내역)\n' +
+        '- `완료` 할일이 끝나면 완료 체크 -> Task에 취소선 긋기 후 완료 취소 버튼 렌더링\n' +
+        '- `완료` 각 Tab 클릭 시 상태별로 필터링된 새로운 리스트 렌더링\n' +
+        '- `완료` Enter 눌러서 Task 추가하기\n' +
+        '- `완료` **전체**가 아닌 다른 탭에서 Task를 삭제 했을떄 UI에 실시간 반영\n' +
+        '- `완료` Underline Animation 적용\n' +
+        '\n' +
+        '---\n' +
+        '\n' +
+        '### 📘 innerHTML & innerText & textContent의 차이점\n' +
+        '\n' +
+        '<br>\n' +
+        '\n' +
+        '> **innerHTML**\n' +
+        '\n' +
+        '- 해당 Element의 HTML, XML을 읽어오거나 설정을 할 수 있습니다.\n' +
+        '- HTML 코드와 같이 작성 가능\n' +
+        '\n' +
+        '```js\n' +
+        'let arr = ["A", "B", \'C\']\n' +
+        '\n' +
+        'function render() {\n' +
+        '    let resultHTML = \'\';\n' +
+        '    \n' +
+        '    for (let i=0; i<arr.length; i++) {\n' +
+        '        resultHTML += `\n' +
+        '            <h2>{arr[i]}</h2>\n' +
+        '            <div> ... </div> // 등등 HTML\n' +
+        '        `;\n' +
+        '    }\n' +
+        '}\n' +
+        '```\n' +
+        '\n' +
+        '<br>\n' +
+        '\n' +
+        '> **innerText**\n' +
+        '\n' +
+        '- Element의 속성으로, 해당 Element 내에서 사용자에게 **보여지는** Text 값 (렌더링된 Text Content)을 읽어옵니다.\n' +
+        '- HTML 코드 작성 불가능\n' +
+        '\n' +
+        '<br>\n' +
+        '\n' +
+        '> **textContent**\n' +
+        '\n' +
+        '- innerText와 달리 `<script>`나 `<style>` 태그와 상관없이 해당 노드가 가지고 있는 Text 값을 그대로 읽어옵니다.\n' +
+        '\n' +
+        '---\n' +
+        '\n' +
+        '### 📘 여러 Dom 같이 선택하기 - querySelectorAll()\n' +
+        '\n' +
+        '- `.tabs`에 묶인 4개의 div중 첫번쨰 div를 제외한 3개의 div의 Event Listener에 콜백 함수 호출 \n' +
+        '\n' +
+        '```js\n' +
+        'let tabs = document.querySelectorAll(".tabs div");\n' +
+        '\n' +
+        'for (let i=1; i<tabs.length; i++) {\n' +
+        '    tabs[i].addEventListener("click", function (event) {\n' +
+        '        fitler(event);\n' +
+        '    });\n' +
+        '}\n' +
+        '```\n' +
+        '\n' +
+        '---\n' +
+        '\n' +
+        '### 📘 Underline CSS Animation 추가\n' +
+        '\n' +
+        '- Styled Component\n' +
+        '- JSX에서 Tab Props UnderLine에 넘겨주어 Tab의 문자열마다 left의 픽셀 수치 조정\n' +
+        '- transition 속성을 이용한 애니메이션 효과 추가\n' +
+        '\n' +
+        '```ts\n' +
+        'export const UnderLine = styled.div<{tab: string}>`\n' +
+        '    width: 64px;\n' +
+        '    height: 3px;\n' +
+        '    background-color: lightseagreen;\n' +
+        '    position: absolute;\n' +
+        '    left: ${props => props.tab === \'전체\' ? \'0px\' : props.tab === \'진행중\' ? \'75px\' : \'143px\'};\n' +
+        '    top: 50px;\n' +
+        '    padding: 0;\n' +
+        '    transition: left 0.5s ease-in-out;\n' +
+        '`;\n' +
+        '```\n' +
+        '\n' +
+        '---\n' +
+        '\n' +
+        '### 📘 React & TypeScript Component 전체 코드\n' +
+        '\n' +
+        '<details>\n' +
+        '<summary>펼치기</summary>\n' +
+        '\n' +
+        '```tsx\n' +
+        'import React, {useState} from "react";\n' +
+        'import {ViewContainer} from "../../styles/container/ViewContainer.ts";\n' +
+        'import ReactMarkdown from "react-markdown";\n' +
+        'import MarkdownComponent from "../note/MarkdownComponent.tsx";\n' +
+        'import rehypeRaw from "rehype-raw";\n' +
+        'import rehypeSanitize from "rehype-sanitize";\n' +
+        'import gfm from "remark-gfm";\n' +
+        'import {\n' +
+        '    TodoContainer,\n' +
+        '    StyledInput,\n' +
+        '    StyledButton,\n' +
+        '    HeaderSection,\n' +
+        '    HeaderTab,\n' +
+        '    Tab,\n' +
+        '    Tasks,\n' +
+        '    UnderLine, DoneTasks, StyledImage, DoneTitle, DoneContent\n' +
+        '} from "../../styles/assignment/TodoApp.ts";\n' +
+        '\n' +
+        'interface Task {\n' +
+        '    id: string\n' +
+        '    content: string\n' +
+        '    isDone: boolean\n' +
+        '}\n' +
+        '\n' +
+        'const TodoApp: React.FC = () => {\n' +
+        '    const [input, setInput] = useState<string>(\'\');\n' +
+        '    const [taskList, setTaskList] = useState<Task[]>([]);\n' +
+        '    const [filteredTaskList, setFilteredTaskList] = useState<Task[]>([]);\n' +
+        '    const [activeTab, setActiveTab] = useState(\'전체\');\n' +
+        '\n' +
+        '    const generateRandomId = () => {\n' +
+        '        return \'_\' + Math.random().toString(36).substring(2, 9);\n' +
+        '    }\n' +
+        '\n' +
+        '    const addTask = () => {\n' +
+        '        const task = {\n' +
+        '            id: generateRandomId(),\n' +
+        '            content: input,\n' +
+        '            isDone: false\n' +
+        '        }\n' +
+        '\n' +
+        '        const newTaskList = [...taskList, task];\n' +
+        '        setTaskList([...taskList, task]);\n' +
+        '        setFilteredTaskList(newTaskList);\n' +
+        '        setInput(\'\');\n' +
+        '    }\n' +
+        '\n' +
+        '    const toggleDone = (id: string) => {\n' +
+        '        const newTaskList = taskList.map(task =>\n' +
+        '            task.id === id ? {...task, isDone: !task.isDone} : task\n' +
+        '        )\n' +
+        '        setTaskList(newTaskList);\n' +
+        '        setFilteredTaskList(newTaskList);\n' +
+        '    }\n' +
+        '\n' +
+        '    const deleteTask = (id: string) => {\n' +
+        '        const newTaskList = taskList.filter(task => task.id !== id);\n' +
+        '        setTaskList(newTaskList);\n' +
+        '        setFilteredTaskList(newTaskList);\n' +
+        '    }\n' +
+        '\n' +
+        '    const filterTabs = (tab: string) => {\n' +
+        '        if (tab !== null && tab !== undefined && tab !== "") {\n' +
+        '            switch (tab) {\n' +
+        '                case \'전체\':\n' +
+        '                    setFilteredTaskList(taskList);\n' +
+        '                    setActiveTab(\'전체\');\n' +
+        '                    break;\n' +
+        '                case \'진행중\':\n' +
+        '                    setFilteredTaskList(taskList.filter(task => !task.isDone));\n' +
+        '                    setActiveTab(\'진행중\');\n' +
+        '                    break;\n' +
+        '                case \'완료\':\n' +
+        '                    setFilteredTaskList(taskList.filter(task => task.isDone));\n' +
+        '                    setActiveTab(\'완료\');\n' +
+        '                    break;\n' +
+        '                default:\n' +
+        '                    console.log(\'Tab 선택 에러 발생\');\n' +
+        '            }\n' +
+        '        } else {\n' +
+        '            console.log(\'Tab 선택 에러 발생\')\n' +
+        '        }\n' +
+        '    }\n' +
+        '\n' +
+        '    return (\n' +
+        '        <div style={{all: "initial"}}>\n' +
+        '            <TodoContainer>\n' +
+        '                <h4 style={{marginTop: "30px"}}>Todo List</h4>\n' +
+        '\n' +
+        '                <section>\n' +
+        '                    <StyledInput\n' +
+        '                        type="text"\n' +
+        '                        value={input}\n' +
+        '                        onChange={(e) => setInput(e.target.value)}\n' +
+        '                        onKeyDown={(e) => {\n' +
+        '                            if (e.key === \'Enter\') {\n' +
+        '                                addTask();\n' +
+        '                            }\n' +
+        '                        }}\n' +
+        '                        placeholder="할일을 입력 해주세요."\n' +
+        '                    />\n' +
+        '                    <StyledButton onClick={addTask}>+</StyledButton>\n' +
+        '                </section>\n' +
+        '\n' +
+        '                <HeaderSection>\n' +
+        '                    <HeaderTab>\n' +
+        '                        <UnderLine tab={activeTab}/>\n' +
+        '                        <Tab onClick={() => filterTabs(\'전체\')}>전체</Tab>\n' +
+        '                        <Tab onClick={() => filterTabs(\'진행중\')}>진행중</Tab>\n' +
+        '                        <Tab onClick={() => filterTabs(\'완료\')}>완료</Tab>\n' +
+        '                    </HeaderTab>\n' +
+        '\n' +
+        '                    <div>\n' +
+        '                        {filteredTaskList.map((task) => (\n' +
+        '                            <div key={task.id}>\n' +
+        '                                {task.isDone ? (\n' +
+        '                                    <DoneTasks>\n' +
+        '                                        <DoneContent>\n' +
+        '                                            <DoneTitle>{task.content}</DoneTitle>\n' +
+        '                                        </DoneContent>\n' +
+        '\n' +
+        '                                        <div>\n' +
+        '                                            <StyledButton onClick={() => toggleDone(task.id)}>\n' +
+        '                                                <StyledImage src="../../../public/assets/todo/return.svg" alt="return"/>\n' +
+        '                                            </StyledButton>\n' +
+        '\n' +
+        '                                            <StyledButton onClick={() => deleteTask(task.id)}>\n' +
+        '                                                <StyledImage src="../../../public/assets/todo/trash.svg" alt="trash"/>\n' +
+        '                                            </StyledButton>\n' +
+        '                                        </div>\n' +
+        '                                    </DoneTasks>\n' +
+        '                                ) : (\n' +
+        '                                    <Tasks>\n' +
+        '                                        <div>{task.content}</div>\n' +
+        '\n' +
+        '                                        <div>\n' +
+        '                                            <StyledButton onClick={() => toggleDone(task.id)}>\n' +
+        '                                                <StyledImage src="../../../public/assets/todo/check.svg" alt="check"/>\n' +
+        '                                            </StyledButton>\n' +
+        '\n' +
+        '                                            <StyledButton onClick={() => deleteTask(task.id)}>\n' +
+        '                                                <StyledImage src="../../../public/assets/todo/trash.svg" alt="trash"/>\n' +
+        '                                            </StyledButton>\n' +
+        '                                        </div>\n' +
+        '                                    </Tasks>\n' +
+        '                                )}\n' +
+        '                            </div>\n' +
+        '                        ))}\n' +
+        '\n' +
+        '                    </div>\n' +
+        '                </HeaderSection>\n' +
+        '            </TodoContainer>\n' +
+        '\n' +
+        '            <div style={{all: \'initial\'}}>\n' +
+        '                <ViewContainer>\n' +
+        '                    <div style={{padding: "30px"}}>\n' +
+        '                        <ReactMarkdown\n' +
+        '                            components={MarkdownComponent}\n' +
+        '                            rehypePlugins={[rehypeRaw, rehypeSanitize]}\n' +
+        '                            remarkPlugins={[gfm]}\n' +
+        '                            children={\'ddd\'}\n' +
+        '                        >\n' +
+        '                        </ReactMarkdown>\n' +
+        '                    </div>\n' +
+        '                </ViewContainer>\n' +
+        '            </div>\n' +
+        '        </div>\n' +
+        '    );\n' +
+        '};\n' +
+        '\n' +
+        'export default TodoApp;\n' +
+        '```\n' +
+        '</details>'
+};
