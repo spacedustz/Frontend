@@ -13,7 +13,7 @@ import {
     HeaderTab,
     Tab,
     Tasks,
-    UnderLine, DoneTasks
+    UnderLine, DoneTasks, StyledImage, DoneTitle, DoneContent
 } from "../../styles/assignment/TodoApp.ts";
 
 interface Task {
@@ -76,14 +76,21 @@ const TodoApp: React.FC = () => {
 
                     <div>
                         {taskList.map((task) => (
-                            <Tasks key={task.id}>
+                            <div key={task.id}>
                                 {task.isDone ? (
                                     <DoneTasks>
-                                        <div style={{textDecoration: "line-through"}}>{task.content}</div>
+                                        <DoneContent>
+                                            <DoneTitle>{task.content}</DoneTitle>
+                                        </DoneContent>
 
                                         <div>
-                                            <StyledButton onClick={() => toggleDone(task.id)}>취소</StyledButton>
-                                            <StyledButton onClick={() => deleteTask(task.id)}>Delete</StyledButton>
+                                            <StyledButton onClick={() => toggleDone(task.id)}>
+                                                <StyledImage src="../../../public/assets/todo/return.svg" alt="return"/>
+                                            </StyledButton>
+
+                                            <StyledButton onClick={() => deleteTask(task.id)}>
+                                                <StyledImage src="../../../public/assets/todo/trash.svg" alt="trash"/>
+                                            </StyledButton>
                                         </div>
                                     </DoneTasks>
                                 ) : (
@@ -91,12 +98,17 @@ const TodoApp: React.FC = () => {
                                         <div>{task.content}</div>
 
                                         <div>
-                                            <StyledButton onClick={() => toggleDone(task.id)}>완료</StyledButton>
-                                            <StyledButton onClick={() => deleteTask(task.id)}>Delete</StyledButton>
+                                            <StyledButton onClick={() => toggleDone(task.id)}>
+                                                <StyledImage src="../../../public/assets/todo/check.svg" alt="check"/>
+                                            </StyledButton>
+
+                                            <StyledButton onClick={() => deleteTask(task.id)}>
+                                                <StyledImage src="../../../public/assets/todo/trash.svg" alt="trash"/>
+                                            </StyledButton>
                                         </div>
                                     </Tasks>
                                 )}
-                            </Tasks>
+                            </div>
                         ))}
 
                     </div>
