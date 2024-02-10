@@ -1,17 +1,46 @@
 ## 📚 프론트엔드 학습 기록 사이트 만들기 📚
 
-**Frontend**
--  📂 React Directory
-- Language : TypeScript
-- Framework : React (yarn & vite)
+**📂 React Directory (Front-End)**
+- Language : `TypeScript`
+- Framework : React (nodejs: 20.11.0 / yarn: 1.22.21 / vite )
+- Libraries
+  - react-router-dom
+  - styled-components
+  - react-bootstrap
+  - axios
+  - webkit
+  - @stomp/stompjs
+  - react-markdown
+  - react-syntax-highlighter
+  - rehype-sanitize
+  - rehype-raw
+  - remark-gfm
 
 <br>
 
-**Backend**
+**📂 API-Server Directory (Back-End)**
 
-- 📂 API-Server Directory
-- Language : Kotlin
+- Language : `Kotlin`
 - Framework : Spring Boot 3.2.1 (JDK 17)
+- Spring Boot 3.2.1 (JDK 17)
+- Spring Data JPA
+- Spring Webflux
+- Spring Security (6.x.x)
+- JWT
+- WebSocket
+- MariaDB
+- Lombok
+
+<br>
+
+**💻 Server - AWS EC2**
+
+- Site : [Frontend 학습 페이지 방문](http://13.124.2.62/)
+- AWS EC2 : `r5a.large` Instance (2 CPU & 16 Mem)
+- Docker (MariaDB)
+- Open JDK 17
+- Mariadb (Container)
+- NodeJS (yarn)
 
 ---
 
@@ -154,45 +183,7 @@
 
 ---
 
-## 📘 Frontend
-
-- React (nodejs: 20.11.0 / yarn: 1.22.21 / vite )
-- TypeScript
-- Libraries
-  - react-router-dom
-  - styled-components
-  - react-bootstrap
-  - axios
-  - webkit
-  - @stomp/stompjs
-  - react-markdown
-  - react-syntax-highlighter
-  - rehype-sanitize
-  - rehype-raw
-  - remark-gfm
-
----
-
-## 📘 Backend
-
-- Spring Boot 3.2.1 (JDK 17)
-- Kotlin
-- Spring Data JPA
-- Spring Webflux
-- Spring Security (6.x.x)
-- JWT
-- WebSocket
-- MariaDB
-- Lombok
-
----
-
 ## 📘 서버 세팅 스크립트
-
-- Docker
-- OpenJDK 17
-- Mariadb (Container)
-- NodeJS
 
 ```bash
 #!/bin/bash
