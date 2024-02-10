@@ -40,6 +40,7 @@
 - Open JDK 17
 - Mariadb (Container)
 - NodeJS (yarn)
+- Jenkins Declarative Pipeline 방식 +  Nginx & Docker 를 이용한 트래픽 로드밸런싱 및 Blue & Green 무중단 배포 CI/CD 구축 (예정)
 
 [사이트 방문하기](http://13.124.2.62/)
 
