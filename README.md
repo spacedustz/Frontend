@@ -35,12 +35,15 @@
 
 **💻 Server - AWS EC2**
 
-- Site : [Frontend 학습 페이지 방문](http://13.124.2.62/)
 - AWS EC2 : `r5a.large` Instance (2 CPU & 16 Mem)
 - Docker (MariaDB)
 - Open JDK 17
 - Mariadb (Container)
 - NodeJS (yarn)
+
+[사이트 방문하기](http://13.124.2.62/)
+
+[서버 세팅 스크립트](./Description/Server-Setting.md)
 
 ---
 
@@ -180,56 +183,3 @@
 ![img](./Description/img/md.png)
 
 </details>
-
----
-
-## 📘 서버 세팅 스크립트
-
-```bash
-#!/bin/bash
-
-# APT Update & Upgrade
-apt -y update & apt -y upgrade
-
-# NodeJS LTS Source
-curl -sL https://deb.nodesource.com/setup_20.x | sudo -E bash -
-
-# NodeJS & OpenJDK 17 설치
-apt -y install nodejs openjdk-17-jdk
-
-# Docker 설치
-apt-get -y install apt-transport-https ca-certificates curl gnupg-agent software-properties-common
-curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
-add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
-apt -y update
-apt-get -y install docker-ce docker-ce-cli containerd.io
-systemctl start docker && sudo systemctl enable docker
-
-# MariaDB Container 실행
-docker run -d --privileged --name skw -e MARIADB_ROOT_PASSWORD=1234 -p 5000:3306 mariadb
-
-# 기타 패키지 & 방화벽 설정
-apt -y install wget curl firewalld git
-npm install -g yarn
-yarn global add typescript vite
-
-ufw disable
-systemctl enable firewalld
-firewall-cmd --permanent --add-port=3000/tcp
-firewall-cmd --permanent --add-port=5000/tcp
-firewall-cmd --permanent --add-service=mysql
-firewall-cmd --reload
-
-setenforce 0
-```
-
-<br>
-
-> 🚩 **DB & DB User 생성 - DB 컨테이너 내부에서 진행**
-
-```sql
-create database skw character set utf8mb4 collate utf8mb4_general_ci;
-create user 'skw'@'%' identified by '1234';
-grant all privileges on skw.* to 'skw'@'%';
-flush privileges;
-```
