@@ -98,6 +98,7 @@ const AssignmentApp: React.FC = () => {
                                 <h4>Application</h4>
                                 <ul>
                                     <li><Link to="/assignment/numberguess">🕹️ Number Guess 게임</Link></li>
+                                    <li><Link to="/assignment/todoapp">🕹️ Todo App</Link></li>
                                 </ul>
                             </List>
                         </ListContainer>
