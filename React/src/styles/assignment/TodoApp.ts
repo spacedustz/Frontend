@@ -56,6 +56,7 @@ export const HeaderTab = styled.div`
 
 export const Tab = styled.div`
     padding: 1em;
+    cursor: pointer;
 `;
 
 export const UnderLine = styled.div`
