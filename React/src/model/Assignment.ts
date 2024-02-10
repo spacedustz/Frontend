@@ -347,14 +347,19 @@ export const TodoAppNote = {
         '- Styled Component\n' +
         '- JSX에서 Tab Props UnderLine에 넘겨주어 Tab의 문자열마다 left의 픽셀 수치 조정\n' +
         '- transition 속성을 이용한 애니메이션 효과 추가\n' +
+        '- `$` 접두사를 붙여줌으로서 해당 props가 최종 DOM 요소에 전달되지 않게 함\n' +
         '\n' +
         '```ts\n' +
-        'export const UnderLine = styled.div<{tab: string}>`\n' +
+        'type UnderLineProps = {\n' +
+        '    $tab: string;\n' +
+        '};\n' +
+        '\n' +
+        'export const UnderLine = styled.div<UnderLineProps>`\n' +
         '    width: 64px;\n' +
         '    height: 3px;\n' +
         '    background-color: lightseagreen;\n' +
         '    position: absolute;\n' +
-        '    left: ${props => props.tab === \'전체\' ? \'0px\' : props.tab === \'진행중\' ? \'75px\' : \'143px\'};\n' +
+        '    left: ${props => props.$tab === \'전체\' ? \'0px\' : props.$tab === \'진행중\' ? \'75px\' : \'143px\'};\n' +
         '    top: 50px;\n' +
         '    padding: 0;\n' +
         '    transition: left 0.5s ease-in-out;\n' +
