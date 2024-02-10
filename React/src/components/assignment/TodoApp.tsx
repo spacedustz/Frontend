@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import {ViewContainer} from "../../styles/container/ViewContainer.ts";
 import ReactMarkdown from "react-markdown";
 import MarkdownComponent from "../note/MarkdownComponent.tsx";
@@ -16,6 +16,13 @@ import {TodoContainer,
 } from "../../styles/assignment/TodoApp.ts";
 
 const TodoApp: React.FC = () => {
+    const [input, setInput] = useState<string>('');
+    const [taskList, setTaskList] = useState<string[]>([]);
+
+    const handleButton = () => {
+        setTaskList([...taskList, input]);
+        setInput('');
+    }
 
     return (
         <div>
@@ -25,8 +32,11 @@ const TodoApp: React.FC = () => {
                 <section>
                     <StyledInput
                         type="text"
+                        value={input}
+                        onChange={(e) => setInput(e.target.value)}
+                        placeholder="할일을 입력 해주세요."
                     />
-                    <StyledButton>+</StyledButton>
+                    <StyledButton onClick={handleButton}>+</StyledButton>
                 </section>
 
                 <HeaderSection>
@@ -49,15 +59,18 @@ const TodoApp: React.FC = () => {
                     </HeaderTab>
 
                     <div>
-                        <Tasks>
-                            집가기
+                        {taskList.map((task: string) => (
+                            <Tasks>
+                                {task}
 
-                            <div>
-                                <StyledButton>Check</StyledButton>
+                                <div>
+                                    <StyledButton>Check</StyledButton>
 
-                                <StyledButton>Delete</StyledButton>
-                            </div>
-                        </Tasks>
+                                    <StyledButton>Delete</StyledButton>
+                                </div>
+                            </Tasks>
+                        ))}
+
                     </div>
                 </HeaderSection>
 
