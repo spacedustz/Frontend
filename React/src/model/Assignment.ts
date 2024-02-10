@@ -3,20 +3,20 @@ export const NumberGameNote = {
         '\n' +
         '<br>\n' +
         '\n' +
-        '### 요구사항\n' +
+        '### 📘 요구사항\n' +
         '\n' +
-        '- 랜덤번호를 내부적으로 지정 (1~100 사이)\n' +
-        '- 유저가 번호 입력 후 Go 버튼 누름 (총 기회 5번)\n' +
-        '- 유저가 번호를 맟추면 "맟췄습니다!"\n' +
-        '- 유저가 제출한 숫자가 정답보다 낮으면 "Down", 높으면 "Up"\n' +
-        '- Reset 버튼을 누르면 Game Reset\n' +
-        '- 5번의 기회를 다쓰면 게임 종료 (Go 버튼 Disable)\n' +
-        '- 1 ~ 100 범위 밖에 숫자를 입력하면 alert으로 "범위 밖입니다." 출력. 기회 깎지않음.\n' +
-        '- 이미 입력한 숫자도 alert으로 "이미 입력한 숫자입니다." 라고만 출력 하고 기회를 깎지 않음.\n' +
+        '- `완료` 랜덤번호를 내부적으로 지정 (1~100 사이)\n' +
+        '- `완료` 유저가 번호 입력 후 Go 버튼 누름 (총 기회 5번)\n' +
+        '- `완료` 유저가 번호를 맟추면 "맟췄습니다!"\n' +
+        '- `완료` 유저가 제출한 숫자가 정답보다 낮으면 "Down", 높으면 "Up"\n' +
+        '- `완료` Reset 버튼을 누르면 Game Reset\n' +
+        '- `완료` 5번의 기회를 다쓰면 게임 종료 (Go 버튼 Disable)\n' +
+        '- `완료` 1 ~ 100 범위 밖에 숫자를 입력하면 alert으로 "범위 밖입니다." 출력. 기회 깎지않음.\n' +
+        '- `완료` 이미 입력한 숫자도 alert으로 "이미 입력한 숫자입니다." 라고만 출력 하고 기회를 깎지 않음.\n' +
         '\n' +
         '---\n' +
         '\n' +
-        '### HTML Tag를 JavaScript Dom으로 변환하는 방식\n' +
+        '### 📘 HTML Tag를 JavaScript Dom으로 변환하는 방식\n' +
         '\n' +
         '- `getElementById()`의 파라미터로 HTML 태그의 식별자 중 id를 넣어줘서 해당 태그를 객체화 합니다. getElementByClassName(), querySelector() 등등\n' +
         '- Dom 객체에 `addEventListener(이벤트명, 콜백함수)`로 첫번쨰 파라미터에 해당하는 이벤트 클릭 시 호출할 콜백 함수를 추가할 수 있습니다.\n' +
@@ -40,9 +40,7 @@ export const NumberGameNote = {
         '\n' +
         '---\n' +
         '\n' +
-        '### React & TypeScript Component\n' +
-        '\n' +
-        '- React & TypeScript 컴포넌트로 프로그램 작성\n' +
+        '### 📘 React & TypeScript Component 전체 코드\n' +
         '\n' +
         '<details>\n' +
         '<summary>펼치기</summary>\n' +
@@ -57,6 +55,7 @@ export const NumberGameNote = {
         'import gfm from "remark-gfm";\n' +
         'import styled from "styled-components";\n' +
         'import ConfettiExplosion from "react-confetti-explosion";\n' +
+        'import {NumberGameNote} from "../../model/Assignment.ts";\n' +
         '\n' +
         'const GameContainer = styled.div`\n' +
         '    display: flex;\n' +
@@ -221,11 +220,6 @@ export const NumberGameNote = {
         '        setPreviousGuesses([]);\n' +
         '    };\n' +
         '\n' +
-        '\n' +
-        '    const note = {\n' +
-        '        content: \'\'\n' +
-        '    };\n' +
-        '\n' +
         '    return (\n' +
         '        <div>\n' +
         '            <div style={{position: \'fixed\', top: \'50%\', left: \'50%\', transform: \'translate(-50%, -50%)\'}}>\n' +
@@ -260,7 +254,7 @@ export const NumberGameNote = {
         '                            components={MarkdownComponent}\n' +
         '                            rehypePlugins={[rehypeRaw, rehypeSanitize]}\n' +
         '                            remarkPlugins={[gfm]}\n' +
-        '                            children={note.content}\n' +
+        '                            children={NumberGameNote.content}\n' +
         '                        >\n' +
         '                        </ReactMarkdown>\n' +
         '                    </div>\n' +
