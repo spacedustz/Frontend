@@ -105,7 +105,7 @@ const TodoApp: React.FC = () => {
 
                 <HeaderSection>
                     <HeaderTab>
-                        <UnderLine tab={activeTab}/>
+                        <UnderLine $tab={activeTab}/>
                         <Tab onClick={() => filterTabs('전체')}>전체</Tab>
                         <Tab onClick={() => filterTabs('진행중')}>진행중</Tab>
                         <Tab onClick={() => filterTabs('완료')}>완료</Tab>
