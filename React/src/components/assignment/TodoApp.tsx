@@ -15,6 +15,7 @@ import {
     Tasks,
     UnderLine, DoneTasks, StyledImage, DoneTitle, DoneContent
 } from "../../styles/assignment/TodoApp.ts";
+import {TodoAppNote} from "../../model/Assignment.ts";
 
 interface Task {
     id: string
@@ -25,6 +26,8 @@ interface Task {
 const TodoApp: React.FC = () => {
     const [input, setInput] = useState<string>('');
     const [taskList, setTaskList] = useState<Task[]>([]);
+    const [filteredTaskList, setFilteredTaskList] = useState<Task[]>([]);
+    const [activeTab, setActiveTab] = useState('전체');
 
     const generateRandomId = () => {
         return '_' + Math.random().toString(36).substring(2, 9);
@@ -37,32 +40,43 @@ const TodoApp: React.FC = () => {
             isDone: false
         }
 
+        const newTaskList = [...taskList, task];
         setTaskList([...taskList, task]);
+        setFilteredTaskList(newTaskList);
         setInput('');
     }
 
     const toggleDone = (id: string) => {
-        setTaskList(taskList.map(task =>
+        const newTaskList = taskList.map(task =>
             task.id === id ? {...task, isDone: !task.isDone} : task
-        ));
+        )
+        setTaskList(newTaskList);
+        setFilteredTaskList(newTaskList);
     }
 
     const deleteTask = (id: string) => {
-        setTaskList(taskList.filter(task => task.id !== id));
+        const newTaskList = taskList.filter(task => task.id !== id);
+        setTaskList(newTaskList);
+        setFilteredTaskList(newTaskList);
     }
 
     const filterTabs = (tab: string) => {
         if (tab !== null && tab !== undefined && tab !== "") {
-            if (tab === '전체') {
-
-            }
-
-            else if (tab === '진행중') {
-
-            }
-
-            else if (tab === '완료') {
-
+            switch (tab) {
+                case '전체':
+                    setFilteredTaskList(taskList);
+                    setActiveTab('전체');
+                    break;
+                case '진행중':
+                    setFilteredTaskList(taskList.filter(task => !task.isDone));
+                    setActiveTab('진행중');
+                    break;
+                case '완료':
+                    setFilteredTaskList(taskList.filter(task => task.isDone));
+                    setActiveTab('완료');
+                    break;
+                default:
+                    console.log('Tab 선택 에러 발생');
             }
         } else {
             console.log('Tab 선택 에러 발생')
@@ -79,6 +93,11 @@ const TodoApp: React.FC = () => {
                         type="text"
                         value={input}
                         onChange={(e) => setInput(e.target.value)}
+                        onKeyDown={(e) => {
+                            if (e.key === 'Enter') {
+                                addTask();
+                            }
+                        }}
                         placeholder="할일을 입력 해주세요."
                     />
                     <StyledButton onClick={addTask}>+</StyledButton>
@@ -86,14 +105,14 @@ const TodoApp: React.FC = () => {
 
                 <HeaderSection>
                     <HeaderTab>
-                        <UnderLine/>
-                        <Tab onClick={() =>filterTabs('전체')}>전체</Tab>
-                        <Tab onClick={() =>filterTabs('진행중')}>진행중</Tab>
-                        <Tab onClick={() =>filterTabs('완료')}>완료</Tab>
+                        <UnderLine tab={activeTab}/>
+                        <Tab onClick={() => filterTabs('전체')}>전체</Tab>
+                        <Tab onClick={() => filterTabs('진행중')}>진행중</Tab>
+                        <Tab onClick={() => filterTabs('완료')}>완료</Tab>
                     </HeaderTab>
 
                     <div>
-                        {taskList.map((task) => (
+                        {filteredTaskList.map((task) => (
                             <div key={task.id}>
                                 {task.isDone ? (
                                     <DoneTasks>
@@ -140,7 +159,7 @@ const TodoApp: React.FC = () => {
                             components={MarkdownComponent}
                             rehypePlugins={[rehypeRaw, rehypeSanitize]}
                             remarkPlugins={[gfm]}
-                            children={'ddd'}
+                            children={TodoAppNote.content}
                         >
                         </ReactMarkdown>
                     </div>
