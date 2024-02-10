@@ -13,11 +13,25 @@
 - Language : Kotlin
 - Framework : Spring Boot 3.2.1 (JDK 17)
 
+---
+
+## 📘 **Main Pages**
+
+**과제 탭**
+
+![img](./Description/img/assignment-tab.png)
+
 <br>
 
-> **페이지 처음 화면**
+**노트 탭**
 
 ![img](./Description/img/1.png)
+
+<br>
+
+**방명록 탭**
+
+![img](./Description/img/comment-tab.png)
 
 ---
 
