@@ -35,7 +35,7 @@
 
 **💻 Server - AWS EC2**
 
-- AWS EC2 : `r5a.large` Instance (2 CPU & 16 Mem)
+- AWS EC2 : `t2.micro` 메모리 부족 -> `r5a.large` 로 인스턴스 이전 (2 CPU & 16 Mem)
 - Docker (MariaDB)
 - Open JDK 17
 - Mariadb (Container)
