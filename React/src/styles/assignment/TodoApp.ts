@@ -22,6 +22,10 @@ export const StyledInput = styled.input`
         font-weight: 300;
         font-size: 15px;
         padding-left: 10px;
+        
+        @media (max-width: 768px) {
+            font-size: 10px;
+        }
     }
 `;
 
