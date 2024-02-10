@@ -28,9 +28,7 @@ export const StyledInput = styled.input`
 export const StyledButton = styled.button`
     padding: 5px 10px;
     font-size: 16px;
-    background-color: #4CAF50; /* Green */
     border: none;
-    color: white;
     text-align: center;
     text-decoration: none;
     display: inline-block;
@@ -43,10 +41,11 @@ export const StyledButton = styled.button`
         cursor: not-allowed;
     }
 `;
+
 export const HeaderSection = styled.section`
     border: 1px solid lightgray;
     width: 100%;
-    background-color: aliceblue;
+    background-color: rgba(250, 250, 250, 0.8);
 `;
 
 export const HeaderTab = styled.div`
@@ -62,7 +61,7 @@ export const Tab = styled.div`
 export const UnderLine = styled.div`
     width: 60px;
     height: 3px;
-    background-color: pink;
+    background-color: lightseagreen;
     position: absolute;
     left: 0;
     top: 50px;
@@ -75,6 +74,7 @@ export const Tasks = styled.div`
     justify-content: space-between;
     padding: 1em;
     width: 100%;
+    border-bottom: 1px solid rgba(30,30,30,0.7);
 `;
 
 export const DoneTasks = styled.div`
@@ -83,5 +83,26 @@ export const DoneTasks = styled.div`
     justify-content: space-between;
     padding: 1em;
     width: 100%;
-    background-color: lightgray;
+    border-bottom: 1px solid rgba(30,30,30,0.7);
+`;
+
+export const DoneContent = styled.div`
+    background-color: lightslategrey;
+    flex-grow: 1;
+    padding-right: 1em;
+`;
+
+export const DoneTitle = styled.div`
+    text-decoration: line-through;
+    width: 100%;
+    margin-right: 1%;
+    
+    @media (max-width: 768px) {
+        width: 100%;
+    }
+`;
+
+export const StyledImage = styled.img`
+    height: 20px;
+    width: 20px;
 `;
