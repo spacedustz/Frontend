@@ -48,7 +48,7 @@ export const StyledButton = styled.button`
 
 export const HeaderSection = styled.section`
     border: 1px solid lightgray;
-    width: 100%;
+    width: 50%;
     background-color: rgba(250, 250, 250, 0.8);
 `;
 
