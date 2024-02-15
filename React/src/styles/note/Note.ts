@@ -1,19 +1,5 @@
-import styled, {keyframes} from "styled-components";
-
-export const navColorChange = keyframes`
-    0% {
-        background-color: rgba(250, 250, 210, 0);
-        color: rgba(177, 50, 170, 0.84);
-    }
-    50% {
-        background-color: rgba(250, 250, 210, 0);
-        color: rgba(70, 100, 210, 0.72);
-    }
-    100% {
-        background-color: rgba(250, 250, 210, 0);
-        color: rgba(130, 130, 210, 1);
-    }
-`;
+import styled from "styled-components";
+import {NoteTextColor} from "../animation/TextAnimation.ts";
 
 export const RootContainer = styled.div`
     display: flex;
@@ -74,7 +60,7 @@ export const List = styled.div`
 
     a {
         margin: 2px;
-        animation: ${navColorChange} 3s infinite;
+        animation: ${NoteTextColor} 3s infinite;
         text-decoration: none;
         position: relative;
         right: 20px;
@@ -115,7 +101,7 @@ export const List = styled.div`
 
         a {
             margin: 1px;
-            animation: ${navColorChange} 3s infinite;
+            animation: ${NoteTextColor} 3s infinite;
             text-decoration: none;
 
             &:hover {
