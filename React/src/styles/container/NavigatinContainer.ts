@@ -1,20 +1,6 @@
-import styled, {keyframes} from "styled-components";
+import styled from "styled-components";
 import Navbar from "react-bootstrap/Navbar";
-
-export const navColorChange = keyframes`
-    0% {
-        background-color: rgba(250, 250, 210, 0);
-        color: rgba(250, 250, 210, 0.5);
-    }
-    50% {
-        background-color: rgba(250, 250, 210, 0);
-        color: rgba(250, 250, 210, 0.8);
-    }
-    100% {
-        background-color: rgba(250, 250, 210, 0);
-        color: rgba(250, 250, 210, 0.5);
-    }
-`;
+import {NoteTextColor} from "../animation/TextAnimation.ts";
 
 export const NavStyle = styled(Navbar)`
     display: flex;
@@ -24,7 +10,7 @@ export const NavStyle = styled(Navbar)`
 
     a {
         margin: 2px;
-        animation: ${navColorChange} 3s infinite;
+        animation: ${NoteTextColor} 10s infinite;
 
         &:hover {
             background-color: rgba(250, 250, 210, 0);
