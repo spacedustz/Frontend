@@ -3,18 +3,16 @@ import Tabs from "react-bootstrap/Tabs";
 
 export const TabsStyle = styled(Tabs)`
     overflow: hidden;
-    background-color: lightblue;
+    background-color: rgba(110, 110, 170, 0.5);
     
     &.mb-3 {
         margin-bottom: 0 !important;
     }
     
     button {
-        color: black;
+        color: white;
 
         &:hover {
-            background-color: dimgray;
-            color: black;
             transition: color 0.5s;
         }
     }
