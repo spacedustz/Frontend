@@ -80,3 +80,15 @@ export const deleteNote = async (id: number) => {
     };
     await axios.delete(request, { headers })
 }
+
+export const getNews = async () => {
+    const request = `http://13.124.2.62:8080/api/news`;
+
+    return await axios.get(request);
+}
+
+export const getNewsForAdmin = async () => {
+    const request = `http://13.124.2.62:8080/api/news/skw`;
+
+    return await axios.get(request);
+}
