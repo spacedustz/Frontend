@@ -25,4 +25,9 @@ class NewsController(
     fun postNews(@RequestBody data: NewsData) {
         newsService.saveNews(data)
     }
+
+    @GetMapping("/news/skw")
+    fun getAllNewsForAdmin(): List<NewsResponse> {
+        return newsService.getAllNewsForAdmin()
+    }
 }

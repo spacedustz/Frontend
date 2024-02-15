@@ -69,4 +69,28 @@ class NewsService(
 
         return news;
     }
+
+    @Transactional(readOnly = true)
+    fun getAllNewsForAdmin(): List<NewsResponse> {
+        val news = newsRepository.findAll().filter { it.id != 1L }.map { news ->
+            NewsResponse(
+                status = news.status,
+                totalResults = news.totalResults,
+                articles = news.articles?.map { article ->
+                    ArticleResponse(
+                        source = article.source,
+                        author = article.author,
+                        title = article.title,
+                        description = article.description,
+                        url = article.url,
+                        urlToImage = article.urlToImage,
+                        publishedAt = article.publishedAt,
+                        content = article.content
+                    )
+                }
+            )
+        }
+
+        return news
+    }
 }
