@@ -2,8 +2,6 @@ import React, {useEffect, useState} from "react";
 import {Button, Container} from "react-bootstrap";
 import {ArticleResponse, NewsResponse} from "../../model/News.ts";
 import {getNewsForAdmin} from "../../model/Api.ts";
-import {Simulate} from "react-dom/test-utils";
-import error = Simulate.error;
 import {HeadLine, Img, Menu, News, NewsCol, NewsContainer} from "../../styles/assignment/NewsApp.ts";
 
 const NewsApp: React.FC = () => {
@@ -16,6 +14,7 @@ const NewsApp: React.FC = () => {
         console.log("ddd", response.data)
         if (response.data && Array.isArray(response.data)) {
             setNewsList(response.data);
+            filterNews('course')
         }
     }
 
@@ -25,8 +24,12 @@ const NewsApp: React.FC = () => {
     }
 
     useEffect(() => {
-        fetchNews().catch(error);
+        fetchNews().catch((error) => { console.error('An error occurred:', error); });
     }, []);
+
+    useEffect(() => {
+        filterNews('course');
+    }, [newsList]);
 
     const formatDate = (dateStr: string | undefined): string => {
         if (!dateStr) {
