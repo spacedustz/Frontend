@@ -7,7 +7,7 @@ const ProfileCard: React.FC = () => {
         <CardContainer>
             <MainCard style={{width: '20rem'}}>
                 {/*<Card.Img variant="top" src="https://techstack-generator.vercel.app/react-icon.svg"/>*/}
-                <Card.Img variant="top" src="../public/assets/profile/profile-logo.png" />
+                <Card.Img variant="top" src="../public/assets/profile/transparent-developer-black-skw.png" />
                 <Card.Body>
                     <strong>Frontend 학습 기록</strong><br/>
                     <a href="https://github.com/spacedustz/Frontend" target="_blank" style={{color: "black"}}>View Repository</a>
